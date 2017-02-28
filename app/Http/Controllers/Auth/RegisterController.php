@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Auth; // <- Necessário importar a facade Auth para verificar Logar o usuário após o cadastro
+use Illuminate\Support\Facades\Hash;
 use App\User; // <- Classe de Usuario
 use App\Http\Requests\Auth\RegisterFormRequest; // <- Classe de regras e mensagens de validação de Cadastro
 
@@ -34,17 +36,35 @@ class RegisterController extends Controller
         // Pega todos os dados vindo do formulário
         $dataForm = $request->all();
 
-        // Se checkbox estiver marcado = 1, senão = 0
+        // Se checkbox estiver marcado = true, senão = false
         $dataForm['is_prof'] = ( !isset($dataForm['is_prof']) ) ? 'false' : 'true';
 
-        // return dd($dataForm);
+        // Guarda is_prof
+        $isProf = $dataForm['is_prof'];
+
+        // Verifica e cria hash do password
+        if (Hash::needsRehash($dataForm['password'])) {
+            $dataForm['password'] = Hash::make($dataForm['password']);
+        }
 
         // Insere na base de Dados
         $insert = $user->create($dataForm);
 
-        // Se inseriu redireciona para /login, se não volta pro form e exibe os erros
+        // Loga o usuários após cadastrar
+        $login = Auth::login($insert, true);
+
+        /* Se inseriu... Verifica se é profissional | Se não inseriu volta pro form e exibe os erros */
         if($insert){
-            return redirect()->route('login');
+
+            switch($isProf){
+                case "true":
+                    // Proximas etapas do cadastro profissional aqui 
+                    return "É profissional!";
+                    break;
+
+                default:
+                    return redirect('/');
+            }
         }else{
             return redirect()->back();
         }

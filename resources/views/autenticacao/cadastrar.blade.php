@@ -13,6 +13,7 @@
           <h2 class="text-center">Cadastrar</h2>
           <form id="form_prof" class="form-horizontal" action="{{ route('postCadastrar') }}" method="POST">
             {{ csrf_field() }}
+            
             <div class="form-group">
               <div class="col-md-offset-2 col-md-9">
 

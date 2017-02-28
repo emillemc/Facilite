@@ -26,10 +26,5 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    // Encrypta o password no cadastro
-    public function setPasswordAttribute($password)
-    {   
-        $this->attributes['password'] = bcrypt($password);
-    }
+    
 }
