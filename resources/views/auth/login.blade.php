@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title') Facilite Serviços - Login @endsection
+@section('title') Login - Facilite Serviços @endsection
 
 @section('navbar')
-    @include('autenticacao.includes.header')
+    @include('layouts.includes.header')
 @endsection
 
 @section('content')
@@ -76,5 +76,5 @@
 @endsection
 
 @section('footer')
-    @include('autenticacao.includes.footer')
+    @include('layouts.includes.footer')
 @endsection

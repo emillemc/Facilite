@@ -12,9 +12,10 @@ use App\Http\Requests\Auth\LoginFormRequest; // <- Classe de regras e mensagens 
 class LoginController extends Controller
 {
     public function __construct()
-    {
+    {        
         // Middleware 'guest': Se tiver sessão ativa redireciona para '/' e não mostra a page de login
     	$this->middleware('guest')->only('login');
+
     }
 
     public function index()
@@ -24,7 +25,7 @@ class LoginController extends Controller
 
     public function login()
     {
-    	return view('autenticacao.login');
+    	return view('auth.login');
     }
 
     public function postLogin(LoginFormRequest $request)
@@ -52,7 +53,7 @@ class LoginController extends Controller
         if (Auth::attempt($dataForm, true)) {
             // Dados corretos: faz o login e redireciona para '/'
             // return dd($dataForm);
-            return redirect('/');
+            return redirect()->route('home');
         } else {
             // Dados incorretos: retorna para a page de login informando os erros (LoginFormRequest)
             // return dd($dataForm);
@@ -63,6 +64,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect()->route('home');
     }
 }

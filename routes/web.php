@@ -1,17 +1,27 @@
 <?php
 
-/********************** Rotas do Site ********************/
-Route::get('/', function(){
-	return view('site.home');
+/********************** AppController ********************/
+Route::group(['namespace' => 'App'], function(){
+
+	// Home
+	Route::get('/', [
+		'uses' 	=> 'AppController@index',
+		'as'	=> 'home' // <- Rota nomeada
+	]);
+
+	// // Moda e Beleza
+	// Route::get('/{categoria?}', [
+	// 	'uses' 	=> 'AppController@listarServicos',
+	// 	'as'	=> 'moda-beleza' // <- Rota nomeada
+	// ]);
+	
+	// // Casa
+	// Route::get('/casa', [
+	// 	'uses' 	=> 'AppController@listarServicos',
+	// 	'as'	=> 'casa' // <- Rota nomeada
+	// ]);
 });
 
-Route::get('/para-voce', function(){
-	return view('site.para-voce');
-});
-
-Route::get('/para-sua-casa', function(){
-	return view('site.para-casa');
-});
 /***************************//****************************/
 
 /******************** AuthController *********************/
@@ -21,31 +31,43 @@ Route::group(['namespace' => 'Auth'], function(){
 	Route::get('/login', [
 		'uses' 	=> 'LoginController@login',
 		'as'	=> 'login' // <- Rota nomeada
-		]);
+	]);
 
 	// PostLogin
 	Route::post('/login', [
 		'uses' 	=> 'LoginController@postLogin',
 		'as'	=> 'postLogin' // <- Rota nomeada
-		]);
+	]);
 
 	// Logout
 	Route::post('/logout', [
 		'uses' 	=> 'LoginController@logout',
 		'as'	=> 'logout' // <- Rota nomeada
-		]);
+	]);
 
-	// Cadastro
+	// Cadastrar
 	Route::get('/cadastrar', [
-		'uses' 	=> 'RegisterController@cadastrar',
+		'uses' 	=> 'RegisterController@index',
 		'as'	=> 'cadastrar' // -< Rota nomeada
-		]);
+	]);
 
-	// PostCadastro
+	// Post Cadastrar
 	Route::post('/cadastrar', [
 		'uses' 	=> 'RegisterController@postCadastrar',
-		'as'	=> 'postCadastrar' // -< Rota nomeada
-		]);
+		'as'	=> 'post-cadastrar' // -< Rota nomeada
+	]);
+
+	// Cadastrar Categorias
+	Route::get('/cadastrar/categorias', [
+		'uses' 	=> 'RegisterController@cadastrarCategorias',
+		'as'	=> 'cadastrar-categorias' // -< Rota nomeada
+	]);
+
+	// Post Cadastrar Categorias
+	Route::post('/cadastrar/categorias', [
+		'uses' 	=> 'RegisterController@postCadastrarCategorias',
+		'as'	=> 'post-cadastrar-categorias' // -< Rota nomeada
+	]);
 
 });
 /***************************//****************************/

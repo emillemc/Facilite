@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title') Facilite Serviços - Cadastro @endsection
+@section('title') Cadastrar - Facilite Serviços @endsection
 
 @section('navbar')
-    @include('autenticacao.includes.header')
+    @include('layouts.includes.header')
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
         <!-- CADASTRO -->
         <div class="col-lg-6 col-md-6">
           <h2 class="text-center">Cadastrar</h2>
-          <form id="form_prof" class="form-horizontal" action="{{ route('postCadastrar') }}" method="POST">
+          <form id="form_prof" class="form-horizontal" action="{{ route('post-cadastrar') }}" method="POST">
             {{ csrf_field() }}
             
             <div class="form-group">
@@ -107,7 +107,7 @@
 @endsection
 
 @section('footer')
-    @include('autenticacao.includes.footer')
+    @include('layouts.includes.footer')
 @endsection
 
 

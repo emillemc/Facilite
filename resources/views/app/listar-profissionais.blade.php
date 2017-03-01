@@ -7,10 +7,6 @@
 @endsection
 
 @section('content')
-	<div class="top-25 visible-xs"></div>
-    <div class="top-12 visible-sm"></div>
-    <div class="top-12 visible-md"></div>
-    <div class="top-6 visible-lg"></div>
 	<h2>Serviço</h2>
   <hr class="linha-horizontal4">
   <!-- ROW -->

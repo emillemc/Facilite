@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Support\Facades\Auth; // <- Necessário importar a facade Auth para verificar Logar o usuário após o cadastro
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth; // <- Necessário para verificar e Logar o usuário após o cadastro
+use Illuminate\Support\Facades\Hash; // <- Encryptar password no cadastro
 use App\User; // <- Classe de Usuario
+use App\Models\Categoria;
 use App\Http\Requests\Auth\RegisterFormRequest; // <- Classe de regras e mensagens de validação de Cadastro
 
 class RegisterController extends Controller
@@ -15,17 +15,12 @@ class RegisterController extends Controller
     public function __construct()
     {
         // Middleware 'guest': Se tiver sessão ativa redireciona para '/' e não mostra a page de cadastro
-    	$this->middleware('guest')->only('cadastrar');
+    	$this->middleware('guest')->only('index');
     }
 
     public function index()
     {
-    	// return "test";
-    }
-
-    public function cadastrar()
-    {
-        return view('autenticacao.cadastrar');
+    	return view('auth.cadastrar');
     }
 
     public function postCadastrar(RegisterFormRequest $request, User $user)
@@ -57,36 +52,30 @@ class RegisterController extends Controller
         if($insert){
 
             switch($isProf){
-                case "true":
-                    // Proximas etapas do cadastro profissional aqui 
-                    return "É profissional!";
+                case "true": 
+                    return redirect()->route('cadastrar-categorias');
                     break;
 
                 default:
-                    return redirect('/');
+                    return redirect()->route('home');
             }
         }else{
             return redirect()->back();
         }
     }
 
-    public function show($id)
+    public function cadastrarCategorias(Categoria $categoria)
+    {
+        $this->categoria = $categoria;
+
+        $categorias = $this->categoria->all();
+
+    	return view('auth.cadastrar-categorias', compact('categorias'));
+    }
+
+    public function postCadastrarCategorias()
     {
     	//
     }
 
-    public function edit($id)
-    {
-    	//
-    }
-
-    public function update(Request $request, $id)
-    {
-    	//
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }
