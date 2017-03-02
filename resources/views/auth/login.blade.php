@@ -15,37 +15,38 @@
       <form class="form-horizontal" role="form" method="POST" action="{{ route('postLogin') }}">
         {{ csrf_field() }}
 
-        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+        <div class="form-group @if (count($errors) > 0) has-error @endif">
           <label for="email" class="col-md-2 control-label">Email:</label>
           <div class="col-md-9">
             <input id="email" type="email" class="form-control" name="email" placeholder="exemplo@exemplo.com" value="{{ old('email') }}" autofocus/>
-            
-            @if ($errors->has('email'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-            @endif
-
           </div>
         </div>
 
-        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+        <div class="form-group @if (count($errors) > 0) has-error @endif">
           <label for="password" class="col-md-2 control-label">Senha:</label>
           <div class="col-md-9">
             <input id="password" type="password" class="form-control" name="password" placeholder="*****************"/>
 
-            @if ($errors->has('password'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
+            @if (count($errors) > 0)
+              @foreach ($errors->all() as $error)
+                <span class="help-block text-center">
+                  <strong class="text-danger">{!! $error !!}</strong>
                 </span>
+              @endforeach
             @endif
 
           </div>
         </div>
+        
 
         <div class="form-group">
-          <div class="col-md-offset-2 col-md-8">
-            <div class="pull-left">
+          <div class="col-md-offset-3 col-md-8">
+            {{-- <div class="pull-left">
+              <label for="remember">
+                <input name="remember" type="checkbox"/> Me lembre
+              </label>
+            </div> --}}
+            <div class="pull-right">
               <label>
                 <a class="btn btn-link" href="#">
                   Esqueceu sua senha?
@@ -54,6 +55,7 @@
             </div>
           </div>
         </div>
+
         <div class="form-group">
           <div class="text-center">
             <button type="submit" class="btn btn-success btn-lg">Entrar</button>

@@ -19,7 +19,6 @@ class AppController extends Controller
 
     public function listarServicos()
     {
-    	// $categorias = $this->categoria->all(); 
-    	// $categoria = Categoria::where('categoria', $nomeCategoria);
+
     }
 }

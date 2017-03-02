@@ -24,9 +24,11 @@ class RegisterFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => 'required|min:4|max:40',
-            'email'     => 'required|email|max:55|unique:users,email',
-            'password'     => 'required|confirmed|min:6',
+            'name'      => 'required|min:4|max:40',
+            'email'     => 'required|email|max:55|unique:users,email|unique:professionals,email',
+            'password'  => 'required|confirmed|min:6',
+            'cpf'       => 'min:11|unique:professionals,cpf',
+            'tel'       => 'min:11|unique:professionals,tel'           
         ];
     }
 
@@ -41,7 +43,14 @@ class RegisterFormRequest extends FormRequest
             'email.max'             => 'Seu e-mail parece grande demais...',
             'email.unique'          => 'O e-mail informado já está em uso.',
             'password.required'      => 'Informe uma senha.',
-            'password.confirmed'    => 'A confirmãção de senha não confere.'
+            'password.confirmed'    => 'A confirmãção de senha não confere.',
+            'password.min'          => 'A senha deve ter no mínimo :min caracteres.',
+            // 'cpf.required'          => 'O campo cpf é obrigatório.',
+            'cpf.min'               => 'O campo cpf deve conter :min dígitos.',
+            'cpf.unique'            => 'O cpf informado já está em uso.',
+            // 'tel.required'          => 'O campo telefone é obrigatório.',
+            'tel.min'               => 'O campo telefone deve conter :min dígitos.',
+            'tel.unique'            => 'O telefone informado já está em uso.'
             
         ];
     }

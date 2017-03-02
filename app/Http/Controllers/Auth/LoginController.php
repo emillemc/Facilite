@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Professional;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth; // <- Necessário importar a facade Auth para verificar os dados do Login
 use App\Http\Requests\Auth\LoginFormRequest; // <- Classe de regras e mensagens de validação de login
@@ -28,37 +28,52 @@ class LoginController extends Controller
     	return view('auth.login');
     }
 
-    public function postLogin(LoginFormRequest $request)
+    public function postLogin(Request $request)
     {
-        // $email = $request->email;
-        // $password = $request->password;
+        $credentials = $request->only(['email', 'password']);
 
-        // if (Hash::needsRehash($dataForm['password'])) {
-        //     $dataForm['password'] = Hash::make($dataForm['password']);
-        // }
+        $prof = Professional::where('email', $credentials['email'])->first();
 
-        // if (Hash::check($password, $hashedPassword)) {
-        //     // The passwords match...
-        // }
+        // Se for email profissional
+        if( $prof ) {
 
-        // $hashed = Hash::make($dataForm['password']);
-        // $dataForm['password'] = $hashed;
+            // Loga como profissional
+            if( Auth::guard('prof')->attempt($credentials) ) {
 
-        // $email = $dataForm['email'];
-        // $password = $dataForm['password'];
+                // Dados corretos: faz o login e redireciona para '/'
+                return redirect()->route('home');
 
-        $dataForm = $request->only(['email', 'password']);
-        // return dd($dataForm);
+            }else{
 
-        if (Auth::attempt($dataForm, true)) {
-            // Dados corretos: faz o login e redireciona para '/'
-            // return dd($dataForm);
-            return redirect()->route('home');
-        } else {
-            // Dados incorretos: retorna para a page de login informando os erros (LoginFormRequest)
-            // return dd($dataForm);
-            return redirect()->back();
+                // Dados incorretos: retorna para a page de login informando os erros (LoginFormRequest)
+                return redirect()->back()->withErrors('Email ou senha incorretos!');
+            }
+
+        // Se não for email profissional
+        }else{
+
+            // Loga como usuário comum
+            if ( Auth::attempt($credentials) ) {
+
+                // Dados corretos: faz o login e redireciona para '/'
+                return redirect()->route('home');
+
+            } else {
+
+                // Dados incorretos: retorna para a page de login informando os erros (LoginFormRequest)
+                return redirect()->back()->withErrors('Email ou senha incorretos!');
+            }
+
         }
+
+        // // if ( auth()->guard('prof')->attempt($dataForm) ) {
+        // if ( auth()->attempt($dataForm) ) {
+        //     // Dados corretos: faz o login e redireciona para '/'
+        //     return redirect()->route('home');
+        // } else {
+        //     // Dados incorretos: retorna para a page de login informando os erros (LoginFormRequest)
+        //     return redirect()->back();
+        // }
     }
 
     public function logout()
