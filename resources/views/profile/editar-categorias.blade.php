@@ -1,6 +1,6 @@
 @extends('layouts.master-fluid')
 
-@section('title') Cadastrar Categorias - Facilite Serviços @endsection
+@section('title') Editar Categorias - Facilite Serviços @endsection
 
 @section('navbar')
     @include('layouts.includes.header')
@@ -13,7 +13,7 @@
 
   <div class="row">
     <!-- FORM -->
-    <form action="{{route('post-cadastrar-categorias')}}" method="POST">
+    <form action="{{route('post-editar-categorias')}}" method="POST">
       
       {{ csrf_field() }}
       

@@ -18,7 +18,7 @@
               <div class="col-md-offset-2 col-md-9">
 
                 <div class="checkbox">
-                  <label for="is_prof"><input type="checkbox" id="is_prof" name="is_prof" {{-- value=1 @if( isset($isProf) && $isProf == 'true' ) checked @endif --}}/> Sou profissional</label>
+                  <label for="role"><input type="checkbox" id="role" name="role"/> Sou profissional</label>
                 </div>
 
               </div>
@@ -48,7 +48,7 @@
               </div>
             </div>
 
-            <div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }}" id="formCpf" style="display: none">
+            {{-- <div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }}" id="formCpf" style="display: none">
               <label for="cpf" class="col-md-2 control-label">Cpf:</label>
               <div class="col-md-9">
                 <input required disabled type="text" class="form-control" id="cpf" name="cpf" value="{{ old('cpf') }}" maxlength="14" placeholder="000.000.000-00"/>
@@ -70,7 +70,7 @@
                     </span>
                 @endif
               </div>
-            </div>
+            </div> --}}
 
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
               <label for="password" class="col-md-2 control-label">Senha:</label>
@@ -124,9 +124,9 @@
 @push('scripts')
 
     <!-- JQuery/JQuery Mask Plugins -->
-    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/jquery.mask.min.js') }}"></script> --}}
     <!-- Eventos do Formulário-->
-    <script src="{{ asset('js/check-prof-mask-inputs.js') }}"></script>
+    {{-- <script src="{{ asset('js/check-prof-mask-inputs.js') }}"></script> --}}
     
 @endpush

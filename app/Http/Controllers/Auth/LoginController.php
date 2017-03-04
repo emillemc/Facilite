@@ -13,8 +13,8 @@ class LoginController extends Controller
 {
     public function __construct()
     {        
-        // Middleware 'guest': Se tiver sessão ativa redireciona para '/' e não mostra a page de login
-    	$this->middleware('guest')->only('login');
+        // Se tiver sessão ativa redireciona para '/' e não mostra a page de login
+    	$this->middleware('guest')->except('logout');
 
     }
 
@@ -28,52 +28,18 @@ class LoginController extends Controller
     	return view('auth.login');
     }
 
-    public function postLogin(Request $request)
+    public function postLogin(LoginFormRequest $request)
     {
         $credentials = $request->only(['email', 'password']);
 
-        $prof = Professional::where('email', $credentials['email'])->first();
-
-        // Se for email profissional
-        if( $prof ) {
-
-            // Loga como profissional
-            if( Auth::guard('prof')->attempt($credentials) ) {
-
+        if ( Auth::attempt($credentials) ) {
                 // Dados corretos: faz o login e redireciona para '/'
                 return redirect()->route('home');
-
-            }else{
-
-                // Dados incorretos: retorna para a page de login informando os erros (LoginFormRequest)
-                return redirect()->back()->withErrors('Email ou senha incorretos!');
-            }
-
-        // Se não for email profissional
-        }else{
-
-            // Loga como usuário comum
-            if ( Auth::attempt($credentials) ) {
-
-                // Dados corretos: faz o login e redireciona para '/'
-                return redirect()->route('home');
-
             } else {
-
                 // Dados incorretos: retorna para a page de login informando os erros (LoginFormRequest)
-                return redirect()->back()->withErrors('Email ou senha incorretos!');
+                return redirect()->back();
             }
-
-        }
-
-        // // if ( auth()->guard('prof')->attempt($dataForm) ) {
-        // if ( auth()->attempt($dataForm) ) {
-        //     // Dados corretos: faz o login e redireciona para '/'
-        //     return redirect()->route('home');
-        // } else {
-        //     // Dados incorretos: retorna para a page de login informando os erros (LoginFormRequest)
-        //     return redirect()->back();
-        // }
+        
     }
 
     public function logout()

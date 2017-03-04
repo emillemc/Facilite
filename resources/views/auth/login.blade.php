@@ -15,24 +15,29 @@
       <form class="form-horizontal" role="form" method="POST" action="{{ route('postLogin') }}">
         {{ csrf_field() }}
 
-        <div class="form-group @if (count($errors) > 0) has-error @endif">
+        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
           <label for="email" class="col-md-2 control-label">Email:</label>
           <div class="col-md-9">
             <input id="email" type="email" class="form-control" name="email" placeholder="exemplo@exemplo.com" value="{{ old('email') }}" autofocus/>
+
+            @if ($errors->has('email'))
+              <span class="help-block">
+                  <strong>{{ $errors->first('email') }}</strong>
+              </span>
+            @endif
+
           </div>
         </div>
 
-        <div class="form-group @if (count($errors) > 0) has-error @endif">
+        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
           <label for="password" class="col-md-2 control-label">Senha:</label>
           <div class="col-md-9">
             <input id="password" type="password" class="form-control" name="password" placeholder="*****************"/>
-
-            @if (count($errors) > 0)
-              @foreach ($errors->all() as $error)
-                <span class="help-block text-center">
-                  <strong class="text-danger">{!! $error !!}</strong>
-                </span>
-              @endforeach
+            
+            @if ($errors->has('password'))
+              <span class="help-block">
+                  <strong>{{ $errors->first('password') }}</strong>
+              </span>
             @endif
 
           </div>

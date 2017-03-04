@@ -10,7 +10,7 @@ class Professional extends Authenticatable
 	use Notifiable;
 	
     protected $fillable = [
-        'name', 'email', 'password', 'tel', 'cpf', 'city',
+        'tel', 'cpf', 'city',
     ];
 
     protected $hidden = [

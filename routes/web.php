@@ -57,16 +57,22 @@ Route::group(['namespace' => 'Auth'], function(){
 		'as'	=> 'post-cadastrar' // -< Rota nomeada
 	]);
 
-	// Cadastrar Categorias
-	Route::get('/cadastrar/categorias', [
-		'uses' 	=> 'RegisterController@cadastrarCategorias',
-		'as'	=> 'cadastrar-categorias' // -< Rota nomeada
+});
+/***************************//****************************/
+
+/******************* ProfileController *******************/
+Route::group(['namespace' => 'Profile'], function(){
+
+	// Cadastrar/Editar Categorias
+	Route::get('profile/editar/categorias', [
+		'uses' 	=> 'ProfileController@editarCategorias',
+		'as'	=> 'editar-categorias' // -< Rota nomeada
 	]);
 
-	// Post Cadastrar Categorias
-	Route::post('/cadastrar/categorias', [
-		'uses' 	=> 'RegisterController@postCadastrarCategorias',
-		'as'	=> 'post-cadastrar-categorias' // -< Rota nomeada
+	// Post Cadastrar/Editar Categorias
+	Route::post('profile/editar/categorias', [
+		'uses' 	=> 'ProfileController@postEditarCategorias',
+		'as'	=> 'post-editar-categorias' // -< Rota nomeada
 	]);
 
 });

@@ -15,14 +15,18 @@ class CreateProfessionalsTable extends Migration
     {
         Schema::create('professionals', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->integer('user_id')->unsigned();
             $table->string('tel', 20);
             $table->string('cpf', 20);
-            $table->string('city', 100)->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('city', 100);
             $table->timestamps();
+
+            // Chave estrangeira que representa o Usuário
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
+
         });
     }
 
