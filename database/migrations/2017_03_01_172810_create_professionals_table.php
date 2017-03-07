@@ -18,7 +18,7 @@ class CreateProfessionalsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('tel', 20);
             $table->string('cpf', 20);
-            $table->string('city', 100);
+            $table->string('city', 100)->nullable();
             $table->timestamps();
 
             // Chave estrangeira que representa o Usuário

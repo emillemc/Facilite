@@ -48,7 +48,7 @@
               </div>
             </div>
 
-            {{-- <div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }}" id="formCpf" style="display: none">
+            <div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }}" id="formCpf" style="display: none">
               <label for="cpf" class="col-md-2 control-label">Cpf:</label>
               <div class="col-md-9">
                 <input required disabled type="text" class="form-control" id="cpf" name="cpf" value="{{ old('cpf') }}" maxlength="14" placeholder="000.000.000-00"/>
@@ -70,7 +70,7 @@
                     </span>
                 @endif
               </div>
-            </div> --}}
+            </div>
 
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
               <label for="password" class="col-md-2 control-label">Senha:</label>
@@ -124,9 +124,9 @@
 @push('scripts')
 
     <!-- JQuery/JQuery Mask Plugins -->
-    {{-- <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/jquery.mask.min.js') }}"></script> --}}
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
     <!-- Eventos do Formulário-->
-    {{-- <script src="{{ asset('js/check-prof-mask-inputs.js') }}"></script> --}}
+    <script src="{{ asset('js/check-prof-mask-inputs.js') }}"></script>
     
 @endpush

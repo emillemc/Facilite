@@ -2,9 +2,9 @@
 
 /* MOSTRAR/OCULTAR CAMPOS PROFISSIONAIS */
 //Ao selecionar checkbox mostra e ativa os campos profissionais 
-$("#is_prof").on("click", function() {
+$("#role").on("click", function() {
     // $("#formCpf").toggle();
-     if( $("#is_prof").is(':checked') ){
+     if( $("#role").is(':checked') ){
         $("#cpf").prop("disabled", false); // <- = habilita input
         $("#tel").prop("disabled", false); // <- = habilita input
         $("#formCpf").show("fast");

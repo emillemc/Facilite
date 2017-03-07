@@ -1,7 +1,7 @@
 <nav class="navbar navbar navbar-inverse navbar-static-top">
   <div class="container">
     <div class="navbar-header">
-      <!-- Collapsed Hamburger -->
+      <!-- Menu Hamburguer SM/XS -->
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
           <span class="sr-only">Toggle Navigation</span>
           <span class="icon-bar"></span>
@@ -9,47 +9,31 @@
           <span class="icon-bar"></span>
       </button>
 
-      <!-- Branding Image -->
+      <!-- Logo Facilite -->
       <a class="navbar-brand" href="{{ route('home') }}">
           {{ config('app.name', 'Facilite Serviços') }}
       </a>
     </div>
 
     <div class="collapse navbar-collapse" id="app-navbar-collapse">
-        <!-- Left Side Of Navbar -->
-        <!-- <ul class="nav navbar-nav">
-            &nbsp;
-        </ul> -->
 
-      <!-- Right Side Of Navbar -->
+      {{-- NavBar lado direito --}}
       <ul class="nav navbar-nav navbar-right text-center">
-          <!-- Authentication Links -->
-          @if (Auth::guest())
-              <li><a href="{{ route('login') }}">Entrar</a></li>
-              <li><a href="{{ route('cadastrar') }}">Cadastrar</a></li>
-          @else
-              <!-- Link Private Messages -->
-              <li><a href="#"><span class="glyphicon glyphicon-inbox"></span></a></li>
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      {{ Auth::user()->name }} <span class="caret"></span>
-                  </a>
 
-                  <ul class="dropdown-menu" role="menu">
-                      <li>
-                          <a href="{{ route('logout') }}"
-                              onclick="event.preventDefault();
-                                       document.getElementById('logout-form').submit();">
-                              Logout
-                          </a>
+        {{-- Menu se for visitante --}}
+        @if( Auth::guest() )
+          <li><a href="{{ route('login') }}">Entrar</a></li>
+          <li><a href="{{ route('cadastrar') }}">Cadastrar</a></li>
 
-                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                              {{ csrf_field() }}
-                          </form>
-                      </li>
-                  </ul>
-              </li>
-          @endif
+        {{-- Menu se for prof --}}
+        @elseif( Auth::user()->role == 'prof' )
+          @include('layouts.includes.menu-prof');
+        
+        {{-- Menu se for user --}}
+        @else
+          @include('layouts.includes.menu-user');
+        @endif
+        
       </ul>
 
       <div>

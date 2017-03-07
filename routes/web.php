@@ -75,6 +75,12 @@ Route::group(['namespace' => 'Profile'], function(){
 		'as'	=> 'post-editar-categorias' // -< Rota nomeada
 	]);
 
+	// Cadastrar/Editar Serviços
+	Route::get('profile/editar/servicos', [
+		'uses' 	=> 'ProfileController@editarServicos',
+		'as'	=> 'editar-servicos' // -< Rota nomeada
+	]);
+
 });
 /***************************//****************************/
 

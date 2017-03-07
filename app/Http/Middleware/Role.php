@@ -18,7 +18,8 @@ class Role
         if ( \Auth::user()->can($role . '-access') ){
             return $next($request);
         }else{
-            return response(view('errors.nao-autorizado'));
+            // return response(view('errors.nao-autorizado'));
+            return redirect()->route('home');
         }
 
     }

@@ -7,10 +7,10 @@
 
 	<title>@yield('title')</title>
 
-	<!-- Bootstrap CSS -->
+	{{-- Bootstrap CSS --}}
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- CSS -->
+    {{-- CSS --}}
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
@@ -24,7 +24,7 @@
 
 	@yield('footer')
 
-	<!-- JS BOOTSTRAP ARCHIVES -->
+	{{-- JS Bootstrap Archives --}}
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 

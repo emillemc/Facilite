@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Profile;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Professional;
 use App\Models\Categoria;
 
 class ProfileController extends Controller
@@ -32,7 +34,23 @@ class ProfileController extends Controller
 
     public function postEditarCategorias(Request $request)
     {
-        $categorias = $request->all();
-    	return dd($categorias);
+        // Pega os checkbox's marcados, exceto o token
+        $categorias = $request->except(['_token']);
+        // Busca id do prof = id do prof logado
+        $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Atualiza as categorias escolhidas e salva no banco de dados
+        $insert = $profissional->categorias()->sync($categorias);
+
+        if($insert){
+            return redirect()->route('editar-servicos');
+        }else{
+            return redirect()->back()->withErrors('Erro ao atualizar dados.');
+        }
+
+    }
+
+    public function editarServicos()
+    {
+        return "Page editar serviços...";
     }
 }

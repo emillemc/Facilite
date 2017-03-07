@@ -26,7 +26,7 @@
             <div id="div_bg_{{$categoria->id}}" style="margin: 20px 0px 5px 0px; box-shadow: 3px 3px #545050; border: 2px solid; border-radius: 10px 10px 10px 10px ">
               <span id="check_span_{{$categoria->id}}" name="check_span_{{$categoria->id}}" class="glyphicon glyphicon-unchecked" style="font-size: 25px; padding: 3px 2px 0px 3px;"></span>
               <label id="label_cat_{{$categoria->id}}" class="text-center" for="cat_{{$categoria->id}}" style="font-weight: normal; margin: 0px; font-size: 25px; padding: 0px 0px 0px 0px;">
-                <input type="checkbox" id="cat_{{$categoria->id}}" name="cat_{{$categoria->id}}" value="{{$categoria->id}}" style="display: none;"/> {{$categoria->name}}
+                <input type="checkbox" id="cat_{{$categoria->id}}" name="categoria_id_{{$categoria->id}}" value="{{$categoria->id}}" style="display: none;"/> {{$categoria->name}}
               </label>
             </div>
           </div>

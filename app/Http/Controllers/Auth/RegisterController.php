@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Professional;
 use Illuminate\Support\Facades\Auth; // <- Necessário para verificar e Logar o usuário após o cadastro
 use Illuminate\Support\Facades\Hash; // <- Encryptar password no cadastro
 use App\Http\Requests\Auth\RegisterFormRequest; // <- Classe de regras e mensagens de validação de Cadastro
@@ -23,10 +24,11 @@ class RegisterController extends Controller
     	return view('auth.cadastrar');
     }
 
-    public function postCadastrar(RegisterFormRequest $request, User $user)
+    public function postCadastrar(RegisterFormRequest $request, User $user, Professional $prof)
     {   
-        // Cria instância de User
+        // Cria instância de User e Prof
         $this->user = $user;
+        $this->prof = $prof;
 
         // Pega todos os dados vindo do formulário
         $dataForm = $request->all();
@@ -44,12 +46,18 @@ class RegisterController extends Controller
 
         switch($role){
             case "prof":
-                // Insere na base de dados, na tabela users
-                $insert = $user->create($dataForm);
+                // Insere na base de dados, na tabela users os dados de login
+                $insertUser = $user->create($dataForm);
+                // Insere na base de dados, na tabela prof os campos profissionais
+                $insertProf = $prof->create([
+                    'user_id'   => $insertUser->id,
+                    'cpf'       => $dataForm['cpf'],
+                    'tel'       => $dataForm['tel'], 
+                ]);
                 // Loga o usuário após cadastrar
-                $login = Auth::login($insert, true);
+                $login = Auth::login($insertUser, true);
                 // Verifica se inseriu com sucesso
-                if($insert){
+                if($insertProf){
                     // Redireciona para a page Cadastrar/Editar Categorias
                     return redirect()->route('editar-categorias');
                 }else{
