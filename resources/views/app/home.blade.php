@@ -8,7 +8,7 @@
 
 @section('content')
 
-	<h1 style="text-align: center">HOME PAGE DO SITE</h1>
+	<h1 style="text-align: center">HOME PAGE</h1>
 
 @endsection
 

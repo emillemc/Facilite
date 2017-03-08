@@ -1,17 +1,19 @@
+@inject('categorias', 'App\MenuCategorias')
+
 <nav class="navbar navbar navbar-inverse navbar-static-top">
   <div class="container">
     <div class="navbar-header">
       <!-- Menu Hamburguer SM/XS -->
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-          <span class="sr-only">Toggle Navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+        <span class="sr-only">Toggle Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </button>
 
       <!-- Logo Facilite -->
       <a class="navbar-brand" href="{{ route('home') }}">
-          {{ config('app.name', 'Facilite Serviços') }}
+        {{ config('app.name', 'Facilite Serviços') }}
       </a>
     </div>
 
@@ -38,79 +40,23 @@
 
       <div>
         <ul class="nav navbar-nav">
+          {{-- Service Injection das Categorias do NavBar --}}
+          @forelse( $categorias->menuCategorias() as $categoria )
 
-          <li class="dropdown">
-            <a href="/moda-beleza" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Moda e Beleza</a>
+            <li class="dropdown">
+            <a href="{{ url("/categoria/$categoria->url") }}" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $categoria->name }}</a>
             <div class="hidden-xs">
               <ul class="dropdown-menu">
-                <li><a href="/para-voce/cabeleleiro">Cabeleleiro</a></li>
-                <li><a href="/para-voce/depilacao">Depilação</a></li>
-                <li><a href="/para-voce/manicure">Manicure</a></li>
-                <li><a href="/para-voce/maquiador">Maquiador</a></li>
-                <li><a href="/para-voce/esteticista">Esteticista</a></li>
+                <li><a href="#">Serviço 1</a></li>
+                <li><a href="#">Serviço 2</a></li>
+                <li><a href="#">Serviço 3</a></li>
+                <li><a href="#">...</a></li>
               </ul>
             </div>
           </li>
-          
-          <li class="dropdown">
-            <a href="/para-sua-casa" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Casa</a>
-            <div class="hidden-xs">
-              <ul class="dropdown-menu">
-                <li><a href="/para-sua-casa/eletricista">Eletricista</a></li>
-                <li><a href="/para-sua-casa/carpinteiro">Carpinteiro</a></li>
-                <li><a href="/para-sua-casa/chaveiro">Chaveiro</a></li>
-                <li><a href="/para-sua-casa/encanador">Encanador</a></li>
-                <li><a href="/para-sua-casa/pedreiro">Pedreiro</a></li>
-                <li><a href="/para-sua-casa/diarista">Diarista</a></li>
-                <li><a href="/para-sua-casa/pintor">Pintor</a></li>
-                <li><a href="/para-sua-casa/serralheiro">Serralheiro</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="dropdown">
-            <a href="/transporte" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Transporte</a>
-            <div class="hidden-xs">
-              <ul class="dropdown-menu">
-                <li><a href="/transporte/motorista">Motorista</a></li>
-                <li><a href="/transporte/motoboy">Motoboy</a></li>
-                <li><a href="/transporte/lavagem">Lavagem</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="dropdown">
-            <a href="/saude" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Saúde</a>
-            <div class="hidden-xs">
-              <ul class="dropdown-menu">
-                <li><a href="/saude/enfermeiro">Enfermeiros</a></li>
-                <li><a href="/saude/cuidador">Cuidadores</a></li>
-                <li><a href="/saude/dentista">Dentistas</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="dropdown">
-            <a href="/aulas" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aulas</a>
-            <div class="hidden-xs">
-              <ul class="dropdown-menu">
-                <li><a href="/aulas/danca">Danças</a></li>
-                <li><a href="/aulas/esporte">Esportes</a></li>
-                <li><a href="/aulas/musica">Música</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="dropdown">
-            <a href="/eventos" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eventos</a>
-            <div class="hidden-xs">
-              <ul class="dropdown-menu">
-                <li><a href="/eventos/churrasqueiro">Churrasqueiro</a></li>
-                <li><a href="/eventos/dj">DJ</a></li>
-                <li><a href="/eventos/fotografo">Fotógrafo</a></li>
-              </ul>
-            </div>
-          </li>
+          @empty
+            <h4>Não foi possível carregar as categorias...</h4>
+          @endforelse
         
         </ul>
       </div>

@@ -8,7 +8,8 @@
 
 @section('content')
   
-  <h2>Selecione as categorias:</h2>
+  <h2>Selecione as categorias: </h2>
+  <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h4 class="text-danger">{{ $error }}</h4> @endforeach @endif</span>
   <hr style="margin-bottom: 50px;">
 
   <div class="row">

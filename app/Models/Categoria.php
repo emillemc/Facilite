@@ -16,7 +16,7 @@ class Categoria extends Model
     	return $this->hasMany(Servico::class);
     }
 
-    // Uma Categoria tem muitos Profissionais (Many-To-Many)
+    // Uma Categoria pertence a muitos Profissionais (Many-To-Many)
     public function profissionais()
     {
     	return $this->belongsToMany(Professional::class, 'categoria_professional');

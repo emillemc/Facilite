@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categoria;
 use App\Models\Especialidade;
+use App\Models\Professional;
 
 class Servico extends Model
 {
@@ -17,7 +18,14 @@ class Servico extends Model
     }
 
     // Um serviço tem várias Especialidades (One-To-Many)
-    public function especialidades(){
+    public function especialidades()
+    {
     	return $this->hasMany(Especialidade::class);
+    }
+
+    // Um serviço pode pertencer a vários Profissionais (Many-To-Many)
+    public function profissionais()
+    {
+        return $this->belongsToMany(Professional::class, 'servico_professional');
     }
 }

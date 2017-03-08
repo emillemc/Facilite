@@ -9,17 +9,16 @@ Route::group(['namespace' => 'App'], function(){
 		'as'	=> 'home' // <- Rota nomeada
 	]);
 
-	// // Moda e Beleza
-	// Route::get('/{categoria?}', [
-	// 	'uses' 	=> 'AppController@listarServicos',
-	// 	'as'	=> 'moda-beleza' // <- Rota nomeada
+	// // Listar Serviços
+	// Route::get('/categoria/{url?}', [
+	// 	'uses' 	=> 'AppController@listarServicos'
 	// ]);
 	
-	// // Casa
-	// Route::get('/casa', [
-	// 	'uses' 	=> 'AppController@listarServicos',
-	// 	'as'	=> 'casa' // <- Rota nomeada
-	// ]);
+	// Listar Serviços
+	Route::get('/categoria/{url?}', [
+		'uses' 	=> 'AppController@listarServicos'
+	]);
+
 });
 
 /***************************//****************************/
@@ -81,12 +80,11 @@ Route::group(['namespace' => 'Profile'], function(){
 		'as'	=> 'editar-servicos' // -< Rota nomeada
 	]);
 
+	// Post Cadastrar/Editar Serviços
+	Route::post('profile/editar/servicos', [
+		'uses' 	=> 'ProfileController@editarServicos',
+		'as'	=> 'post-editar-servicos' // -< Rota nomeada
+	]);
+
 });
 /***************************//****************************/
-
-
-
-
-/* Auth do Laravel */
-
-// Auth::routes();
