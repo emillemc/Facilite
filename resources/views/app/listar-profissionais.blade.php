@@ -1,14 +1,14 @@
-@extends('aplicacao.layouts.aplicacaomaster')
+@extends('layouts.master-fluid')
 
-@section('title') Facilite Serviços @endsection
+@section('title') **Facilite Serviços @endsection
 
 @section('navbar')
-    @include('aplicacao.includes.header')
+    @include('layouts.includes.header')
 @endsection
 
 @section('content')
 	<h2>Serviço</h2>
-  <hr class="linha-horizontal4">
+  <hr>
   <!-- ROW -->
   <div class="row">
     
@@ -236,5 +236,5 @@
 @endsection
 
 @section('footer')
-	@include('aplicacao.includes.footer')
+	@include('layouts.includes.footer')
 @endsection

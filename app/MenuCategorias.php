@@ -15,6 +15,6 @@ class MenuCategorias extends Model
     public function menuCategorias()
     {
         return $this->categoria->all();
-        // return 10;
     }
+    
 }

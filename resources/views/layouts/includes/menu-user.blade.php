@@ -9,7 +9,7 @@
 
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="#">
+      <a href="{{ route('editar-conta') }}">
         <span class="glyphicon glyphicon-cog"></span> Editar conta
       </a>
     </li>

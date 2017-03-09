@@ -15,14 +15,21 @@ class AppController extends Controller
 	}
 
     public function index()
-    {
+    {   
+        // Home Page do Site
         return view('app.home');
     }
 
-    public function listarServicos($url = "moda-beleza") // Valor padrão caso não seja passado nenhuma url route
+    public function listarCategorias()
+    {
+        //*** -> Buscar as categorias e exibir na view
+        return view('app.listar-categorias');
+    }
+
+    public function listarServicos($urlCat = "moda-beleza") // Valor padrão caso não seja passado nenhuma url route
     {   
         // Busca a categoria de acordo com a $url da categoria informada
-        $categoria = Categoria::where('url', $url)->get()->first();
+        $categoria = Categoria::where('url', $urlCat)->get()->first();
 
         // Se a url existir, mostra a page e lista os serviços
         if($categoria){
@@ -39,5 +46,10 @@ class AppController extends Controller
             return redirect()->route('home');
         }
 
+    }
+
+    public function listarProfissionais($urlCat = "moda-beleza", $urlServ = "manicure") // Valor padrão caso não seja passado nenhuma url route
+    {
+        return view('app.listar-profissionais');
     }
 }

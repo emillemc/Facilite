@@ -17,6 +17,7 @@ class CreateServicosTable extends Migration
             $table->increments('id');
             $table->integer('categoria_id')->unsigned();
             $table->string('name', 150);
+            $table->string('url', 50)->unique();
             $table->timestamps();
 
             // Chave estrangeira que representa a Categoria

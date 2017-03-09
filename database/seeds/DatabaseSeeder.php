@@ -56,16 +56,19 @@ class DatabaseSeeder extends Seeder
         DB::table('servicos')->insert([
             'categoria_id'  => 1,
             'name'          => 'Manicure',
+            'url'           => 'manicure'
         ]);
 
         DB::table('servicos')->insert([
             'categoria_id'  => 1,
             'name'          => 'Cabeleleiro',
+            'url'           => 'cabeleleiro'
         ]);
 
         DB::table('servicos')->insert([
             'categoria_id'  => 2,
             'name'          => 'Pedreiro',
+            'url'           => 'pedreiro'
         ]);
     }
 }

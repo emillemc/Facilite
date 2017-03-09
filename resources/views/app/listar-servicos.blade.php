@@ -16,9 +16,9 @@
     <div class="col-lg-10 col-md-10 col-sm-8">
       @forelse($servicos as $servico)
         
-          <div class="col-lg-offset-1 col-lg-3 col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-            <h3><a href="#">{{ $servico->name }}</a></h3>
-          </div>
+        <div class="col-lg-offset-1 col-lg-3 col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
+          <h3><a href="{{ url("/categorias/$categoria->url/$servico->url ") }}">{{ $servico->name }}</a></h3>
+        </div>
         
       @empty
         <h1>Não foi possível carregar os serviços...</h1>

@@ -9,13 +9,13 @@
 
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="#">
+      <a href="{{ route('perfil') }}">
         <span class="glyphicon glyphicon-user"></span> Meu perfil
       </a>
     </li>
     <li class="divider"></li>
     <li>
-      <a href="#">
+      <a href="{{ route('editar-perfil') }}">
         <span class="glyphicon glyphicon-picture"></span> Editar perfil
       </a>
     </li>
@@ -33,13 +33,13 @@
     </li>
     <li class="divider"></li>
     <li>
-      <a href="#">
+      <a href="{{ route('editar-especialidades') }}">
         <span class="glyphicon glyphicon-th"></span> Editar especialidades
       </a>
     </li>
     <li class="divider"></li>
     <li>
-      <a href="#">
+      <a href="{{ route('editar-conta') }}">
         <span class="glyphicon glyphicon-cog"></span> Editar conta
       </a>
     </li>

@@ -22,8 +22,19 @@ class ProfileController extends Controller
 
     public function index()
     {
-
+        return "Perfil Profissional";
     }
+
+    public function editarPerfil()
+    {
+        return "Editar Perfil";
+    }
+
+    public function postEditarPerfil()
+    {
+        //
+    }
+
 
     public function editarCategorias(Categoria $categoria)
     {
@@ -77,6 +88,8 @@ class ProfileController extends Controller
 
              echo "<hr>";
         }
+
+
 
         // $categorias = $this->categoria
         //     ->join('categoria_professional', 'categorias.id', '=', 'categoria_professional.categoria_id')
@@ -151,6 +164,16 @@ class ProfileController extends Controller
 
         // return view('profile.editar-servicos', compact('categorias'));
         
+    }
+
+    public function editarEspecialidades()
+    {
+        return "Editar Especialidades";
+    }
+
+    public function postEditarEspecialidades()
+    {
+        //
     }
 
 }
