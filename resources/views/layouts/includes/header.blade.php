@@ -1,5 +1,4 @@
-@inject('categorias', 'App\MenuCategorias')
-{{-- @inject('servicos', 'App\MenuCategorias') --}}
+@inject('categorias', 'App\InjectCategorias')
 
 <nav class="navbar navbar navbar-inverse navbar-static-top">
   <div class="container">
@@ -42,18 +41,18 @@
       <div>
         <ul class="nav navbar-nav">
           {{-- Service Injection das Categorias do NavBar --}}
-          @forelse( $categorias->menuCategorias() as $categoria )
+          @forelse( $categorias->injectCategorias() as $categoria )
 
             <li class="dropdown">
             <a href="{{ url("/categorias/$categoria->url") }}" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $categoria->name }}</a>
             <div class="hidden-xs">
-              {{-- <ul class="dropdown-menu">
-                @forelse( $servicos->menuServicos() as $servico)
-                  <li><a href="#">{{ $servico->name }} </a></li>
+              <ul class="dropdown-menu">
+                @forelse( $categoria->servicos as $servico)
+                  <li><a href="{{ url("/categorias/$categoria->url/$servico->url ") }}">{{ $servico->name }} </a></li>
                 @empty
                   <p>Não foi possível carregar as categorias...</p>
                 @endforelse
-              </ul> --}}
+              </ul>
             </div>
           </li>
           @empty

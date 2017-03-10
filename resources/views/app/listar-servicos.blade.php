@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-fluid')
 
 @section('title') {{ $categoria->name or "Facilite Serviços - Categorias"}}  @endsection
 
@@ -7,6 +7,13 @@
 @endsection
 
 @section('content')
+
+  {{-- BreadCrumb --}}
+  <ol class="breadcrumb">
+    <li><a href="{{ route('home') }}">Pagina inicial</a></li>
+    <li><a href="{{ route('categorias') }}">Categorias</a></li>
+    <li class="active">{{$categoria->name}}</li>
+  </ol>
 
   <h3>Serviços disponíveis para {{$categoria->name}}:</h3>
   <hr>

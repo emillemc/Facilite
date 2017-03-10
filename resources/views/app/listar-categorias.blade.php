@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-fluid')
 
 @section('title') Categorias - Facilite Serviços  @endsection
 
@@ -7,6 +7,12 @@
 @endsection
 
 @section('content')
+  
+  {{-- BreadCrumb --}}
+  <ol class="breadcrumb">
+    <li><a href="{{ route('home') }}">Página inicial</a></li>
+    <li class="active">Categorias</li>
+  </ol>
 
   <h3>Categorias:</h3>
   <hr>
@@ -14,10 +20,16 @@
 
     <!-- BLOCO PRINCIPAL -->
     <div class="col-lg-10 col-md-10 col-sm-8">
-      <div class="col-lg-offset-1 col-lg-3 col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-        <h3><a href="#">Categoria 1 ...</a></h3>
-      </div>
+
+      @forelse($categorias as $categoria)
+        <div class="col-lg-offset-1 col-lg-3 col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
+          <h3><a href="{{ url("/categorias/$categoria->url") }}"> {{$categoria->name}}</a></h3>
+        </div>
+      @empty
+        <h1>Não foi possível carregar as categorias...</h1>
+      @endforelse
     </div>
+
   <div class="col-lg-1 col-md-1 col-sm-2"></div>
 
 @endsection

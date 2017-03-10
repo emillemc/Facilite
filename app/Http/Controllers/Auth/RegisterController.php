@@ -24,13 +24,9 @@ class RegisterController extends Controller
     	return view('auth.cadastrar');
     }
 
-    public function postCadastrar(RegisterFormRequest $request, User $user, Professional $prof)
+    public function postCadastrar(RegisterFormRequest $request)
     {   
-        // Cria instância de User e Prof
-        $this->user = $user;
-        $this->prof = $prof;
-
-        // Pega todos os dados vindo do formulário
+        // Pega os dados vindo do formulário
         $dataForm = $request->all();
 
         // Se checkbox estiver marcado = prof, senão = user
@@ -47,9 +43,9 @@ class RegisterController extends Controller
         switch($role){
             case "prof":
                 // Insere na base de dados, na tabela users os dados de login
-                $insertUser = $user->create($dataForm);
+                $insertUser = User::create($dataForm);
                 // Insere na base de dados, na tabela prof os campos profissionais
-                $insertProf = $prof->create([
+                $insertProf = Professional::create([
                     'user_id'   => $insertUser->id,
                     'cpf'       => $dataForm['cpf'],
                     'tel'       => $dataForm['tel'], 
@@ -58,7 +54,7 @@ class RegisterController extends Controller
                 $login = Auth::login($insertUser, true);
                 // Verifica se inseriu com sucesso
                 if($insertProf){
-                    // Redireciona para a page Cadastrar/Editar Categorias
+                    // Redireciona para a page Cadastrar/Editar Especialidades
                     return redirect()->route('editar-especialidades');
                 }else{
                     // Caso haja erro na inserção, volta para a page cadastro informando os erros
@@ -68,7 +64,7 @@ class RegisterController extends Controller
 
             default:
                 // Insere na base de dados, na tabela users
-                $insert = $user->create($dataForm);
+                $insert = User::create($dataForm);
                 // Loga o usuário após cadastrar
                 $login = Auth::login($insert, true);
                 // Verifica se inseriu com sucesso
