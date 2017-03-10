@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Servico;
-use App\Professional;
+// use App\Professional;
 
 class Categoria extends Model
 {
@@ -16,9 +16,9 @@ class Categoria extends Model
     	return $this->hasMany(Servico::class);
     }
 
-    // Uma Categoria pertence a muitos Profissionais (Many-To-Many)
-    public function profissionais()
-    {
-    	return $this->belongsToMany(Professional::class, 'categoria_professional');
-    }
+    // // Uma Categoria pertence a muitos Profissionais (Many-To-Many)
+    // public function profissionais()
+    // {
+    // 	return $this->belongsToMany(Professional::class, 'categoria_professional');
+    // }
 }

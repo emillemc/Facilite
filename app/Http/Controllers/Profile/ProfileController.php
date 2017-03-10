@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Professional;
 use App\Models\Categoria;
 use App\Models\Servico;
+use App\Models\Especialidade;
 
 class ProfileController extends Controller
 {
@@ -36,58 +37,85 @@ class ProfileController extends Controller
     }
 
 
-    public function editarCategorias(Categoria $categoria)
+    public function editarEspecialidades()
     {
-    	$this->categoria = $categoria;
+        $categorias = Categoria::get();
 
-        $categorias = $this->categoria->all();
-
-    	return view('profile.editar-categorias', compact('categorias'));
+        return view('profile.editar-categorias-especialidades', compact('categorias'));
     }
 
-    public function postEditarCategorias(Request $request)
+    public function postEditarEspecialidades(Request $request)
     {
         // Pega os checkbox's marcados, exceto o token
-        $categorias = $request->except(['_token']);
-        // Verifica categorias >=1 e <=3
-        if( count($categorias) >= 1 && count($categorias) <= 3 ){
-            // Busca id do prof = id do prof logado
-            $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
-            // Atualiza as categorias escolhidas e salva no banco de dados
-            $insert = $profissional->categorias()->sync($categorias);
+        $especialidades = $request->except(['_token']);
+        // dd($especialidades);
 
-            if($insert){
-                return redirect()->route('editar-servicos');
-            }else{
-                return redirect()->back()->withErrors('Erro ao atualizar dados.');
-            }
+        // Busca id do prof = id do prof logado
+        $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // dd($profissional);
+
+        // Atualiza as especialidades escolhidas e salva no banco de dados
+        $insert = $profissional->especialidades()->sync($especialidades);
+
+        if($insert){
+            return redirect()->route('editar-perfil');
         }else{
-            return redirect()->back()->withErrors('(Selecione no mínimo 1 e no máximo 3 categorias)');
+            return redirect()->back()->withErrors('Erro ao atualizar dados.');
         }
-        
 
     }
 
-    public function editarServicos()
-    {
-        // Exemplo listando tudo do banco:
+
+    // public function editarCategorias()
+    // {
+    // 	$categorias = Categoria::get();
+
+    // 	return view('profile.editar-categorias', compact('categorias'));
+    // }
+
+    // public function postEditarCategorias(Request $request)
+    // {
+    //     // Pega os checkbox's marcados, exceto o token
+    //     $categorias = $request->except(['_token']);
+    //     // Verifica categorias >=1 e <=3
+    //     if( count($categorias) >= 1 && count($categorias) <= 3 ){
+    //         // Busca id do prof = id do prof logado
+    //         $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+    //         // Atualiza as categorias escolhidas e salva no banco de dados
+    //         $insert = $profissional->categorias()->sync($categorias);
+
+    //         if($insert){
+    //             return redirect()->route('editar-servicos');
+    //         }else{
+    //             return redirect()->back()->withErrors('Erro ao atualizar dados.');
+    //         }
+    //     }else{
+    //         return redirect()->back()->withErrors('(Selecione no mínimo 1 e no máximo 3 categorias)');
+    //     }
         
-        $categorias = Categoria::where('name', 'LIKE', "%a%")->get();
 
-        foreach($categorias as $categoria){
-            echo "<b>{$categoria->name}</b><br>";
+    // }
 
-            // Retorna todos os servicos correspondentes as categorias
-            $servicos = $categoria->servicos()->get();
+    // public function editarServicos()
+    // {
+    //     // Exemplo listando tudo do banco:
+        
+    //     $categorias = Categoria::where('name', 'LIKE', "%a%")->get();
 
-            // Percorre e lista os Estados
-            foreach ($servicos as $servico) {
-                echo "<br>{$servico->name}.";
+    //     foreach($categorias as $categoria){
+    //         echo "<b>{$categoria->name}</b><br>";
 
-             }
+    //         // Retorna todos os servicos correspondentes as categorias
+    //         $servicos = $categoria->servicos()->get();
 
-             echo "<hr>";
-        }
+    //         // Percorre e lista os Estados
+    //         foreach ($servicos as $servico) {
+    //             echo "<br>{$servico->name}.";
+
+    //          }
+
+    //          echo "<hr>";
+    //     }
 
 
 
@@ -164,16 +192,16 @@ class ProfileController extends Controller
 
         // return view('profile.editar-servicos', compact('categorias'));
         
-    }
+    // }
 
-    public function editarEspecialidades()
-    {
-        return "Editar Especialidades";
-    }
+    // public function editarEspecialidades()
+    // {
+    //     return "Editar Especialidades";
+    // }
 
-    public function postEditarEspecialidades()
-    {
-        //
-    }
+    // public function postEditarEspecialidades()
+    // {
+    //     //
+    // }
 
 }

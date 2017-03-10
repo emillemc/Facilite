@@ -86,31 +86,31 @@ Route::group(['namespace' => 'Profile'], function(){
 		'as'	=> 'post-editar-perfil' // -< Rota nomeada
 	]);
 
-	// Cadastrar/Editar Categorias
-	Route::get('profile/editar/categorias', [
-		'uses' 	=> 'ProfileController@editarCategorias',
-		'as'	=> 'editar-categorias' // -< Rota nomeada
-	]);
+	// // Cadastrar/Editar Categorias
+	// Route::get('profile/editar/categorias', [
+	// 	'uses' 	=> 'ProfileController@editarCategorias',
+	// 	'as'	=> 'editar-categorias' // -< Rota nomeada
+	// ]);
 
-	// Post Cadastrar/Editar Categorias
-	Route::post('profile/editar/categorias', [
-		'uses' 	=> 'ProfileController@postEditarCategorias',
-		'as'	=> 'post-editar-categorias' // -< Rota nomeada
-	]);
+	// // Post Cadastrar/Editar Categorias
+	// Route::post('profile/editar/categorias', [
+	// 	'uses' 	=> 'ProfileController@postEditarCategorias',
+	// 	'as'	=> 'post-editar-categorias' // -< Rota nomeada
+	// ]);
 
-	// Cadastrar/Editar Serviços
-	Route::get('profile/editar/servicos', [
-		'uses' 	=> 'ProfileController@editarServicos',
-		'as'	=> 'editar-servicos' // -< Rota nomeada
-	]);
+	// // Cadastrar/Editar Serviços
+	// Route::get('profile/editar/servicos', [
+	// 	'uses' 	=> 'ProfileController@editarServicos',
+	// 	'as'	=> 'editar-servicos' // -< Rota nomeada
+	// ]);
 
-	// Post Cadastrar/Editar Serviços
-	Route::post('profile/editar/servicos', [
-		'uses' 	=> 'ProfileController@editarServicos',
-		'as'	=> 'post-editar-servicos' // -< Rota nomeada
-	]);
+	// // Post Cadastrar/Editar Serviços
+	// Route::post('profile/editar/servicos', [
+	// 	'uses' 	=> 'ProfileController@editarServicos',
+	// 	'as'	=> 'post-editar-servicos' // -< Rota nomeada
+	// ]);
 
-	// Cadastrar/Editar Especialidades
+	// Cadastrar/Editar Categorias e Especialidades
 	Route::get('profile/editar/especialidades', [
 		'uses' 	=> 'ProfileController@editarEspecialidades',
 		'as'	=> 'editar-especialidades' // -< Rota nomeada
