@@ -6,6 +6,7 @@ html {
 }
 
 body {
+    font-family: 'Open Sans', sans-serif;
     margin: 0 0 100px;
     /* bottom = footer height */
 }
@@ -45,4 +46,17 @@ footer {
 .dropdown:hover .dropdown-menu{
     display: block;
     margin-top: 0;
+ }
+
+ /* #navbar{
+    background-color: #2DB0B8;
+ }
+ */
+#logo{
+    color: white;
+ }
+
+ .font-navbar{
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
  }

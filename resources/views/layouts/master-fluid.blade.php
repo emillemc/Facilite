@@ -10,10 +10,12 @@
 	{{-- Bootstrap CSS --}}
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- CSS -->
+    {{-- CSS --}}
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
-    
+    {{-- Fonts --}}
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 </head>
 <body>

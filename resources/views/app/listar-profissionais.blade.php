@@ -11,13 +11,13 @@
   
   {{-- BreadCrumb --}}
   <ol class="breadcrumb">
-    <li><a href="{{ route('home') }}">Pagina inicial</a></li>
+    <li><span class="glyphicon glyphicon-menu-right" style="font-size: 12px;"></span><a href="{{ route('home') }}"> Pagina inicial</a></li>
     <li><a href="{{ route('categorias') }}">Categorias</a></li>
     <li><a href="{{ url("/categorias/$categoria->url") }}">{{$categoria->name}}</a></li>
     <li class="active">{{$servico->name}}</li>
   </ol>
 
-	<h3>Profissionais encontrados em "{{$servico->name}}" :</h3>
+	<h4>Profissionais encontrados em "{{$servico->name}}" :</h4>
   <hr>
   <!-- ROW -->
   <div class="row">
@@ -80,7 +80,7 @@
     <!-- *************************************************************************
     *************** BLOCO PRINCIPAL 2 CONTEÚDO (LISTA DE PROFISSIONAIS) **********
     ******************************************************************************* -->
-    <div class="col-lg-10 col-md-9 col-sm-9 top-3">
+    <div class="col-lg-10 col-md-9 col-sm-9">
       @forelse($profissionais as $profissional)
         <div class="col-lg-4 col-md-6 col-sm-6">
           <h4 style="color: white;"> - </h4> <!-- GAMBIARRA -->

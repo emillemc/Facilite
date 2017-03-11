@@ -38,8 +38,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('categorias')->insert([
-            'name'      => 'Saúde',
-            'url'     => 'saude'
+            'name'      => 'Tecnologia',
+            'url'     => 'tecnologia'
         ]);
 
         DB::table('categorias')->insert([

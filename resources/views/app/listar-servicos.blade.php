@@ -10,7 +10,7 @@
 
   {{-- BreadCrumb --}}
   <ol class="breadcrumb">
-    <li><a href="{{ route('home') }}">Pagina inicial</a></li>
+    <li><span class="glyphicon glyphicon-menu-right" style="font-size: 12px;"></span><a href="{{ route('home') }}"> Pagina inicial</a></li>
     <li><a href="{{ route('categorias') }}">Categorias</a></li>
     <li class="active">{{$categoria->name}}</li>
   </ol>
