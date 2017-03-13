@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Professional;
 use App\Models\Categoria;
 use App\Models\Servico;
@@ -21,9 +22,40 @@ class ProfileController extends Controller
     	$this->middleware('role:prof');
     }
 
+    // Perfil Profissional
     public function index()
     {
-        return "Perfil Profissional";
+        // Busca usuário profissional logado (tabela user)
+        $userProfessional = User::find(Auth::user()->id);
+        $profName = $userProfessional['name'];
+        $profEmail = $userProfessional['email'];
+
+        // Busca profissional logado (tabela professional)
+        $professional = Professional::find(Auth::user()->id);
+        $profTel = $professional['tel'];
+        $proflCpf = $professional['cpf'];
+
+        // Busca Serviços
+        $profServicos = User::distinct()->select('servicos.name')
+            ->join('professionals', 'professionals.user_id', '=', 'users.id')
+            ->join('especialidade_professional', 'especialidade_professional.professional_id', '=', 'professionals.id')
+            ->join('especialidades', 'especialidades.id', '=', 'especialidade_professional.especialidade_id')
+            ->join('servicos', 'servicos.id', '=', 'especialidades.servico_id')
+            ->where('users.id', '=', Auth::user()->id)
+            ->groupBy('servicos.name')
+            ->get();
+
+        // Busca Especialidades
+        $profEspecialidades = User::distinct()->select('especialidades.name')
+            ->join('professionals', 'professionals.user_id', '=', 'users.id')
+            ->join('especialidade_professional', 'especialidade_professional.professional_id', '=', 'professionals.id')
+            ->join('especialidades', 'especialidades.id', '=', 'especialidade_professional.especialidade_id')
+            ->join('servicos', 'servicos.id', '=', 'especialidades.servico_id')
+            ->where('users.id', '=', Auth::user()->id)
+            ->groupBy('especialidades.name')
+            ->get();
+
+        return view('profile.perfil-profissional', compact('profName', 'profTel', 'profServicos', 'profEspecialidades'));
     }
 
     public function editarPerfil()
