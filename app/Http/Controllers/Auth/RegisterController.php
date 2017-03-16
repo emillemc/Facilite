@@ -55,7 +55,7 @@ class RegisterController extends Controller
                 // Verifica se inseriu com sucesso
                 if($insertProf){
                     // Redireciona para a page Cadastrar/Editar Especialidades
-                    return redirect()->route('editar-especialidades');
+                    return redirect()->route('editar-categorias');
                 }else{
                     // Caso haja erro na inserção, volta para a page cadastro informando os erros
                     return redirect()->back();

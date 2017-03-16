@@ -4,16 +4,18 @@ namespace App\Http\Controllers\App;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Categoria;
 use App\Models\Servico;
 use App\Models\Especialidade;
+use App\Professional;
 use App\User;
 
 class AppController extends Controller
 {
-	public function __construct()
+	public function __construct(Professional $prof)
 	{
-
+        $this->prof = $prof;
 	}
 
     public function index()
@@ -65,15 +67,23 @@ class AppController extends Controller
                 // Busca as especialidades a partir do id do serviço
                 $especialidades = Especialidade::where('servico_id', $servico->id)->get();
 
-                // Tá bugado (ARRUMAR)
-                $profissionais = User::select('users.name', 'especialidades.id')
-                                    ->join('professionals', 'professionals.user_id', '=', 'users.id')
-                                    ->join('especialidade_professional', 'especialidade_professional.professional_id', '=', 'professionals.id')
-                                    ->join('especialidades', 'especialidades.id', '=', 'especialidade_professional.especialidade_id')
-                                    ->join('servicos', 'servicos.id', '=', 'especialidades.servico_id')
-                                    ->join('categorias', 'categorias.id', '=', 'servicos.categoria_id')
-                                    ->where('servicos.id', '=', $servico->id)
-                                    ->get();
+                // Busca profissional a partir da categoria e serviço visitado
+                $profissionais = Professional::with('user', 'servicos')
+                    ->join('servico_professional', 'professionals.id', '=', 'servico_professional.professional_id')
+                    ->join('servicos', 'servicos.id', '=', 'servico_professional.servico_id')
+                    ->join('categoria_professional', 'professionals.id', '=', 'categoria_professional.professional_id')
+                    ->join('categorias', 'categorias.id', '=', 'categoria_professional.categoria_id')
+                    ->where('categorias.id', $categoria->id)->where('servicos.id', $servico->id)->get();
+
+                    // dd($profissionais);
+                    // foreach($profissionais as $profissional){
+                    //     echo "{$profissional->user->name}:<br>";
+
+                    //     foreach($profissional->servicos as $servico){
+                    //         echo "{$servico->name}";
+                    //     }
+                    //     echo "<hr>";
+                    // }
 
             }else{
                 // Redireciona para home caso não retorne o servico

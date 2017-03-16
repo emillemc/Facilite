@@ -39,7 +39,7 @@
             </div>
           @empty
             <div>
-              <p>Não foi possível carregar as especialidades...</p>
+              <p>Não foi possível carregar o conteúdo...</p>
             </div>
           @endforelse
         </div>
@@ -91,7 +91,7 @@
               </div>
               <!-- BLOCO NOME E ESTRELAS PROFISSIONAL -->
               <div class="col-md-8 ">
-                <h4 class="panel-title text-center"><b>{{$profissional->name}}</b></h4>
+                <h4 class="panel-title text-center"><b>{{$profissional->user->name}}</b></h4>
                 <hr>
                 <!-- ESTRELAS -->
                 <div class="text-center">
@@ -105,9 +105,13 @@
               </div>
             </div>
             <div class="panel-body">
-              <p>Aqui especialidades...</p>
-              <hr>
-              <i><p>Aqui descrição...</p></i>
+              @forelse($profissional->servicos as $servico)
+                <span>•{{$servico->name}}&nbsp;</span>
+              @empty
+                <span>Não foi possível carregar o conteúdo...</span>
+              @endforelse
+                <hr>
+                <i><p>Aqui descrição...</p></i>
             </div>
             <div class="panel-footer text-center">
               <a href="#">Ver Perfil</a>
@@ -115,50 +119,8 @@
           </div>
         </div>
         @empty
-          <h1>Não foi possível carregar o profissional...</h1>
+          <h1>Não foi possível carregar o conteúdo...</h1>
         @endforelse
-      
-      <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-  
-      <!-- BLOCO PROFISSIONAL 2 -->
-      {{-- <div class="col-lg-4 col-md-6 col-sm-6"> --}}
-        <!-- GAMBIARRA -->
-        {{-- <h4 class="txt-branco"> - </h4>  --}}
-        {{-- <div class="panel panel-default"> --}}
-          <!-- CLEARFIX PARA ENCAIXAR AS COLUNAS NO PAINEL HEAD -->
-          {{-- <div class="panel-heading clearfix">  --}}
-            <!-- BLOCO FOTO PROFISSIONAL -->
-            {{-- <div class="col-md-4 text-center">  
-              <img src="{{ asset('img/perfil2.png') }}" alt="img_perfil2" class="img-circle">
-            </div> --}}
-            <!-- BLOCO NOME E ESTRELAS PROFISSIONAL -->
-            {{-- <div class="col-md-8">  
-              <h4 class="panel-title text-center"><b>Profissional 2</b></h4>
-              <hr> --}}
-              <!-- ESTRELAS -->
-              {{-- <div class="text-center">
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="font-size: 25px;"></span>
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="font-size: 25px;"></span>
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="font-size: 25px;"></span>
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="font-size: 25px;"></span>
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="font-size: 25px;"></span>
-              </div> --}}
-              <!-- //ESTRELAS -->
-            {{-- </div>
-          </div>
-          <div class="panel-body">
-            <p>Aqui especialidades...</p>
-            <hr>
-            <i><p>Aqui descrição...</p></i>
-          </div>
-          <div class="panel-footer text-center">
-            <a href="#">Ver Perfil</a>
-          </div>
-        </div>
-      </div> --}}
-      <!-- //BLOCO PROFISSIONAL 2 -->
-
-      <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
     </div>
     <!-- //BLOCO PRINCIPAL 2 CONTEÚDO (LISTA DE PROFISSIONAIS) -->

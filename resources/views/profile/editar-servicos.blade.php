@@ -1,6 +1,6 @@
 @extends('layouts.master-fluid')
 
-@section('title') Editar Categorias - Facilite Serviços @endsection
+@section('title') Editar Serviços - Facilite Serviços @endsection
 
 @section('navbar')
     @include('layouts.includes.header')
@@ -10,180 +10,57 @@
   
   <h2>Selecione os serviços: </h2>
   <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h4 class="text-danger">{{ $error }}</h4> @endforeach @endif</span>
-  <hr style="margin-bottom: 50px;">
-      <!-- FORMULÁRIO -->
-      <form class="form-horizontal" action="#">
-        
-        <div class="col-lg-1 col-md-1"></div>
+  <hr>
+    
+  <div class="row">
+    {{-- FORM --}}
+    <form class="form-horizontal" action="{{route('post-editar-servicos')}}" method="POST">
+      {{ csrf_field() }}
+      
+      @forelse($prof->categorias as $categoria)
 
-        <!-- BLOCO PRINCIPAL -->
-        <div class="col-lg-10 col-md-10">
-          
-          {{-- @forelse($categorias as $categoria)
-            <h3>$categoria</h3>
+        {{-- BLOCO PRINCIPAL --}}
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+          <h3>{{$categoria->name}}</h3>
+          <hr>
+
+          @forelse($categoria->servicos as $servico)
+            {{-- BLOCO CHECKBOX's --}}
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+              <div class="form-group">
+                <div class="checkbox">
+                  <label class="checkbox-inline" for="check_{{$servico->url}}">
+                    <input type="checkbox" id="check_{{$servico->url}}" name="check_{{$servico->url}}" value="{{$servico->id}}">{{$servico->name}}
+                  </label>
+                </div>
+              </div>
+            </div>
           @empty
-          <h1>Não foi possível carregar os serviços...</h1>
-        @endforelse --}}
-
-
-
-          <!-- BLOCO 1 -->
-          {{-- <div class="row">
-            <h3>Moda e Beleza</h3>
-            <hr class="linha-horizontal">
-            <!-- BLOCO CHECKBOX's -->
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="checkManicure">
-                    <input type="checkbox" id="checkManicure" value="option1">Manicure
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="checkCabeleleiro">
-                    <input type="checkbox" id="checkCabeleleiro" value="option2">Cabeleleiro
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="checkMaquiador">
-                   <input type="checkbox" id="checkMaquiador" value="option3">Maquiador
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="checkEsteticista">
-                    <input type="checkbox" id="checkEsteticista" value="option4">Esteticista
-                </div>
-              </div>
-            </div>
-            <!-- //BLOCO CHECKBOX's -->
-          </div>
-          <!-- //BLOCO 1 -->
-          
-          <!-- BLOCO 2 -->
-          <div class="row top-5">
-            <h3>Categoria 2</h3>
-            <hr class="linha-horizontal">
-            <!-- BLOCO CHECKBOX's -->
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="check1">
-                    <input type="checkbox" id="check1" value="option1">Serviço 1
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="check2">
-                    <input type="checkbox" id="check2" value="option2">Serviço 2
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="check3">
-                   <input type="checkbox" id="check3" value="option3">Serviço 3
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="check4">
-                    <input type="checkbox" id="check4" value="option4">Serviço 4
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- //BLOCO 2 -->
-
-          <!-- BLOCO 3 -->
-          <div class="row top-5">
-            <h3>Categoria 3</h3>
-            <hr class="linha-horizontal">
-            <!-- BLOCO CHECKBOX's -->
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="check11">
-                    <input type="checkbox" id="check11" value="option11">Serviço 1
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="check22">
-                    <input type="checkbox" id="check22" value="option22">Serviço 2
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="check33">
-                   <input type="checkbox" id="check33" value="option33">Serviço 3
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-offset-1 col-lg-2 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-5">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="checkbox-inline" for="check44">
-                    <input type="checkbox" id="check44" value="option44">Serviço 4
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- //BLOCO 3 --> --}}
+            <h1>Não foi possível carregar o conteúdo...</h1>
+          @endforelse
 
         </div>
-        <!-- //BLOCO PRINCIPAL -->
+        {{-- //BLOCO PRINCIPAL --}}
 
-        <div class="col-lg-1 col-md-1"></div>
+      @empty
+        <h1>Não foi possível carregar o conteúdo...</h1>
+      @endforelse
 
-        <!-- BOTÃO SUBMIT -->
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top-8">
-          <div class="form-group">
-            <div class="text-center">
-              <button type="submit" class="btn btn-success btn-md">Continuar</button>
-            </div>
-          </div>  
-        </div>
-        <!-- //BOTÃO SUBMIT -->
-      </form>
-      <!-- //FORMULÁRIO -->
+      {{-- BOTÃO SUBMIT --}}
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top-8">
+        <div class="form-group">
+          <div class="text-center">
+            <button type="submit" class="btn btn-success btn-md">Continuar</button>
+          </div>
+        </div>  
+      </div>
+
+    </form>
+    {{-- //FORM --}}
+  </div>
+  {{-- ROW --}}
+
 @endsection
 
 @section('footer')
@@ -191,7 +68,7 @@
 @endsection
 
 @push('scripts')
-  <script src="{{ asset('js/check-uncheck.js') }}"></script>
-  <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-  <script src="{{ asset('js/jquery.min.js') }}"></script>
+  {{-- <script src="{{ asset('js/check-uncheck.js') }}"></script> --}}
+  {{-- <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.min.js') }}"></script> --}}
 @endpush

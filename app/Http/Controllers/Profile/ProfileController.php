@@ -26,36 +26,36 @@ class ProfileController extends Controller
     public function index()
     {
         // Busca usuário profissional logado (tabela user)
-        $userProfessional = User::find(Auth::user()->id);
-        $profName = $userProfessional['name'];
-        $profEmail = $userProfessional['email'];
+        $userProf = User::find(Auth::user()->id);
+        // Busca prof (contém serviços e especialidades) pelo id do userProf logado
+        $prof = Professional::where('user_id', $userProf->id)->get()->first();
 
-        // Busca profissional logado (tabela professional)
-        $professional = Professional::find(Auth::user()->id);
-        $profTel = $professional['tel'];
-        $proflCpf = $professional['cpf'];
+        $profName = $userProf['name'];
+        // $profEmail = $userProf['email'];
+        // $profTel = $prof['tel'];
 
-        // Busca Serviços
-        $profServicos = User::distinct()->select('servicos.name')
-            ->join('professionals', 'professionals.user_id', '=', 'users.id')
-            ->join('especialidade_professional', 'especialidade_professional.professional_id', '=', 'professionals.id')
-            ->join('especialidades', 'especialidades.id', '=', 'especialidade_professional.especialidade_id')
-            ->join('servicos', 'servicos.id', '=', 'especialidades.servico_id')
-            ->where('users.id', '=', Auth::user()->id)
-            ->groupBy('servicos.name')
-            ->get();
+        /**
+         * Arrumar forma de buscar pelo Eloquent
+         */
+        // foreach($prof->servicos as $servico){
+        //     echo "{$servico->name}: <br>";
+        //     /**
+        //      * Transofrmar isso aqui em Busca Eloquent
+        //      * [Busca especialidades cadastradas pelo profissional a partir do id do serviço]
+        //      */
+        //     $especialidades = Especialidade::select('especialidades.name')
+        //         ->join('especialidade_professional', 'especialidades.id', '=', 'especialidade_professional.especialidade_id')
+        //         ->join('servicos', 'servicos.id', '=', 'especialidades.servico_id')
+        //         ->where('servico_id', $servico->id)
+        //         ->get();
 
-        // Busca Especialidades
-        $profEspecialidades = User::distinct()->select('especialidades.name')
-            ->join('professionals', 'professionals.user_id', '=', 'users.id')
-            ->join('especialidade_professional', 'especialidade_professional.professional_id', '=', 'professionals.id')
-            ->join('especialidades', 'especialidades.id', '=', 'especialidade_professional.especialidade_id')
-            ->join('servicos', 'servicos.id', '=', 'especialidades.servico_id')
-            ->where('users.id', '=', Auth::user()->id)
-            ->groupBy('especialidades.name')
-            ->get();
+        //     foreach($especialidades as $especialidade){
+        //         echo "{$especialidade->name} <br>";
+        //     }
+        //     echo "<hr>";
+        // }       
 
-        return view('profile.perfil-profissional', compact('profName', 'profTel', 'profServicos', 'profEspecialidades'));
+        return view('profile.perfil-profissional', compact('prof', 'profName'));
     }
 
     public function editarPerfil()
@@ -68,172 +68,94 @@ class ProfileController extends Controller
         //
     }
 
+    public function editarCategorias()
+    {
+    	$categorias = Categoria::get();
+
+    	return view('profile.editar-categorias', compact('categorias'));
+    }
+
+    public function postEditarCategorias(Request $request)
+    {
+        // Pega os checkbox's marcados, exceto o token
+        $categorias = $request->except(['_token']);
+        // Verifica categorias >=1 e <=3
+        if( count($categorias) >= 1 && count($categorias) <= 2 ){
+            // Busca id do prof = id do prof logado
+            $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+            // Atualiza as categorias escolhidas e salva no banco de dados
+            $insert = $profissional->categorias()->sync($categorias);
+
+            if($insert){
+                return redirect()->route('editar-servicos');
+            }else{
+                return redirect()->back()->withErrors('Erro ao atualizar dados.');
+            }
+        }else{
+            return redirect()->back()->withErrors('(Selecione no mínimo 1 e no máximo 2 categorias)');
+        }
+        
+
+    }
+
+    public function editarServicos()
+    {
+        // Busca profissional (contém categorias e serviços)
+        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();        
+        
+        return view('profile.editar-servicos', compact('prof'));
+        
+    }
+
+    public function postEditarServicos(Request $request)
+    {
+        // Pega os checkbox's marcados, exceto o token
+        $servicos = $request->except(['_token']);
+        // Verifica servicos >=1 e <=5
+        if( count($servicos) >= 1 && count($servicos) <= 5 ){
+            // Busca id do prof = id do prof logado
+            $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+            // Atualiza os servicos escolhidos e salva no banco
+            $insert = $profissional->servicos()->sync($servicos);
+
+            if($insert){
+                return redirect()->route('editar-especialidades');
+            }else{
+                return redirect()->back()->withErrors('Erro ao atualizar dados.');
+            }
+        }else{
+            return redirect()->back()->withErrors('(Selecione no mínimo 1 e no máximo 5 serviços)');
+        }
+    }
 
     public function editarEspecialidades()
     {
-        $categorias = Categoria::get();
-
-        return view('profile.editar-categorias-especialidades', compact('categorias'));
+        // Busca profissional (contém serviços e especialidades)
+        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        
+        return view('profile.editar-especialidades', compact('prof'));
     }
 
     public function postEditarEspecialidades(Request $request)
     {
         // Pega os checkbox's marcados, exceto o token
         $especialidades = $request->except(['_token']);
-        // dd($especialidades);
 
-        // Busca id do prof = id do prof logado
-        $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
-        // dd($profissional);
+        // Mínimo de 1 especialidade
+        if( count($especialidades) >= 1 ){
+            // Busca id do prof = id do prof logado
+            $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+            // Atualiza as especialidades escolhidos e salva no banco
+            $insert = $profissional->especialidades()->sync($especialidades);
 
-        // Atualiza as especialidades escolhidas e salva no banco de dados
-        $insert = $profissional->especialidades()->sync($especialidades);
-
-        if($insert){
-            return redirect()->route('editar-perfil');
+            if($insert){
+                return redirect()->route('editar-perfil');
+            }else{
+                return redirect()->back()->withErrors('Erro ao atualizar dados.');
+            }
         }else{
-            return redirect()->back()->withErrors('Erro ao atualizar dados.');
+            return redirect()->back()->withErrors('(Selecione pelo menos uma especialidade)');
         }
-
     }
-
-
-    // public function editarCategorias()
-    // {
-    // 	$categorias = Categoria::get();
-
-    // 	return view('profile.editar-categorias', compact('categorias'));
-    // }
-
-    // public function postEditarCategorias(Request $request)
-    // {
-    //     // Pega os checkbox's marcados, exceto o token
-    //     $categorias = $request->except(['_token']);
-    //     // Verifica categorias >=1 e <=3
-    //     if( count($categorias) >= 1 && count($categorias) <= 3 ){
-    //         // Busca id do prof = id do prof logado
-    //         $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
-    //         // Atualiza as categorias escolhidas e salva no banco de dados
-    //         $insert = $profissional->categorias()->sync($categorias);
-
-    //         if($insert){
-    //             return redirect()->route('editar-servicos');
-    //         }else{
-    //             return redirect()->back()->withErrors('Erro ao atualizar dados.');
-    //         }
-    //     }else{
-    //         return redirect()->back()->withErrors('(Selecione no mínimo 1 e no máximo 3 categorias)');
-    //     }
-        
-
-    // }
-
-    // public function editarServicos()
-    // {
-    //     // Exemplo listando tudo do banco:
-        
-    //     $categorias = Categoria::where('name', 'LIKE', "%a%")->get();
-
-    //     foreach($categorias as $categoria){
-    //         echo "<b>{$categoria->name}</b><br>";
-
-    //         // Retorna todos os servicos correspondentes as categorias
-    //         $servicos = $categoria->servicos()->get();
-
-    //         // Percorre e lista os Estados
-    //         foreach ($servicos as $servico) {
-    //             echo "<br>{$servico->name}.";
-
-    //          }
-
-    //          echo "<hr>";
-    //     }
-
-
-
-        // $categorias = $this->categoria
-        //     ->join('categoria_professional', 'categorias.id', '=', 'categoria_professional.categoria_id')
-        //     ->join('professionals', 'professionals.id', '=', 'categoria_professional.professional_id')
-        //     ->join('users', 'users.id', '=', 'professionals.user_id')
-        //     ->select('categorias.name')
-        //     ->where('users.id', '=', Auth::user()->id)
-        //     ->orderBy('categorias.name')
-        //     ->get();
-        // dd($categorias);
-
-        // $categorias = $this->categoria
-        //     ->join('servicos', 'categorias.id', '=', 'servicos.categoria_id')
-        //     ->join('servico_professional', 'servicos.id', '=', 'servico_professional.servico_id')
-        //     ->join('categoria_professional', 'categorias.id', '=', 'categoria_professional.categoria_id')
-        //     ->join('professionals', 'professionals.id', '=', 'categoria_professional.professional_id')
-        //     ->join('users', 'users.id', '=', 'professionals.user_id')
-        //     ->select('categorias.name', 'servicos.name')
-        //     ->where('users.id', '=', Auth::user()->id)
-        //     ->orderBy('categorias.name')
-        //     ->get();
-
-
-        // foreach ($categorias as $categoria){
-        //     echo "<b>{$categoria->name}</b><br>";
-
-        //     // $servicos = $categoria->servicos()->get();
-
-        //     foreach ($servicos as $servico) {
-        //         echo "<br>{$servico->name}.";
-        //      }
-
-        //      echo "<hr>";
-        // }
-
-        // $categorias = DB::table('categorias')
-        //     ->join('categoria_professional', 'categorias.id', '=', 'categoria_professional.categoria_id')
-        //     ->join('professionals', 'professionals.id', '=', 'categoria_professional.professional_id')
-        //     ->join('users', 'users.id', '=', 'professionals.user_id')
-        //     ->select('categorias.name')
-        //     ->where('users.id', '=', Auth::user()->id)
-        //     ->orderBy('categorias.name')
-        //     ->get();
-
-        // dd($categorias);
-        
-
-        // Busca categorias cadastradas do profissional logado
-        // $categorias = DB::table('categorias')
-        //     ->join('categoria_professional', 'categorias.id', '=', 'categoria_professional.categoria_id')
-        //     ->join('professionals', 'professionals.id', '=', 'categoria_professional.professional_id')
-        //     ->join('users', 'users.id', '=', 'professionals.user_id')
-        //     ->select('categorias.name')
-        //     ->where('users.id', '=', Auth::user()->id)
-        //     ->orderBy('categorias.name')
-        //     ->get();
-
-        // PESQUISA TA OK \/ *********************************************************************
-        // $servicos = DB::table('servicos')
-            // ->join('categorias', 'categorias.id', '=', 'servicos.categoria_id')
-            // ->join('categoria_professional', 'categorias.id', '=', 'categoria_professional.categoria_id')
-            // ->join('professionals', 'professionals.id', '=', 'categoria_professional.professional_id')
-            // ->join('users', 'users.id', '=', 'professionals.user_id')
-            // ->select('categorias.name', 'servicos.name')
-            // ->where('users.id', '=', Auth::user()->id)
-            // ->orderBy('categorias.name')
-            // ->get();
-
-        // dd($servicos);
-
-        // ***************************************************************************************
-
-        // return view('profile.editar-servicos', compact('categorias'));
-        
-    // }
-
-    // public function editarEspecialidades()
-    // {
-    //     return "Editar Especialidades";
-    // }
-
-    // public function postEditarEspecialidades()
-    // {
-    //     //
-    // }
 
 }

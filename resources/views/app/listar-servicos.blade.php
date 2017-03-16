@@ -28,7 +28,7 @@
         </div>
         
       @empty
-        <h1>Não foi possível carregar os serviços...</h1>
+        <h1>Não foi possível carregar o conteúdo...</h1>
       @endforelse
     </div>
   <div class="col-lg-1 col-md-1 col-sm-2"></div>

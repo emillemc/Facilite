@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEspecialidadeProfessionalTable extends Migration
+class CreateServicoProfessionalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateEspecialidadeProfessionalTable extends Migration
      */
     public function up()
     {
-        // Tabela Associativa de Especialidades e Profissionais
-        Schema::create('especialidade_professional', function (Blueprint $table){
+        // Tabela Associativa de Servicos e Profissionais
+        Schema::create('servico_professional', function (Blueprint $table){
             $table->increments('id');
-            $table->integer('especialidade_id')->unsigned();
+            $table->integer('servico_id')->unsigned();
             $table->integer('professional_id')->unsigned();
             $table->timestamps();
 
             // Chaves estrangeiras referenciando as duas tabelas
-            $table->foreign('especialidade_id')
+            $table->foreign('servico_id')
                     ->references('id')
-                    ->on('especialidades')
+                    ->on('servicos')
                     ->onDelete('cascade');
 
             $table->foreign('professional_id')
@@ -41,6 +41,6 @@ class CreateEspecialidadeProfessionalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('especialidade_professional');
+        Schema::dropIfExists('servico_professional');
     }
 }

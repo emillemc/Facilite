@@ -89,7 +89,7 @@
               <h3 class="margin-0"><b>Comentários:</b></h3>
               <hr>
               <div class="text-center">
-                <p>Aqui comentários de clientes...</p>
+                {{-- <p>Aqui comentários de clientes...</p> --}}
                 <hr>
               </div>
               <div class="text-center">
@@ -130,8 +130,8 @@
                         <hr>
                         <!-- ícones Serviços -->
                         <div class="">
-                          @forelse($profServicos as $profServico)
-                            <span>•{{$profServico->name}}&nbsp;</span>
+                          @forelse($prof->servicos as $servico)
+                            <span>•{{$servico->name}}&nbsp;</span>
                           @empty
                           @endforelse
                         </div>
@@ -147,8 +147,8 @@
                       </div>
                       <!-- Ícones Serviços -->
                       <div class="">
-                        @forelse($profServicos as $profServico)
-                          <span>•{{$profServico->name}}&nbsp;</span>
+                        @forelse($prof->servicos as $servico)
+                          <span>•{{$servico->name}}&nbsp;</span>
                         @empty
                         @endforelse
                         <hr>
@@ -186,57 +186,37 @@
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                           <h4 class="modal-title" id="modalContratarLabel">
                             <!-- <span class="glyphicon glyphicon-list-alt pull-left" aria-hidden="true"></span> <-->
-                              <h3 class="margin-0"><b>Solicitar Serviço</b></h3>
+                              <h3 class="margin-0"><b>Solicitar serviços de "{{$profName}}" :</b></h3>
                           </h4>
                         </div>
                         <div class="modal-body">
                           <!-- FORM SOLICITAR SERVIÇO -->
                           <form action="#" >
                             
-                            <!-- ESCOLHER SERVIÇO -->
+                            <!-- ESCOLHER SERVIÇOS -->
                             <div class="row">
                               <div class="col-lg-12 col-md-12">
                                 <label><i>Escolha os serviços desejados:</i></label>
                               </div>
                               
-                              <!-- SERVIÇO 1 -->
-                              <div class="col-lg-4 col-md-4 text-center">
-                                <div class="form-group">
-                                  <div class="checkbox">
-                                    <label for="checkServ1">
-                                      <input type="checkbox" id="checkServ1" value="Serv1">Serviço 1
-                                    </label>
+                              @forelse($prof->servicos as $servico)
+                                <!-- BLOCO SERVIÇOS -->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 text-center">
+                                  <div class="form-group">
+                                    <div class="checkbox">
+                                      <label for="check_{{$servico->id}}">
+                                        <input type="checkbox" id="check_{{$servico->id}}" value="{{$servico->id}}">{{$servico->name}}
+                                      </label>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <!-- //SERVIÇO 1 -->
+                                <!-- //BLOCO SERVIÇOS -->
+                              @empty
+                                <h4>Não foi possível carregar o conteúdo...</h4>7
+                              @endforelse
                               
-                              <!-- SERVIÇO 2 -->
-                              <div class="col-lg-4 col-md-4 text-center">
-                                <div class="form-group">
-                                  <div class="checkbox">
-                                    <label for="checkServ2">
-                                      <input type="checkbox" id="checkServ2" value="Serv2">Serviço 2
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- //SERVIÇO 2 -->
-                              
-                              <!-- SERVIÇO 3 -->
-                              <div class="col-lg-4 col-md-4 text-center">
-                                <div class="form-group">
-                                  <div class="checkbox">
-                                    <label for="checkServ3">
-                                      <input type="checkbox" id="checkServ3" value="Serv3">Serviço 3
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- //SERVIÇO 3 -->
-
                             </div>
-                            <!-- //ESCOLHER SERVIÇO -->
+                            <!-- //ESCOLHER SERVIÇOS -->
 
                             <hr>
 
@@ -283,11 +263,11 @@
                   <h3><b>Especialidades:</b></h3>
                   <hr>
                   <div class="">
-                    @forelse($profServicos as $profServico)
-                      <h4>{{$profServico->name}}:</h4>
+                    @forelse($prof->servicos as $servico)
+                      <h4>{{$servico->name}}:</h4>
 
-                      @forelse($profEspecialidades as $profEspecialidade)
-                        <span>•{{$profEspecialidade->name}}&nbsp;</span>
+                      @forelse($servico->especialidades as $especialidade)
+                        <span>•{{$especialidade->name}}&nbsp;</span>
                       @empty
                       @endforelse
 
@@ -307,8 +287,8 @@
                   <h3><b>Locais:</b></h3>
                   <hr>
                   <div class="text-center">
-                    <p>Estado 1: Cidade 1, Cidade 2, Cidade 3...</p>
-                    <p>Estado 2: Cidade 1, Cidade 2, Cidade 3...</p>
+                    {{-- <p>Estado 1: Cidade 1, Cidade 2, Cidade 3...</p>
+                    <p>Estado 2: Cidade 1, Cidade 2, Cidade 3...</p> --}}
                   </div>
                   <hr>
                 </div>
@@ -320,7 +300,7 @@
                   <h3 class="margin-0"><b>Calendário:</b></h3>
                   <hr>
                   <div class="text-center">
-                    <span>Aqui calendário de agendamento do profissional...</span>
+                    {{-- <span>Aqui calendário de agendamento do profissional...</span> --}}
                   </div>
                   <hr>
                 </div>

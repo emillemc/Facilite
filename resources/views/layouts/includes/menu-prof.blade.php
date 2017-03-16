@@ -20,18 +20,18 @@
       </a>
     </li>
     <li class="divider"></li>
-    {{-- <li>
+    <li>
       <a href="{{ route('editar-categorias') }}">
         <span class="glyphicon glyphicon-th-large"></span> Editar categorias
       </a>
     </li> 
-    <li class="divider"></li> --}}
-    {{-- <li>
+    <li class="divider"></li>
+    <li>
       <a href="{{ route('editar-servicos') }}">
         <span class="glyphicon glyphicon-th-list"></span> Editar serviços
       </a>
     </li> 
-    <li class="divider"></li> --}}
+    <li class="divider"></li>
     <li>
       <a href="{{ route('editar-especialidades') }}">
         <span class="glyphicon glyphicon-th"></span> Editar especialidades

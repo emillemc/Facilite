@@ -26,7 +26,7 @@
           <h3><a href="{{ url("/categorias/$categoria->url") }}"> {{$categoria->name}}</a></h3>
         </div>
       @empty
-        <h1>Não foi possível carregar as categorias...</h1>
+        <h1>Não foi possível carregar o conteúdo...</h1>
       @endforelse
     </div>
 
