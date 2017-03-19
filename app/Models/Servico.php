@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categoria;
 use App\Models\Especialidade;
-use App\Models\Professional;
+use App\Professional;
 
 class Servico extends Model
 {

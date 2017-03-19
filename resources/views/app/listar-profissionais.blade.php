@@ -105,17 +105,30 @@
               </div>
             </div>
             <div class="panel-body">
-              @forelse($profissional->servicos as $servico)
+              {{-- @forelse($profissional->servicos->where('professionals.id', $profissional->id) as $servico)
                 <span>•{{$servico->name}}&nbsp;</span>
               @empty
-                <span>Não foi possível carregar o conteúdo...</span>
-              @endforelse
+                <span>Não foi possível carregar os serviços...</span>
+              @endforelse --}}
                 <hr>
                 <i><p>Aqui descrição...</p></i>
             </div>
-            <div class="panel-footer text-center">
-              <a href="#">Ver Perfil</a>
-            </div>
+
+            {{-- Se for visitante abre modal-login --}}
+            @if( Auth::guest() )
+              <div class="panel-footer text-center">
+                <a href="#login" data-toggle="modal" data-target="#modalLogin">Ver Perfil</a>
+              </div>
+
+              @include('layouts.includes.modal-login')
+
+            {{-- Se não mostra perfil do profissional --}}
+            @else
+              <div class="panel-footer text-center">
+                <a href="{{url("/perfis/$profissional->url_perfil")}}">Ver Perfil</a>
+              </div>
+            @endif
+
           </div>
         </div>
         @empty

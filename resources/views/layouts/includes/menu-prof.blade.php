@@ -9,7 +9,7 @@
 
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="{{ route('perfil') }}">
+      <a href="{{ route('my-profile') }}">
         <span class="glyphicon glyphicon-user"></span> Meu perfil
       </a>
     </li>

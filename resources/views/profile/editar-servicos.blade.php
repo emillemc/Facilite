@@ -17,7 +17,7 @@
     <form class="form-horizontal" action="{{route('post-editar-servicos')}}" method="POST">
       {{ csrf_field() }}
       
-      @forelse($prof->categorias as $categoria)
+      @forelse($categorias as $categoria)
 
         {{-- BLOCO PRINCIPAL --}}
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

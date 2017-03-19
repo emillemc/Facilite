@@ -4,13 +4,9 @@ namespace App\Http\Controllers\Profile;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\User;
 use App\Professional;
 use App\Models\Categoria;
-use App\Models\Servico;
-use App\Models\Especialidade;
 
 class ProfileController extends Controller
 {
@@ -25,51 +21,21 @@ class ProfileController extends Controller
     // Perfil Profissional
     public function index()
     {
-        // Busca usuário profissional logado (tabela user)
-        $userProf = User::find(Auth::user()->id);
-        // Busca prof (contém serviços e especialidades) pelo id do userProf logado
-        $prof = Professional::where('user_id', $userProf->id)->get()->first();
+        // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
+        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Nome do profissional
+        $name = $prof->user['name'];
+        // Serviços cadastrados pelo profissional
+        $servicos = $prof->servicos;
+        // Especialidades cadastradas pelo profissional
+        $especialidades = $prof->especialidades;       
 
-        $profName = $userProf['name'];
-        // $profEmail = $userProf['email'];
-        // $profTel = $prof['tel'];
-
-        /**
-         * Arrumar forma de buscar pelo Eloquent
-         */
-        // foreach($prof->servicos as $servico){
-        //     echo "{$servico->name}: <br>";
-        //     /**
-        //      * Transofrmar isso aqui em Busca Eloquent
-        //      * [Busca especialidades cadastradas pelo profissional a partir do id do serviço]
-        //      */
-        //     $especialidades = Especialidade::select('especialidades.name')
-        //         ->join('especialidade_professional', 'especialidades.id', '=', 'especialidade_professional.especialidade_id')
-        //         ->join('servicos', 'servicos.id', '=', 'especialidades.servico_id')
-        //         ->where('servico_id', $servico->id)
-        //         ->get();
-
-        //     foreach($especialidades as $especialidade){
-        //         echo "{$especialidade->name} <br>";
-        //     }
-        //     echo "<hr>";
-        // }       
-
-        return view('profile.perfil-profissional', compact('prof', 'profName'));
-    }
-
-    public function editarPerfil()
-    {
-        return "Editar Perfil";
-    }
-
-    public function postEditarPerfil()
-    {
-        //
+        return view('profile.my-profile', compact('name', 'servicos', 'especialidades'));
     }
 
     public function editarCategorias()
-    {
+    {   
+        // Lista todas as categorias disponíveis
     	$categorias = Categoria::get();
 
     	return view('profile.editar-categorias', compact('categorias'));
@@ -100,10 +66,12 @@ class ProfileController extends Controller
 
     public function editarServicos()
     {
-        // Busca profissional (contém categorias e serviços)
-        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();        
-        
-        return view('profile.editar-servicos', compact('prof'));
+        // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
+        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Categorias cadastradas pelo profissional
+        $categorias = $prof->categorias;
+
+        return view('profile.editar-servicos', compact('categorias'));
         
     }
 
@@ -130,10 +98,12 @@ class ProfileController extends Controller
 
     public function editarEspecialidades()
     {
-        // Busca profissional (contém serviços e especialidades)
+        // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Serviços cadastradas pelo profissional
+        $servicos = $prof->servicos;
         
-        return view('profile.editar-especialidades', compact('prof'));
+        return view('profile.editar-especialidades', compact('servicos'));
     }
 
     public function postEditarEspecialidades(Request $request)
@@ -154,8 +124,35 @@ class ProfileController extends Controller
                 return redirect()->back()->withErrors('Erro ao atualizar dados.');
             }
         }else{
-            return redirect()->back()->withErrors('(Selecione pelo menos uma especialidade)');
+            return redirect()->back()->withErrors('(Selecione no mínimo 1 especialidade)');
         }
+    }
+
+    public function editarPerfil()
+    {
+        return view('profile.editar-perfil');
+    }
+
+    public function postEditarPerfil(Request $request)
+    {
+        // Pega os dados do formulário editar-perfil
+        $perfil = $request->except(['_token']);
+
+        if($perfil['url_perfil']){
+            // Busca id do prof = id do prof logado
+            $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+            // Atualiza as informãções do perfil e salva no banco
+            $insert = $profissional->update($perfil);
+
+            if($insert){
+                return redirect()->route('my-profile');
+            }else{
+                return redirect()->back()->withErrors('Erro ao atualizar dados.');
+            }
+        }else{
+            return redirect()->back()->withErrors('(Informe uma url para o seu perfil.)');
+        }
+
     }
 
 }

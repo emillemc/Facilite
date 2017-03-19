@@ -28,16 +28,16 @@ class LoginController extends Controller
     	return view('auth.login');
     }
 
-    public function postLogin(LoginFormRequest $request)
+    public function postLogin(Request $request)
     {
         $credentials = $request->only(['email', 'password']);
 
         if ( Auth::attempt($credentials) ) {
-                // Dados corretos: faz o login e redireciona para '/'
-                return redirect()->route('home');
+                // Dados corretos: faz o login e redireciona para a ultima tentativa de acesso
+                return redirect()->intended();
             } else {
-                // Dados incorretos: retorna para a page de login informando os erros (LoginFormRequest)
-                return redirect()->back();
+                // Dados incorretos: retorna para a page de login informando os erros
+                return redirect()->route('login')->withErrors('Email ou senha incorretos!');
             }
         
     }

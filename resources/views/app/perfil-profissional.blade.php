@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-      <hr>
+      {{-- <hr> --}}
       <!-- ROW -->
       <div class="row">
         
@@ -126,11 +126,11 @@
                     {{-- Display Desktop --}}
                     <div class="visible-lg visible-md">
                       <div class="col-lg-6 col-md-6">
-                        <h2><b>{{$profName}}</b></h2>
+                        <h2><b>{{$name}}</b></h2>
                         <hr>
                         <!-- ícones Serviços -->
                         <div class="">
-                          @forelse($prof->servicos as $servico)
+                          @forelse($servicos as $servico)
                             <span>•{{$servico->name}}&nbsp;</span>
                           @empty
                           @endforelse
@@ -142,12 +142,12 @@
                     {{-- Display Mobile (Centralizado) --}}
                     <div class="visible-sm visible-xs text-center">
                       <div class="col-sm-7 col-xs-7">
-                        <h2><b>{{$profName}}</b></h2>
+                        <h2><b>{{$name}}</b></h2>
                         <hr>
                       </div>
                       <!-- Ícones Serviços -->
                       <div class="">
-                        @forelse($prof->servicos as $servico)
+                        @forelse($servicos as $servico)
                           <span>•{{$servico->name}}&nbsp;</span>
                         @empty
                         @endforelse
@@ -169,86 +169,26 @@
                         <span class="glyphicon glyphicon-heart-empty" style="font-size: 16px;"></span> <span>0</span> <label style="font-size: 13px">Favoritos</label>
                       </div>
                     </div>
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                      <hr>
-                      <button type="button" title="Contratar" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalContratar">
-                        <span>Contratar</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- MODAL CONTRATAR -->
-                  <div class="modal fade" id="modalContratar" tabindex="-1" role="dialog" aria-labelledby="modalContratar">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title" id="modalContratarLabel">
-                            <!-- <span class="glyphicon glyphicon-list-alt pull-left" aria-hidden="true"></span> <-->
-                              <h3 class="margin-0"><b>Solicitar serviços de "{{$profName}}" :</b></h3>
-                          </h4>
-                        </div>
-                        <div class="modal-body">
-                          <!-- FORM SOLICITAR SERVIÇO -->
-                          <form action="#" >
-                            
-                            <!-- ESCOLHER SERVIÇOS -->
-                            <div class="row">
-                              <div class="col-lg-12 col-md-12">
-                                <label><i>Escolha os serviços desejados:</i></label>
-                              </div>
-                              
-                              @forelse($prof->servicos as $servico)
-                                <!-- BLOCO SERVIÇOS -->
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 text-center">
-                                  <div class="form-group">
-                                    <div class="checkbox">
-                                      <label for="check_{{$servico->id}}">
-                                        <input type="checkbox" id="check_{{$servico->id}}" value="{{$servico->id}}">{{$servico->name}}
-                                      </label>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- //BLOCO SERVIÇOS -->
-                              @empty
-                                <h4>Não foi possível carregar o conteúdo...</h4>7
-                              @endforelse
-                              
-                            </div>
-                            <!-- //ESCOLHER SERVIÇOS -->
-
-                            <hr>
-
-                            <!-- COMENTÁRIOS -->
-                            <div class="row">
-                              <div class="col-md-12 col-md-12">
-                                <div class="form-group">
-                                  <label for="comentarios" class="control-label"><i>Comentários:</i></label>
-                                  <textarea class="form-control" name="comentarios" id="comentarios" rows="10"></textarea>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- //COMENTÁRIOS -->
-
-                            <!-- BOTÕES -->
-                            <div class="row">
-                              <div class="col-md-12 col-md-12">
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-fechar" data-dismiss="modal">Fechar</button>
-                                  <button type="submit" class="btn btn-success">Solicitar serviço</button>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- //BOTÕES -->
-
-                          </form>
-                          <!-- //FORM SOLICITAR SERVIÇO -->
-                        </div>
+                    
+                    {{-- Se o perfil visitado for o mesmo do profissional logado, exibe botão editar perfil --}}
+                    @if( Auth::user()->id == $id)
+                      {{-- Botão Editar Perfil --}}
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <hr>
+                        <a class="btn btn-primary" href="{{route('editar-perfil')}}" role="button"><span class="glyphicon glyphicon-pencil"></span> Editar Perfil</a>
                       </div>
-                    </div>
+                    {{-- Se não, exibe o botão solicitar serviço --}}
+                    @else
+                      {{-- Botão Soliciar Serviço --}}
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <hr>
+                        <a class="btn btn-success" href="#solicitar-servico" role="button" data-toggle="modal" data-target="#modalSolicitarServico"> Solicitar Serviço</a>
+                      </div>
+                      @include('layouts.includes.modal-solicitar-servico')
+
+                    @endif
+                    
                   </div>
-                  <!-- //MODAL CONTRATAR -->
                 </div>
               </div>
             </div>
@@ -263,10 +203,11 @@
                   <h3><b>Especialidades:</b></h3>
                   <hr>
                   <div class="">
-                    @forelse($prof->servicos as $servico)
+                    {{-- Lista os serviços cadastradas pelo profissional --}}
+                    @forelse($servicos as $servico)
                       <h4>{{$servico->name}}:</h4>
-
-                      @forelse($servico->especialidades as $especialidade)
+                      {{-- Lista as especialidades cadastradas pelo profissional --}}
+                      @forelse($especialidades->where('servico_id', $servico->id) as $especialidade)
                         <span>•{{$especialidade->name}}&nbsp;</span>
                       @empty
                       @endforelse
@@ -284,13 +225,15 @@
               <!-- LOCAIS -->
               <div class="panel panel-default">
                 <div class="panel-body">
-                  <h3><b>Locais:</b></h3>
+                  <h3><b> Locais:</b></h3>
                   <hr>
                   <div class="text-center">
-                    {{-- <p>Estado 1: Cidade 1, Cidade 2, Cidade 3...</p>
-                    <p>Estado 2: Cidade 1, Cidade 2, Cidade 3...</p> --}}
+                    <span>Locais de atendimento do profissional...</span>
                   </div>
                   <hr>
+                  <div class="text-center">
+                    <a class="btn btn-primary" href="#!" role="button"><span class="glyphicon glyphicon-globe"></span> Locais</a>
+                  </div>
                 </div>
               </div>     
               <!-- //LOCAIS-->
@@ -300,9 +243,12 @@
                   <h3 class="margin-0"><b>Calendário:</b></h3>
                   <hr>
                   <div class="text-center">
-                    {{-- <span>Aqui calendário de agendamento do profissional...</span> --}}
+                    <span>Calendário de agendamento do profissional...</span>
                   </div>
                   <hr>
+                  <div class="text-center">
+                    <a class="btn btn-primary" href="#!" role="button"><span class="glyphicon glyphicon-calendar"></span> Agendamento</a>
+                  </div>
                 </div>
               </div>
 

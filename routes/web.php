@@ -25,6 +25,12 @@ Route::group(['namespace' => 'App'], function(){
 		'uses' 	=> 'AppController@listarProfissionais'
 	]);
 
+	// Listar Perfil Profissional passando a url do perfil
+	Route::get('/perfis/{urlPerfil?}', [
+		'uses' 	=> 'AppController@listarPerfis'
+	]);
+
+
 });
 
 /***************************//****************************/
@@ -69,9 +75,9 @@ Route::group(['namespace' => 'Auth'], function(){
 Route::group(['namespace' => 'Profile'], function(){
 
 	// Perfil
-	Route::get('profile', [
+	Route::get('myprofile', [
 		'uses' 	=> 'ProfileController@index',
-		'as'	=> 'perfil' // -< Rota nomeada
+		'as'	=> 'my-profile' // -< Rota nomeada
 	]);
 
 	// Editar Perfil
