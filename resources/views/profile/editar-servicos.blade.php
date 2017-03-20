@@ -30,8 +30,18 @@
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
               <div class="form-group">
                 <div class="checkbox">
-                  <label class="checkbox-inline" for="check_{{$servico->url}}">
-                    <input type="checkbox" id="check_{{$servico->url}}" name="check_{{$servico->url}}" value="{{$servico->id}}">{{$servico->name}}
+                  <label class="checkbox-inline" for="check_{{$servico->id}}">
+                    <input type="checkbox" id="check_{{$servico->id}}" name="check_{{$servico->id}}" value="{{$servico->id}}"
+
+                      @forelse($profServicos as $profServico) 
+                        @if( isset($profServicos) && $profServico->id == $servico->id ) 
+                          checked 
+                        @endif
+                      @empty 
+                      @endforelse
+                      
+                    />
+                    {{$servico->name}}
                   </label>
                 </div>
               </div>

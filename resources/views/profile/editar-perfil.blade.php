@@ -30,7 +30,7 @@
         </div>
         {{-- //FOTO PERFIL --}}
         
-        {{-- BLOCO CIDADE E CARTÃO --}}
+        {{-- BLOCO CIDADE E URL PERFIL --}}
         <div class="col-lg-6 col-md-6 col-sm-6">
           <hr class="linha-horizontal2 visible-xs">
           {{-- CIDADES --}}
@@ -57,32 +57,16 @@
           {{-- URL PERFIL --}}
           <h3>Url do perfil:</h3>
           <div class="text-center">
-            <div class="col-lg-6 col-md-4 col-sm-6 col-xs-6">
-              <span style="font-size: 21px; color: #6CA7BF"><i>facilite.com/</i></span>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <span style="font-size: 21px; color: #6CA7BF"><i>facilite.com/perfis/</i></span>
             </div>
-            <div class="col-lg-6 col-md-8 col-sm-6 col-xs-6">
-              <input type="text" name="url_perfil" id="url_perfil" class="form-control">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <input type="text" name="url_perfil" id="url_perfil" value="@if(isset($urlPerfil)) {{$urlPerfil}} @endif" class="form-control">
             </div>
           </div>
           {{-- //URL PERFIL --}}
-
-          {{-- CARTÃO --}}
-          {{-- <h3>Aceita cartão?</h3>
-          <div class="text-center">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <div class="radio-inline">
-                <label for="cartaoSim"><input checked type="radio" name="optCartao" id="cartaoSim">Sim</label>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <div class="radio-inline">
-                <label for="cartaoNao"><input type="radio" name="optCartao" id="cartaoNao">Não</label>
-              </div>
-            </div>
-          </div> --}}
-          {{-- //CARTÃO --}}
         </div>
-        <!-- //BLOCO CIDADE E CARTÃO -->
+        <!-- //BLOCO CIDADE E URL PERFIL -->
       </div>
       <!-- //ROW -->
 

@@ -23,22 +23,33 @@ class ProfileController extends Controller
     {
         // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-        // Nome do profissional
-        $name = $prof->user['name'];
-        // Serviços cadastrados pelo profissional
-        $servicos = $prof->servicos;
-        // Especialidades cadastradas pelo profissional
-        $especialidades = $prof->especialidades;       
-
-        return view('profile.my-profile', compact('name', 'servicos', 'especialidades'));
+        // Verifica se o profissional escolheu uma url para o seu perfil
+        $urlPerfil = $prof->url_perfil;
+        if($urlPerfil){
+            // Nome do profissional
+            $name = $prof->user['name'];
+            // Serviços cadastrados pelo profissional
+            $servicos = $prof->servicos;
+            // Especialidades cadastradas pelo profissional
+            $especialidades = $prof->especialidades;       
+            // Exibe o perfil profissional com os dados cadastrados
+            return view('profile.my-profile', compact('name', 'servicos', 'especialidades'));
+        }else{
+            // Redireciona para a página editar-perfil
+            return redirect()->route('editar-perfil');
+        }
     }
 
     public function editarCategorias()
     {   
         // Lista todas as categorias disponíveis
     	$categorias = Categoria::get();
+        // Busca prof logado
+        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Busca categorias previamente cadastradas pelo prof (para exibir marcadas na view)
+        $profCategorias = $prof->categorias;
 
-    	return view('profile.editar-categorias', compact('categorias'));
+    	return view('profile.editar-categorias', compact('categorias', 'profCategorias'));
     }
 
     public function postEditarCategorias(Request $request)
@@ -68,10 +79,17 @@ class ProfileController extends Controller
     {
         // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-        // Categorias cadastradas pelo profissional
+        // Verifica se o profissional cadastrou alguma categoria anteriormente
         $categorias = $prof->categorias;
-
-        return view('profile.editar-servicos', compact('categorias'));
+        if(count($categorias) >= 1){
+            // Busca servicos previamente cadastradas pelo prof, para exibir marcadas na view (se existir)
+            $profServicos = $prof->servicos;
+            // Exibe as categorias com seus respectivos serviços na view
+            return view('profile.editar-servicos', compact('categorias', 'profServicos'));
+        }else{
+            // Redireciona para editar-categorias
+            return redirect()->route('editar-categorias');
+        }
         
     }
 
@@ -100,10 +118,18 @@ class ProfileController extends Controller
     {
         // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-        // Serviços cadastradas pelo profissional
+        // Verifica se o profissional cadastrou serviços anteriormente
         $servicos = $prof->servicos;
+        if(count($servicos) >= 1){
+            // Busca especialidades previamente cadastradas pelo prof, para exibir marcadas na view (se existir)
+            $profEspecialidades = $prof->especialidades;
+            // Exibe os serviços com suas respectivas especialidades na view
+            return view('profile.editar-especialidades', compact('servicos', 'profEspecialidades'));
+        }else{
+            // Redireciona para editar-servicos
+            return redirect()->route('editar-servicos');
+        }
         
-        return view('profile.editar-especialidades', compact('servicos'));
     }
 
     public function postEditarEspecialidades(Request $request)
@@ -130,7 +156,19 @@ class ProfileController extends Controller
 
     public function editarPerfil()
     {
-        return view('profile.editar-perfil');
+        // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
+        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Verifica se o profissional cadastrou alguma especialidade anteriormente
+        $especialidades = $prof->especialidades;
+        if(count($especialidades) >= 1){
+            // Busca url do perfil cadastrada anteriormente (se existir)
+            $urlPerfil = $prof->url_perfil;
+            // Exibe a view de edição de perfil
+            return view('profile.editar-perfil', compact('urlPerfil'));
+        }else{
+            // Redireciona para editar-servicos
+            return redirect()->route('editar-especialidades');
+        }
     }
 
     public function postEditarPerfil(Request $request)

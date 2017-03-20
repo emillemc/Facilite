@@ -58,7 +58,7 @@ class RegisterController extends Controller
                     return redirect()->route('editar-categorias');
                 }else{
                     // Caso haja erro na inserção, volta para a page cadastro informando os erros
-                    return redirect()->back();
+                    return redirect()->back()->with('data', 'checked');
                 }
             break;
 

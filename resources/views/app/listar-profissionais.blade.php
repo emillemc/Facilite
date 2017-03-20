@@ -110,8 +110,9 @@
               @empty
                 <span>Não foi possível carregar os serviços...</span>
               @endforelse --}}
-                <hr>
-                <i><p>Aqui descrição...</p></i>
+              <i><p>Descrição...</p></i>
+              <hr>
+              <i><p>Infos...</p></i>
             </div>
 
             {{-- Se for visitante abre modal-login --}}

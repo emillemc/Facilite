@@ -30,10 +30,20 @@
                   @forelse($servico->especialidades as $especialidade)
                     <div class="checkbox">
                       <label for="check_{{$especialidade->id}}">
-                        <input type="checkbox" id="check_{{$especialidade->id}}" name="check_{{$especialidade->id}}" value="{{$especialidade->id}}">{{$especialidade->name}}
+                        <input type="checkbox" id="check_{{$especialidade->id}}" name="check_{{$especialidade->id}}" value="{{$especialidade->id}}"
+
+                          @forelse($profEspecialidades as $profEspecialidade)
+                            @if( isset($profEspecialidades) && $profEspecialidade->id == $especialidade->id )
+                              checked
+                            @endif
+                          @empty
+                          @endforelse
+
+                        />
+                        {{$especialidade->name}}
                     </div>
                   @empty
-                    <span>Não foi possível carregar o conteúdo...</span>
+                    <span>Erro interno, tente novamente mais tarde...</span>
                   @endforelse
                 </div>
               </div>

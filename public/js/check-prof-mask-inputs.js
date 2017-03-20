@@ -28,3 +28,21 @@ $("#cpf").on("focus", function(){
 $("#tel").on("focus", function(){
     $("#tel").mask("(99) 99999-9999");
 });
+
+/**
+ * Ao carregar a página
+ */
+$( window ).on( "load", function() {
+    // Se checkbox "Sou Profissional" estiver marcado exibe e habilita os campos profissionais
+    if( $("#role").is(':checked') ){
+        $("#cpf").prop("disabled", false); // <- = habilita input
+        $("#tel").prop("disabled", false); // <- = habilita input
+        $("#formCpf").show("fast");
+        $("#formTel").show("linear");
+    }else{
+        $("#cpf").prop("disabled", true); // <- = desabilita input
+        $("#tel").prop("disabled", true); // <- = desabilita input
+        $("#formCpf").hide("fast");
+        $("#formTel").hide("linear");
+    }
+});

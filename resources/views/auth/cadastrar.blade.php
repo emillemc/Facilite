@@ -18,7 +18,7 @@
               <div class="col-md-offset-2 col-md-9">
 
                 <div class="checkbox">
-                  <label for="role"><input type="checkbox" id="role" name="role"/> Sou profissional</label>
+                  <label for="role"><input type="checkbox" id="role" name="role" @if (session('data')) {{ session('data') }} @endif/> Sou profissional</label>
                 </div>
 
               </div>
@@ -51,7 +51,7 @@
             <div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }}" id="formCpf" style="display: none">
               <label for="cpf" class="col-md-2 control-label">Cpf:</label>
               <div class="col-md-9">
-                <input required disabled type="text" class="form-control" id="cpf" name="cpf" value="{{ old('cpf') }}" maxlength="14" placeholder="000.000.000-00"/>
+                <input disabled type="text" class="form-control" id="cpf" name="cpf" value="{{ old('cpf') }}" maxlength="14" placeholder="000.000.000-00"/>
                 @if ($errors->has('cpf'))
                     <span class="help-block">
                         <strong>{{ $errors->first('cpf') }}</strong>
@@ -63,7 +63,7 @@
             <div class="form-group{{ $errors->has('tel') ? ' has-error' : '' }}" id="formTel" style="display: none">
               <label for="tel" class="col-md-2 control-label">Tel:</label>
               <div class="col-md-9">
-                <input required disabled type="tel" class="form-control" id="tel" name="tel" value="{{ old('tel') }}" maxlength="15" placeholder="(00) 00000-0000"/>
+                <input disabled type="tel" class="form-control" id="tel" name="tel" value="{{ old('tel') }}" maxlength="15" placeholder="(00) 00000-0000"/>
                 @if ($errors->has('tel'))
                     <span class="help-block">
                         <strong>{{ $errors->first('tel') }}</strong>
