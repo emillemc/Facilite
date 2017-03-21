@@ -9,13 +9,11 @@ $("#role").on("click", function() {
         $("#tel").prop("disabled", false); // <- = habilita input
         $("#formCpf").show("fast");
         $("#formTel").show("linear");
-        // $("#form_prof").prop("action", "/register-prof"); // <- Muda o action do form para cadastrar prof
     }else{
         $("#cpf").prop("disabled", true); // <- = desabilita input
         $("#tel").prop("disabled", true); // <- = desabilita input
         $("#formCpf").hide("fast");
         $("#formTel").hide("linear");
-        // $("#form_prof").prop("action", "/register");
     }
 });
 

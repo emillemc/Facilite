@@ -5,6 +5,27 @@ $( window ).on( "load", function() {
 
     /* ********************** Aplica estilo se checkbox estiver marcado ********************* */
 
+    //////////////////////////////
+    ///////// Outros Checkbox's //
+    //////////////////////////////
+
+     //Editar Conta && Cadastrar
+    if( $("#role").is(":checked") ){
+        $('#check_span_role').removeClass('glyphicon-unchecked');
+        $('#check_span_role').addClass('glyphicon-check');
+        $("#check_span_role").css({color: "#206BBF"});
+        $("#label_role").css({color: "#206BBF"});
+    }else{
+        $('#check_span_role').removeClass('glyphicon-check');
+        $('#check_span_role').addClass('glyphicon-unchecked');
+        $("#check_span_role").css({color: "#272727"});
+        $("#label_role").css({color: "#272727"});
+    }
+
+    //////////////////////////////
+    ///////// Editar Categorias //
+    //////////////////////////////
+
     // cat_1
     if( $("#cat_1").is(":checked") ){
         $('#check_span_1').removeClass('glyphicon-unchecked');
@@ -94,6 +115,19 @@ $( window ).on( "load", function() {
 
     /******************** Cursor mãozinha em cima dos botões das categorias ******************/
 
+    //////////////////////////////
+    ///////// Outros Checkbox's //
+    //////////////////////////////
+    
+    // Editar Conta && Login
+    $('#label_role, #check_span_role').mouseover(function() {
+        $(this).css({cursor: "pointer"});
+    });
+
+    //////////////////////////////
+    ///////// Editar Categorias //
+    //////////////////////////////
+    
     // cat_1
     $('#label_cat_1, #check_span_1').mouseover(function() {
         $(this).css({cursor: "pointer"});
@@ -128,6 +162,36 @@ $( window ).on( "load", function() {
 
     /* ************************ Check-uncheck style botões categorias************************ */
 
+    //////////////////////////////
+    ///////// Outros Checkbox's //
+    //////////////////////////////
+    
+    //Editar Conta && Login
+    $("#check_span_role, #label_role").on("click", function() {
+        if( $("#cat_1").is(":checked") ){
+            $("#cat_1").prop("checked", false);
+        }else{
+            $("#cat_1").prop("checked", true);
+        }
+
+        if( $("#role").is(":checked") ){
+            $('#check_span_role').removeClass('glyphicon-unchecked');
+            $('#check_span_role').addClass('glyphicon-check');
+            $("#check_span_role").css({color: "#206BBF"});
+            $("#label_role").css({color: "#206BBF"});
+        }else{
+            $('#check_span_role').removeClass('glyphicon-check');
+            $('#check_span_role').addClass('glyphicon-unchecked');
+            $("#check_span_role").css({color: "#272727"});
+            $("#label_role").css({color: "#272727"});
+        }  
+    });
+
+
+    //////////////////////////////
+    ///////// Editar Categorias //
+    //////////////////////////////
+    
     // cat_1
     $("#check_span_1, #label_cat_1").on("click", function() {
         if( $("#cat_1").is(":checked") ){

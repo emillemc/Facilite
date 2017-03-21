@@ -105,7 +105,7 @@
               </div>
             </div>
             <div class="panel-body">
-              {{-- @forelse($profissional->servicos->where('professionals.id', $profissional->id) as $servico)
+              {{-- @forelse($profissional->servicos as $servico)
                 <span>•{{$servico->name}}&nbsp;</span>
               @empty
                 <span>Não foi possível carregar os serviços...</span>
@@ -126,7 +126,7 @@
             {{-- Se não mostra perfil do profissional --}}
             @else
               <div class="panel-footer text-center">
-                <a href="{{url("/perfis/$profissional->url_perfil")}}">Ver Perfil</a>
+                <a href="{{url("/profiles/$profissional->url_perfil")}}">Ver Perfil</a>
               </div>
             @endif
 

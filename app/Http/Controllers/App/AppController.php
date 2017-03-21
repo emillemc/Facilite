@@ -95,12 +95,27 @@ class AppController extends Controller
         }
 
         // Busca profissional a partir da categoria e serviço visitado
-        $profissionais = Professional::with('user')
+        $profissionais = Professional::with('user', 'servicos')
             ->join('servico_professional', 'professionals.id', '=', 'servico_professional.professional_id')
             ->join('servicos', 'servicos.id', '=', 'servico_professional.servico_id')
             ->join('categoria_professional', 'professionals.id', '=', 'categoria_professional.professional_id')
             ->join('categorias', 'categorias.id', '=', 'categoria_professional.categoria_id')
             ->where('categorias.id', $categoria->id)->where('servicos.id', $servico->id)->get();
+
+        //dd($profissionais->servicos);
+
+        // foreach ($profissionais as $sentence => $profissional) {
+            
+        //     echo "{$profissional->user->name}: <br>";
+
+        //     // dd($profissional->servicos);
+            
+
+        //     foreach($profissional->servicos as $value => $servico) {
+                
+        //         $servico->pivot->professional_id;
+        //     }
+        // }
 
         // Busca serviços do profissional
         // $profs = Professional::with('servicos')

@@ -58,7 +58,7 @@
           <h3>Url do perfil:</h3>
           <div class="text-center">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <span style="font-size: 21px; color: #6CA7BF"><i>facilite.com/perfis/</i></span>
+              <span style="font-size: 21px; color: #6CA7BF"><i>facilite.com/profiles/</i></span>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
               <input type="text" name="url_perfil" id="url_perfil" value="@if(isset($urlPerfil)) {{$urlPerfil}} @endif" class="form-control">

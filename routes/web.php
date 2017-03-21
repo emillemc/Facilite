@@ -26,7 +26,7 @@ Route::group(['namespace' => 'App'], function(){
 	]);
 
 	// Listar Perfil Profissional passando a url do perfil
-	Route::get('/perfis/{urlPerfil?}', [
+	Route::get('/profiles/{urlPerfil?}', [
 		'uses' 	=> 'AppController@listarPerfis'
 	]);
 
@@ -71,59 +71,59 @@ Route::group(['namespace' => 'Auth'], function(){
 });
 /***************************//****************************/
 
-/******************* ProfileController *******************/
-Route::group(['namespace' => 'Profile'], function(){
+/******************* ProfileController / Prefix 'profile/' *******************/
+Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 
 	// Perfil
-	Route::get('myprofile', [
+	Route::get('/', [
 		'uses' 	=> 'ProfileController@index',
 		'as'	=> 'my-profile' // -< Rota nomeada
 	]);
 
 	// Editar Perfil
-	Route::get('profile/editar', [
+	Route::get('/editar', [
 		'uses' 	=> 'ProfileController@editarPerfil',
 		'as'	=> 'editar-perfil' // -< Rota nomeada
 	]);
 
 	// Post Editar Perfil
-	Route::post('profile/editar', [
+	Route::post('/editar', [
 		'uses' 	=> 'ProfileController@postEditarPerfil',
 		'as'	=> 'post-editar-perfil' // -< Rota nomeada
 	]);
 
 	// Cadastrar/Editar Categorias
-	Route::get('profile/editar/categorias', [
+	Route::get('/editar/categorias', [
 		'uses' 	=> 'ProfileController@editarCategorias',
 		'as'	=> 'editar-categorias' // -< Rota nomeada
 	]);
 
 	// Post Cadastrar/Editar Categorias
-	Route::post('profile/editar/categorias', [
+	Route::post('/editar/categorias', [
 		'uses' 	=> 'ProfileController@postEditarCategorias',
 		'as'	=> 'post-editar-categorias' // -< Rota nomeada
 	]);
 
 	// Cadastrar/Editar Serviços
-	Route::get('profile/editar/servicos', [
+	Route::get('/editar/servicos', [
 		'uses' 	=> 'ProfileController@editarServicos',
 		'as'	=> 'editar-servicos' // -< Rota nomeada
 	]);
 
 	// Post Cadastrar/Editar Serviços
-	Route::post('profile/editar/servicos', [
+	Route::post('/editar/servicos', [
 		'uses' 	=> 'ProfileController@postEditarServicos',
 		'as'	=> 'post-editar-servicos' // -< Rota nomeada
 	]);
 
 	// Cadastrar/Editar Especialidades
-	Route::get('profile/editar/especialidades', [
+	Route::get('/editar/especialidades', [
 		'uses' 	=> 'ProfileController@editarEspecialidades',
 		'as'	=> 'editar-especialidades' // -< Rota nomeada
 	]);
 
 	// Post Cadastrar/Editar Especialidades
-	Route::post('profile/editar/especialidades', [
+	Route::post('/editar/especialidades', [
 		'uses' 	=> 'ProfileController@postEditarEspecialidades',
 		'as'	=> 'post-editar-especialidades' // -< Rota nomeada
 	]);
@@ -133,16 +133,16 @@ Route::group(['namespace' => 'Profile'], function(){
 
 /******************* AccountController *******************/
 
-Route::group(['namespace' => 'Account'], function(){
+Route::group(['namespace' => 'Account', 'prefix' => 'minha-conta'], function(){
 
 	// Editar Conta
-	Route::get('minha-conta/editar', [
-		'uses' 	=> 'AccountController@editarConta',
+	Route::get('/editar', [
+		'uses' 	=> 'AccountController@index',
 		'as'	=> 'editar-conta' // -< Rota nomeada
 	]);
 
 	// Post Editar Conta
-	Route::post('minha-conta/editar', [
+	Route::post('/editar', [
 		'uses' 	=> 'AccountController@postEditarConta',
 		'as'	=> 'post-editar-conta' // -< Rota nomeada
 	]);
