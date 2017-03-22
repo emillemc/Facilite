@@ -20,6 +20,8 @@ class CreateProfessionalsTable extends Migration
             $table->string('cpf', 20);
             $table->string('city', 100)->nullable();
             $table->string('url_perfil', 30)->unique()->nullable();
+            $table->string('status', 10)->default('inactive');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             // Chave estrangeira que representa o Usuário

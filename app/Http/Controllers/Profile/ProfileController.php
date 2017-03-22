@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Professional;
 use App\Models\Categoria;
+use App\Http\Requests\Profile\ProfileEditFormRequest;
+use App\Http\Requests\Profile\UrlEditFormRequest;
 
 class ProfileController extends Controller
 {
@@ -162,9 +164,13 @@ class ProfileController extends Controller
         $especialidades = $prof->especialidades;
         if(count($especialidades) >= 1){
             // Busca url do perfil cadastrada anteriormente (se existir)
-            $urlPerfil = $prof->url_perfil;
+            $urlProf = $prof->url_perfil;
+            // Busca cidade do profissional cadastrada anteriormente (se existir)
+            $cityProf = $prof->city;
+            // Busca descrição do perfil cadastrada anteriormente (se existir)
+            $descriptionProf = $prof->description;
             // Exibe a view de edição de perfil
-            return view('profile.editar-perfil', compact('urlPerfil'));
+            return view('profile.editar-perfil', compact('urlProf', 'cityProf', 'descriptionProf'));
         }else{
             // Redireciona para editar-servicos
             return redirect()->route('editar-especialidades');
@@ -173,24 +179,72 @@ class ProfileController extends Controller
 
     public function postEditarPerfil(Request $request)
     {
-        // Pega os dados do formulário editar-perfil
-        $perfil = $request->except(['_token']);
-
-        if($perfil['url_perfil']){
-            // Busca id do prof = id do prof logado
-            $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
-            // Atualiza as informãções do perfil e salva no banco
-            $insert = $profissional->update($perfil);
-
-            if($insert){
-                return redirect()->route('my-profile');
-            }else{
-                return redirect()->back()->withErrors('Erro ao atualizar dados.');
-            }
+        // Busca id do prof = id do prof logado
+        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Se houver configurado a url do perfil
+        if(isset($prof->url_perfil)){
+            return redirect()->route('my-profile');
         }else{
-            return redirect()->back()->withErrors('(Informe uma url para o seu perfil.)');
+            return redirect()->back()->withErrors('(Informe um endereço para o seu perfil)');
         }
 
+        // // Pega os dados do formulário editar-perfil
+        // $dataForm = $request->except(['_token']);
+
+        // // Busca id do prof = id do prof logado
+        // $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // // Cadastra/Atualiza as informãções do perfil e salva no banco
+        // $insert = $prof->update([
+        //     'user_id'       => $prof->user->id,
+        //     'description'   => $dataForm['description'],
+        //     'city'          => $dataForm['city'],
+        //     'url_perfil'    => $dataForm['url_perfil'],
+        //     'status'        => 'active',
+        // ]);
+
+        // if($insert){
+        //     return redirect()->route('my-profile');
+        // }else{
+        //     return redirect()->back();
+        // }
+
+    }
+
+    public function postEditarUrl(UrlEditFormRequest $request)
+    {
+        // Pega os dados do formulário editar-url
+        $dataForm = $request->except(['_token']);
+        // Busca id do prof = id do prof logado
+        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Cadastra/Atualiza a url do perfil e ativa o perfil profissional
+        $insert = $prof->update([
+            'url_perfil'    => $dataForm['url_perfil'],
+            'status'        => 'active',
+        ]);
+
+        if($insert){
+            return redirect()->route('editar-perfil');
+        }else{
+            return redirect()->back();
+        }
+    }
+
+    public function postEditarDescricao(Request $request)
+    {
+        // Pega os dados do formulário editar-descrição
+        $dataForm = $request->except(['_token']);
+        // Busca id do prof = id do prof logado
+        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Cadastra/Atualiza a descrição do perfil profissional
+        $insert = $prof->update([
+            'description'    => $dataForm['description'],
+        ]);
+
+        if($insert){
+            return redirect()->route('editar-perfil');
+        }else{
+            return redirect()->back();
+        }
     }
 
 }

@@ -43,7 +43,7 @@ class RegisterFormRequest extends FormRequest
             'email.email'           => 'Informe um endereço de e-mail válido.',
             'email.max'             => 'Seu e-mail parece grande demais...',
             'email.unique'          => 'O e-mail informado já está em uso.',
-            'password.required'      => 'Informe uma senha.',
+            'password.required'     => 'Informe uma senha.',
             'password.confirmed'    => 'A confirmãção de senha não confere.',
             'password.min'          => 'A senha deve ter no mínimo :min caracteres.',
             'cpf.required_with'     => 'O campo cpf é obrigatório.',

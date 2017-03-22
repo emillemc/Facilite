@@ -128,6 +128,18 @@ Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 		'as'	=> 'post-editar-especialidades' // -< Rota nomeada
 	]);
 
+	// Post Cadastrar/Editar Url
+	Route::post('/editar/url', [
+		'uses' 	=> 'ProfileController@postEditarUrl',
+		'as'	=> 'post-editar-url' // -< Rota nomeada
+	]);
+
+	// Post Cadastrar/Editar Descrição
+	Route::post('/editar/descricao', [
+		'uses' 	=> 'ProfileController@postEditarDescricao',
+		'as'	=> 'post-editar-descricao' // -< Rota nomeada
+	]);
+
 });
 /***************************//****************************/
 

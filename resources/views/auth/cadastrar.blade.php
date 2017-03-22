@@ -18,7 +18,7 @@
               <div class="col-md-offset-2 col-md-9">
 
                 <div class="checkbox">
-                  <label for="role"><input type="checkbox" id="role" name="role" @if (session('data')) {{ session('data') }} @endif/> Sou profissional</label>
+                  <label for="role"><input type="checkbox" id="role" name="role"/> Sou profissional</label>
                 </div>
 
               </div>

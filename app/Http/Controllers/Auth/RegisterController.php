@@ -48,7 +48,8 @@ class RegisterController extends Controller
                 $insertProf = Professional::create([
                     'user_id'   => $insertUser->id,
                     'cpf'       => $dataForm['cpf'],
-                    'tel'       => $dataForm['tel'], 
+                    'tel'       => $dataForm['tel'],
+                    // 'status'    => 'inactive',
                 ]);
                 // Loga o usuário após cadastrar
                 $login = Auth::login($insertUser, true);
@@ -58,7 +59,7 @@ class RegisterController extends Controller
                     return redirect()->route('editar-categorias');
                 }else{
                     // Caso haja erro na inserção, volta para a page cadastro informando os erros
-                    return redirect()->back()->with('data', 'checked');
+                    return redirect()->back();
                 }
             break;
 

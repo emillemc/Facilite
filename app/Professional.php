@@ -14,7 +14,7 @@ class Professional extends Authenticatable
 	use Notifiable;
 	
     protected $fillable = [
-        'user_id', 'tel', 'cpf', 'city', 'url_perfil'
+        'user_id', 'tel', 'cpf', 'city', 'url_perfil', 'status'
     ];
 
     protected $hidden = [
