@@ -26,10 +26,15 @@
         {{-- FOTO PERFIL --}}
         <div class="col-lg-6 col-md-6 col-sm-6">
           <h3>Foto do perfil:</h3>
-          {{-- <div class="text-center top-5"> --}}
+          <div class="text-center">
             <img src="{{ asset('img/perfil.png') }}" alt="img_perfil" class="img-circle">
-            <input type="file" id="imgPerfil" accept="image/*" class="top-5">
-          {{-- </div> --}}
+          </div>
+          <div class="top-5 text-center">
+            <label for="input-img">
+              <a class="btn btn-primary btn-sm">Mudar foto</a>
+            </label>
+            <input id="input-img" type="file"  accept="image/*" style="display: none;">
+          </div>
         </div>
         {{-- //FOTO PERFIL --}}
         

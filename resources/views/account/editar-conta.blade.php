@@ -31,32 +31,32 @@
     	<nav>
     		<ul class="nav nav-stacked">
     			<li>
-			      <a href="{{ route('editar-perfil') }}">
+			      <a href="{{ route('my-profile') }}" class="text-muted">
 			        <span class="glyphicon glyphicon-user"></span> Meu Perfil
 			      </a>
 			    </li>
     			<li>
-			      <a href="{{ route('editar-perfil') }}">
+			      <a href="{{ route('editar-perfil') }}" class="text-muted">
 			        <span class="glyphicon glyphicon-picture"></span> Editar perfil
 			      </a>
 			    </li>
 			    <li>
-			      <a href="{{ route('editar-perfil') }}">
+			      <a href="{{ route('editar-categorias') }}" class="text-muted">
 			        <span class="glyphicon glyphicon-th-large"></span> Editar categorias
 			      </a>
 			    </li>
 			    <li>
-			      <a href="{{ route('editar-perfil') }}">
+			      <a href="{{ route('editar-servicos') }}" class="text-muted">
 			        <span class="glyphicon glyphicon-th-list"></span> Editar serviços
 			      </a>
 			    </li>
 			    <li>
-			      <a href="{{ route('editar-perfil') }}">
+			      <a href="{{ route('editar-especialidades') }}" class="text-muted">
 			        <span class="glyphicon glyphicon-th"></span> Editar especialidades
 			      </a>
 			    </li>
 			    <li>
-			      <a href="{{ route('editar-perfil') }}">
+			      <a href="{{ route('editar-conta') }}" class="text-primary">
 			        <span class="glyphicon glyphicon-cog"></span> Editar Conta
 			      </a>
 			    </li>
@@ -89,7 +89,7 @@
             <div class="top-6 form-group{{ $errors->has('name') ? ' has-error' : '' }}">
               <label for="name" class="col-md-2 control-label">Nome:</label>
               <div class="col-md-9">
-                <input id="name" type="text" class="form-control" name="name" value="@if(isset($userName)){{$userName or old('name')}} @else{{$profName or old('name')}} @endif" maxlength="50" placeholder="Ex.: Maria José"/>
+                <input id="name" type="text" class="form-control" name="name" value="@if(isset($userName)){{$userName or old('name')}}@else{{$profName or old('name')}} @endif" maxlength="50" placeholder="Ex.: Maria José"/>
                 @if ($errors->has('name'))
                     <span class="help-block">
                         <strong>{{ $errors->first('name') }}</strong>

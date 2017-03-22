@@ -16,11 +16,10 @@
             
             <div class="form-group">
               <div class="col-md-offset-2 col-md-9">
-
-                <div class="checkbox">
-                  <label for="role"><input type="checkbox" id="role" name="role"/> Sou profissional</label>
-                </div>
-
+                <span id="check_span_role" name="check_span_role" class="glyphicon glyphicon-unchecked" style="font-size: color: #272727"></span>
+                <label id="label_role" for="role" style="font-weight: normal; font-size: 16px;">
+                  <input type="checkbox" id="role" name="role" style="display: none;"/>Sou profissional
+                </label>
               </div>
             </div>
 
@@ -122,11 +121,12 @@
 
 
 @push('scripts')
-
-    <!-- JQuery/JQuery Mask Plugins -->
-    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
-    <!-- Eventos do Formulário-->
-    <script src="{{ asset('js/check-prof-mask-inputs.js') }}"></script>
+  {{-- check-uncheck.js --}}
+  <script src="{{ asset('js/check-uncheck.js') }}"></script>
+  {{-- JQuery/JQuery Mask Plugins --}}
+  <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+   {{-- Eventos do Formulário --}}
+  <script src="{{ asset('js/check-prof-mask-inputs.js') }}"></script>
     
 @endpush

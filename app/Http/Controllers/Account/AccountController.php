@@ -23,7 +23,7 @@ class AccountController extends Controller
      */
     public function index()
     {   
-        // Se quem estiver logado for profissional
+        // Se for profissional
         if(Auth::user()->role == 'prof'){
             // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
             $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
@@ -114,38 +114,38 @@ class AccountController extends Controller
 
 
 
-    	// if(Auth::user()->role == 'prof'){
-     //        $dataForm = $request->all();
+    	if(Auth::user()->role == 'prof'){
+            $dataForm = $request->all();
 
-     //        if(Hash::needsRehash($dataForm['password'])) {
-     //            $dataForm['password'] = Hash::make($dataForm['password']);
-     //        }
+            if(Hash::needsRehash($dataForm['password'])) {
+                $dataForm['password'] = Hash::make($dataForm['password']);
+            }
 
-     //        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-     //        $update = $prof->update($dataForm);
+            $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+            $update = $prof->update($dataForm);
          
-     //        if($update){
-     //          return redirect()->route('editar-conta');
-     //        }else{
-     //          return redirect()->route('home');
-     //        }
+            if($update){
+              return redirect()->route('editar-conta');
+            }else{
+              return redirect()->route('home');
+            }
 
-     //    }else{
-     //        $dataForm = $request->all();
+        }else{
+            $dataForm = $request->all();
 
-     //        if(Hash::needsRehash($dataForm['password'])) {
-     //            $dataForm['password'] = Hash::make($dataForm['password']);
-     //        }
+            if(Hash::needsRehash($dataForm['password'])) {
+                $dataForm['password'] = Hash::make($dataForm['password']);
+            }
 
-     //        $user = User::where('id', Auth::user()->id)->get()->first();
-     //        $update = $user->update($dataForm);
+            $user = User::where('id', Auth::user()->id)->get()->first();
+            $update = $user->update($dataForm);
 
-     //        if($update){
-     //            return redirect()->route('editar-conta');
-     //        }else{
-     //            return redirect()->route('home');
-     //        }
-     //    }
+            if($update){
+                return redirect()->route('editar-conta');
+            }else{
+                return redirect()->route('home');
+            }
+        }
 
     }
 }
