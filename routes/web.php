@@ -147,16 +147,22 @@ Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 
 Route::group(['namespace' => 'Account', 'prefix' => 'minha-conta'], function(){
 
-	// Editar Conta
+	// Editar Conta User
 	Route::get('/editar', [
 		'uses' 	=> 'AccountController@index',
 		'as'	=> 'editar-conta' // -< Rota nomeada
 	]);
 
-	// Post Editar Conta
+	// Post Editar Conta User
 	Route::post('/editar', [
-		'uses' 	=> 'AccountController@postEditarConta',
-		'as'	=> 'post-editar-conta' // -< Rota nomeada
+		'uses' 	=> 'AccountController@postEditarContaUser',
+		'as'	=> 'post-editar-conta-user' // -< Rota nomeada
+	]);
+
+	// Post Editar Conta Prof
+	Route::post('/edit', [
+		'uses' 	=> 'AccountController@postEditarContaProf',
+		'as'	=> 'post-editar-conta-prof' // -< Rota nomeada
 	]);
 
 });

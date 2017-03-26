@@ -41,7 +41,7 @@
                   <strong>{{ $errors->first('password') }}</strong>
               </span>
             @endif --}}
-            <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h4 class="text-danger">{{ $error }}</h4> @endforeach @endif</span>
+            <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h5 class="text-danger">{{ $error }}</h5> @endforeach @endif</span>
 
           </div>
         </div>

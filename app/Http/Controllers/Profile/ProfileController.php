@@ -25,9 +25,9 @@ class ProfileController extends Controller
     {
         // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-        // Verifica se o profissional escolheu uma url para o seu perfil
-        $urlPerfil = $prof->url_perfil;
-        if($urlPerfil){
+        // Verifica se o profissional está ativo
+        $profStatus = $prof->status;
+        if($profStatus == 'active'){
             // Nome do profissional
             $name = $prof->user['name'];
             // Serviços cadastrados pelo profissional
@@ -38,7 +38,7 @@ class ProfileController extends Controller
             return view('profile.my-profile', compact('name', 'servicos', 'especialidades'));
         }else{
             // Redireciona para a página editar-perfil
-            return redirect()->route('editar-perfil');
+            return redirect()->route('editar-perfil')->withErrors('Informe um endereço para o seu perfil!');
         }
     }
 
@@ -71,7 +71,7 @@ class ProfileController extends Controller
                 return redirect()->back()->withErrors('Erro ao atualizar dados.');
             }
         }else{
-            return redirect()->back()->withErrors('(Selecione no mínimo 1 e no máximo 2 categorias)');
+            return redirect()->back()->withErrors('Selecione no mínimo 1 e no máximo 2 categorias!');
         }
         
 
@@ -90,7 +90,7 @@ class ProfileController extends Controller
             return view('profile.editar-servicos', compact('categorias', 'profServicos'));
         }else{
             // Redireciona para editar-categorias
-            return redirect()->route('editar-categorias');
+            return redirect()->route('editar-categorias')->withErrors('Selecione no mínimo 1 e no máximo 2 categorias!');
         }
         
     }
@@ -112,7 +112,7 @@ class ProfileController extends Controller
                 return redirect()->back()->withErrors('Erro ao atualizar dados.');
             }
         }else{
-            return redirect()->back()->withErrors('(Selecione no mínimo 1 e no máximo 5 serviços)');
+            return redirect()->back()->withErrors('Selecione no mínimo 1 e no máximo 5 serviços!');
         }
     }
 
@@ -129,7 +129,7 @@ class ProfileController extends Controller
             return view('profile.editar-especialidades', compact('servicos', 'profEspecialidades'));
         }else{
             // Redireciona para editar-servicos
-            return redirect()->route('editar-servicos');
+            return redirect()->route('editar-servicos')->withErrors('Selecione no mínimo 1 e no máximo 5 serviços!');
         }
         
     }
@@ -152,7 +152,7 @@ class ProfileController extends Controller
                 return redirect()->back()->withErrors('Erro ao atualizar dados.');
             }
         }else{
-            return redirect()->back()->withErrors('(Selecione no mínimo 1 especialidade)');
+            return redirect()->back()->withErrors('Selecione no mínimo 1 especialidade!');
         }
     }
 
@@ -173,7 +173,7 @@ class ProfileController extends Controller
             return view('profile.editar-perfil', compact('urlProf', 'cityProf', 'descriptionProf'));
         }else{
             // Redireciona para editar-servicos
-            return redirect()->route('editar-especialidades');
+            return redirect()->route('editar-especialidades')->withErrors('Selecione no mínimo 1 especialidade!');
         }
     }
 
@@ -185,28 +185,8 @@ class ProfileController extends Controller
         if(isset($prof->url_perfil)){
             return redirect()->route('my-profile');
         }else{
-            return redirect()->back()->withErrors('(Informe um endereço para o seu perfil)');
+            return redirect()->back()->withErrors('Informe um endereço para o seu perfil!');
         }
-
-        // // Pega os dados do formulário editar-perfil
-        // $dataForm = $request->except(['_token']);
-
-        // // Busca id do prof = id do prof logado
-        // $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-        // // Cadastra/Atualiza as informãções do perfil e salva no banco
-        // $insert = $prof->update([
-        //     'user_id'       => $prof->user->id,
-        //     'description'   => $dataForm['description'],
-        //     'city'          => $dataForm['city'],
-        //     'url_perfil'    => $dataForm['url_perfil'],
-        //     'status'        => 'active',
-        // ]);
-
-        // if($insert){
-        //     return redirect()->route('my-profile');
-        // }else{
-        //     return redirect()->back();
-        // }
 
     }
 

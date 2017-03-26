@@ -49,7 +49,6 @@ class RegisterController extends Controller
                     'user_id'   => $insertUser->id,
                     'cpf'       => $dataForm['cpf'],
                     'tel'       => $dataForm['tel'],
-                    // 'status'    => 'inactive',
                 ]);
                 // Loga o usuário após cadastrar
                 $login = Auth::login($insertUser, true);

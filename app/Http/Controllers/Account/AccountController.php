@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Professional;
-use App\Http\Requests\Auth\RegisterFormRequest;
 
 class AccountController extends Controller
 {
@@ -23,119 +22,96 @@ class AccountController extends Controller
      */
     public function index()
     {   
-        // Se for profissional
-        if(Auth::user()->role == 'prof'){
-            // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
-            $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Busca user pelo id do user logado
+        $user = User::where('id', Auth::user()->id)->get()->first();
+        $userName = $user->name;
+        $userEmail = $user->email;
+        // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
+        $prof = Professional::where('user_id', $user->id)->get()->first();
+        // Se for encontrado profissional cadastrado anteriormente, exibe as informações
+        if($prof){
             $profRole = $prof->user->role;
             $profName = $prof->user->name;
             $profEmail = $prof->user->email;
             $profCpf = $prof->cpf;
             $profTel = $prof->tel;
-            // Retorna a view com os campos do profissional preenchidos
-            return view('account.editar-conta', compact('profRole', 'profName', 'profEmail', 'profCpf', 'profTel'));
-
-        }else{
-            // Busca user pelo id do user logado
-            $user = User::where('id', Auth::user()->id)->get()->first();
-            $userName = $user->name;
-            $userEmail = $user->email;
-            // Retorna a view com os campos do user preenchidos
-            return view('account.editar-conta', compact('userName', 'userEmail'));
         }
-        
-        
 
+        // Retorna a view com os campos preenchidos
+        return view('account.editar-conta', compact('userName', 'userEmail', 'profRole', 'profName', 'profEmail', 'profCpf', 'profTel'));
     }
 
-    public function postEditarConta(RegisterFormRequest $request)
-    {
+    public function postEditarContaUser(Request $request)
+    { 
+        $dataForm = $request->all();
+        // Verifica checkbox 'Sou Profissional' marcado = prof, desmarcado = user
+        $dataForm['role'] = ( !isset($dataForm['role']) ) ? 'user' : 'prof';
+        // Guarda valor do checkbox (user ou prof)
+        $role = $dataForm['role'];
 
-        // // Pega os dados vindo do formulário
-        // $dataForm = $request->all();
-        // // Se checkbox estiver marcado = prof, senão = user
-        // $dataForm['role'] = ( !isset($dataForm['role']) ) ? 'user' : 'prof';
-        // // Guarda valor do checkbox (user ou prof)
-        // $role = $dataForm['role'];
-        // // Verifica e cria hash do password
-        // if (Hash::needsRehash($dataForm['password'])) {
-        //     $dataForm['password'] = Hash::make($dataForm['password']);
-        // }
+        // Se o checkbox estiver marcado
+        if($role == 'prof'){
 
-        // switch($role){
-        //     case "prof":
-        //         $user = User::where('id', Auth::user()->id)->get()->first();
-        //         $prof = Professional::where('user_id', $user->id)->get()->first();
-        //         // Insere na base de dados, na tabela users os dados editados do user
-        //         $updateUser = $user->update($dataForm);
-        //         if(isset($prof)){
-        //             // // Atualiza na base de dados, na tabela prof, os dados editados do prof
-        //             $updateProf = $prof->update([
-        //             'user_id'   => $updateUser->id,
-        //             'cpf'       => $dataForm['cpf'],
-        //             'tel'       => $dataForm['tel'],
-        //             ]);
-        //         }else{
-        //             Auth::logout();
-        //             // Insere na base de dados, na tabela prof os dados do prof
-        //             $updateProf = Professional::create([
-        //             'user_id'   => $updateUser->id,
-        //             'cpf'       => $dataForm['cpf'],
-        //             'tel'       => $dataForm['tel'], 
-        //             ]);
-
-        //             Auth::login($updateProf, true);
-        //         }
-                
-        //         // Verifica se inseriu/atualizou com sucesso
-        //         if($updateProf){
-        //             // Page editar-conta com os novos dados cadastrados
-        //             return redirect()->route('editar-conta');
-        //         }else{
-        //             // Caso haja erro na inserção, volta para a page editar-conta informando os erros
-        //             return redirect()->back();
-        //         }
-        //     break;
-
-        //     default:
-        //         $user = User::where('id', Auth::user()->id)->get()->first();
-        //         // Insere na base de dados, na tabela users
-        //         $updateUser = $user->update($dataForm);
-        //         // Verifica se editou com sucesso
-        //         if($updateUser){
-        //             // Redireciona para a page home
-        //             return redirect()->route('editar-conta');
-        //         }else{
-        //             // Caso haja erro na inserção, volta para a page editar-conta informando os erros
-        //             return redirect()->back();
-        //         }
-        // }
-
-
-
-
-    	if(Auth::user()->role == 'prof'){
-            $dataForm = $request->all();
-
-            if(Hash::needsRehash($dataForm['password'])) {
-                $dataForm['password'] = Hash::make($dataForm['password']);
-            }
-
+            // Busca o prof, caso já tenha sido cadastrado como prof anteriormente
             $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-            $update = $prof->update($dataForm);
-         
-            if($update){
-              return redirect()->route('editar-conta');
+
+            // Se exisitr o prof
+            if($prof){
+
+                // Busca usuário
+                $user = User::where('id', Auth::user()->id)->get()->first();
+
+                // Atualiza as informações e o 'role' do usuário para 'prof'
+                $update = $user->update([
+                    'name' => $dataForm['name'],
+                    'role' => 'prof',
+                ]);
+
+                // Se atualizou
+                if($update){
+
+                    // Verifica se o prof tem perfil previamente configurado
+                    if($prof->url_perfil){
+
+                        // Atualiza o 'status' do profissional para 'active'
+                        $updateStatus = $prof->update([
+                            'status' => 'active',
+                        ]);
+
+                        // Retorna o perfil do profissional
+                        return redirect()->route('my-profile');
+
+                    // Se não, retorna editar-perfil
+                    }else{
+                        return redirect()->route('editar-perfil')->withErrors('Informe um endereço para o seu perfil!');
+                    }
+
+                // Se não atualizou os dados
+                }else{
+                    return redirect()->back()->withErrors('Deu Merda!');
+                }
+
+            // Se não existir o prof
             }else{
-              return redirect()->route('home');
+
+                $user = User::where('id', Auth::user()->id)->get()->first();
+                $update = $user->update($dataForm);
+                // Insere na base de dados, na tabela prof os campos profissionais
+                $insertProf = Professional::create([
+                    'user_id'   => $user->id,
+                    'cpf'       => $dataForm['cpf'],
+                    'tel'       => $dataForm['tel'],
+                ]);
+
+                if($insertProf){
+                    return redirect()->route('editar-perfil');
+                }else{
+                    return redirect()->route('home');
+                }
             }
 
+        // Se o checkbox não estiver marcado
         }else{
-            $dataForm = $request->all();
-
-            if(Hash::needsRehash($dataForm['password'])) {
-                $dataForm['password'] = Hash::make($dataForm['password']);
-            }
 
             $user = User::where('id', Auth::user()->id)->get()->first();
             $update = $user->update($dataForm);
@@ -143,9 +119,56 @@ class AccountController extends Controller
             if($update){
                 return redirect()->route('editar-conta');
             }else{
-                return redirect()->route('home');
+                return redirect()->back()->withErrors('Deu merda!');
             }
+
         }
 
+    }
+
+    public function postEditarContaProf(Request $request)
+    {
+        $dataForm = $request->all();
+        // Verifica checkbox 'Sou Profissional' marcado = prof, desmarcado = user
+        $dataForm['role'] = ( !isset($dataForm['role']) ) ? 'user' : 'prof';
+        // Guarda valor do checkbox (user ou prof)
+        $role = $dataForm['role'];
+
+        // Se o checkbox estiver marcado
+        if($role == 'prof'){
+
+            // Busca usuário para fazer alterações (como nome e etc...)
+            $user = User::where('id', Auth::user()->id)->get()->first();
+            $prof = Professional::where('user_id', $user->id)->get()->first();
+
+            $update = $user->update($dataForm);
+
+            if($update){
+                return redirect()->route('editar-conta');
+            }else{
+                return redirect()->route('home');
+            }
+        }else{
+            // Busca usuário
+            $user = User::where('id', Auth::user()->id)->get()->first();
+            $prof = Professional::where('user_id', $user->id)->get()->first();
+
+            // Atualiza o 'status' do profissional para 'inactive'
+            $updateStatus = $prof->update([
+                'status' => 'inactive',
+            ]);
+
+            // Atualiza os dados do profissional
+            $update = $user->update([
+                'name' => $dataForm['name'],
+                'role' => 'user',
+            ]);
+
+            if($update){
+                return redirect()->route('home');
+            }else{
+                return redirect()->back()->withErrors('Deu merda');
+            }
+        }
     }
 }

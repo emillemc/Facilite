@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // Cria users (UsersTableSeeder)
+        $this->call(UsersTableSeeder::class);
 
         // DB::table('professionals')->insert([
         // 	'name' 		=> 'Raniery Pontes',
@@ -63,8 +64,8 @@ class DatabaseSeeder extends Seeder
 
         DB::table('servicos')->insert([
             'categoria_id'  => 1,
-            'name'          => 'Cabeleleiro',
-            'url'           => 'cabeleleiro'
+            'name'          => 'Cabeleireiro',
+            'url'           => 'cabeleireiro'
         ]);
 
         DB::table('servicos')->insert([

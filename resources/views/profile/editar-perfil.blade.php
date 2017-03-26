@@ -9,7 +9,7 @@
 @section('content')
     
   <h2>Editar Perfil:</h2>
-  <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h4 class="text-danger">{{ $error }}</h4> @endforeach @endif</span>
+  <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h4 class="text-danger">&raquo; {{ $error }}</h4> @endforeach @endif</span>
   <hr>
   {{-- FORMULÁRIO --}}
   {{-- <form class="form-horizontal" action="{{route('post-editar-perfil')}}" method="POST"> --}}

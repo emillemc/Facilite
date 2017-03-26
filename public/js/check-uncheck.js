@@ -9,7 +9,7 @@ $( window ).on( "load", function() {
     ///////// Outros Checkbox's //
     //////////////////////////////
 
-     //Editar Conta && Cadastrar
+     //Cadastrar
     if( $("#role").is(":checked") ){
         $('#check_span_role').removeClass('glyphicon-unchecked');
         $('#check_span_role').addClass('glyphicon-check');
@@ -119,7 +119,7 @@ $( window ).on( "load", function() {
     ///////// Outros Checkbox's //
     //////////////////////////////
     
-    // Editar Conta && Login
+    // Login
     $('#label_role, #check_span_role').mouseover(function() {
         $(this).css({cursor: "pointer"});
     });

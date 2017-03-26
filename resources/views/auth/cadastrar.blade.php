@@ -18,7 +18,7 @@
               <div class="col-md-offset-2 col-md-9">
                 <span id="check_span_role" name="check_span_role" class="glyphicon glyphicon-unchecked" style="font-size: color: #272727"></span>
                 <label id="label_role" for="role" style="font-weight: normal; font-size: 16px;">
-                  <input type="checkbox" id="role" name="role" style="display: none;"/>Sou profissional
+                  <input type="checkbox" id="role" name="role" style="display: none;" {{old('role') ? 'checked="checked"': ''}}/>Sou profissional
                 </label>
               </div>
             </div>
