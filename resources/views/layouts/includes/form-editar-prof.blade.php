@@ -1,4 +1,5 @@
 <form id="form_prof" class="form-group" action="{{ route('post-editar-conta-prof') }}" method="POST">
+  {{-- {{ method_field('PUT') }} --}}
   {{ csrf_field() }}
   
   <div class="col-md-offset-2 col-md-9">
@@ -27,17 +28,17 @@
     </div>
   </div>
 
-  {{-- <div class="top-4 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+  <div class="top-4 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
     <label for="email" class="col-md-2 control-label">Email:</label>
     <div class="col-md-9">
-      <input id="email" type="email" class="form-control" name="email" value="@if(isset($userEmail)){{$userEmail or old('email')}} @else{{$profEmail or old('email')}} @endif" maxlength="60" placeholder="Ex.: josemaria@gmail.com"/>
+      <input id="email" type="email" class="form-control" name="email" value="@if(isset($userEmail)){{old('email', $userEmail)}}@else{{old('email', $profEmail)}} @endif" maxlength="60" placeholder="Ex.: josemaria@gmail.com"/>
       @if ($errors->has('email'))
           <span class="help-block">
               <strong>{{ $errors->first('email') }}</strong>
           </span>
       @endif
     </div>
-  </div> --}}
+  </div>
 
   {{-- <div class="top-4 form-group{{ $errors->has('cpf') ? ' has-error' : '' }}" id="formCpf" style="display: none">
     <label for="cpf" class="col-md-2 control-label">Cpf:</label>
@@ -51,17 +52,17 @@
     </div>
   </div> --}}
 
-  {{-- <div class="top-4 form-group{{ $errors->has('tel') ? ' has-error' : '' }}" id="formTel" style="display: none">
+  <div class="top-4 form-group{{ $errors->has('tel') ? ' has-error' : '' }}" id="formTel" style="display: none">
     <label for="tel" class="col-md-2 control-label">Tel:</label>
     <div class="col-md-9">
-      <input disabled type="tel" class="form-control" id="tel" name="tel" value="{{$profTel or old('tel')}}" maxlength="15" placeholder="(00) 00000-0000"/>
+      <input disabled type="tel" class="form-control" id="tel" name="tel" value="{{old('tel', $profTel)}}" maxlength="15" placeholder="(00) 00000-0000"/>
       @if ($errors->has('tel'))
           <span class="help-block">
               <strong>{{ $errors->first('tel') }}</strong>
           </span>
       @endif
     </div>
-  </div> --}}
+  </div>
 
   {{-- <div class="top-4 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
     <label for="password" class="col-md-2 control-label">Senha:</label>

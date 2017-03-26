@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Professional;
 use App\User;
 
-class AccountEditFormRequest extends FormRequest
+class UserEditFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,13 @@ class AccountEditFormRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {   
+    {
         // Busca user
         $user = User::find(Auth::user()->id);
         // Busca user_prof (se existir)
         $prof = Professional::where('user_id', $user->id)->get()->first();
 
-        // Se houver referência profissional
+        // Se houver referência profissional (foi cadastrado como profissional anteriormente)
         if($prof){
 
             return [
@@ -53,9 +53,10 @@ class AccountEditFormRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'name.required'         => 'Informe um nome.',
             'name.min'              => 'Mínimo de :min caracteres permitido.',
             'name.max'              => 'Máximo de :max caracteres permitido.',
+            'email.required'        => 'Informe um email.',
             'email.email'           => 'Informe um endereço de e-mail válido.',
             'email.max'             => 'Seu e-mail parece grande demais...',
             'email.unique'          => 'O e-mail informado já está em uso.',
