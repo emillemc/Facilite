@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-fluid')
 
 @section('title') Editar Conta - Facilite Serviços @endsection
 
@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+  <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 	
 		{{-- Imagem e botão 'Mudar foto' --}}
 	  <div class="text-center">
@@ -31,11 +31,11 @@
 
       <!-- MENU EDITAR-CONTA-->
         @if(Auth::user()->role == 'prof')
-          {{-- Profissional logado, exibe menu-editar-prof --}}
-          @include('layouts.includes.menu-editar-prof')
+          {{-- Profissional logado, exibe menu-prof --}}
+          @include('layouts.includes.menu-prof')
         @else
-          {{-- Exibe menu-editar-user --}}
-          @include('layouts.includes.menu-editar-user')
+          {{-- Exibe menu-user --}}
+          @include('layouts.includes.menu-user')
         @endif
       <!-- //MENU EDITAR-CONTA -->
 
@@ -43,7 +43,7 @@
 
   </div>
 	
-	<div class="top-5 col-lg-7 col-md-7 col-sm-8 col-xs-12">
+	<div class="top-5 col-lg-6 col-md-6 col-sm-7 col-xs-12">
 		
 		<!-- EDITAR-CONTA-->
       <div class="form-horizontal">

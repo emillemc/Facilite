@@ -30,16 +30,15 @@ class AccountEditFormRequest extends FormRequest
         $user = User::find(Auth::user()->id);
         // Busca user_prof (se existir)
         $prof = Professional::where('user_id', $user->id)->get()->first();
-
         // Se houver referência profissional
-        if($prof){
+        if ($prof) {
 
             return [
                 'name'      => 'required|min:4|max:40',
                 'email'     => "required|email|max:55|unique:users,email,$user->id",
             ];
 
-        }else{
+        } else {
 
             return [
                 'name'      => 'required|min:4|max:40',
@@ -53,7 +52,6 @@ class AccountEditFormRequest extends FormRequest
     public function messages()
     {
         return [
-
             'name.min'              => 'Mínimo de :min caracteres permitido.',
             'name.max'              => 'Máximo de :max caracteres permitido.',
             'email.email'           => 'Informe um endereço de e-mail válido.',

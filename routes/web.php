@@ -40,7 +40,7 @@ Route::group(['namespace' => 'Auth'], function(){
 
 	// Login
 	Route::get('/login', [
-		'uses' 	=> 'LoginController@login',
+		'uses' 	=> 'LoginController@index',
 		'as'	=> 'login' // <- Rota nomeada
 	]);
 
@@ -98,8 +98,14 @@ Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 		'as'	=> 'editar-categorias' // -< Rota nomeada
 	]);
 
-	// Post Cadastrar/Editar Categorias
+	// Post Cadastrar Categorias (Primeiro Cadastro)
 	Route::post('/editar/categorias', [
+		'uses' 	=> 'ProfileController@postCadastrarCategorias',
+		'as'	=> 'post-cadastrar-categorias' // -< Rota nomeada
+	]);
+
+	// Post Editar Categorias
+	Route::post('/edit/categorias', [
 		'uses' 	=> 'ProfileController@postEditarCategorias',
 		'as'	=> 'post-editar-categorias' // -< Rota nomeada
 	]);
@@ -110,8 +116,14 @@ Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 		'as'	=> 'editar-servicos' // -< Rota nomeada
 	]);
 
-	// Post Cadastrar/Editar Serviços
+	// Post Cadastrar Serviços
 	Route::post('/editar/servicos', [
+		'uses' 	=> 'ProfileController@postCadastrarServicos',
+		'as'	=> 'post-cadastrar-servicos' // -< Rota nomeada
+	]);
+
+	// Post Cadastrar/Editar Serviços
+	Route::post('/edit/servicos', [
 		'uses' 	=> 'ProfileController@postEditarServicos',
 		'as'	=> 'post-editar-servicos' // -< Rota nomeada
 	]);

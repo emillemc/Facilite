@@ -2,45 +2,44 @@
 
 /* MOSTRAR/OCULTAR CAMPOS PROFISSIONAIS */
 //Ao selecionar checkbox mostra e ativa os campos profissionais 
-$("#role").on("click", function() {
-    // $("#formCpf").toggle();
-     if( $("#role").is(':checked') ){
-        $("#cpf").prop("disabled", false); // <- = habilita input
-        $("#tel").prop("disabled", false); // <- = habilita input
-        $("#formCpf").show("fast");
-        $("#formTel").show("linear");
+$("#role,#role_edit").on("click", function() {
+     if( $("#role,#role_edit").is(':checked') ){
+        $("#cpf,#cpf_edit").prop("disabled", false); // <- = habilita input
+        $("#tel,#tel_edit").prop("disabled", false); // <- = habilita input
+        $("#formCpf,#formCpf_edit").fadeIn("linear");
+        $("#formTel,#formTel_edit").fadeIn("slow");
     }else{
-        $("#cpf").prop("disabled", true); // <- = desabilita input
-        $("#tel").prop("disabled", true); // <- = desabilita input
-        $("#formCpf").hide("fast");
-        $("#formTel").hide("linear");
+        $("#cpf,#cpf_edit").prop("disabled", true); // <- = desabilita input
+        $("#tel,#tel_edit").prop("disabled", true); // <- = desabilita input
+        $("#formCpf,#formCpf_edit").hide();
+        $("#formTel,#formTel_edit").hide();
     }
 });
 
 /* CPF MASK */
-$("#cpf").on("focus", function(){
-    $("#cpf").mask("999.999.999-99");
+$("#cpf,#cpf_edit").on("focus", function(){
+    $("#cpf,#cpf_edit").mask("999.999.999-99");
 });
 
 /* TEL MASK */
-$("#tel").on("focus", function(){
-    $("#tel").mask("(99) 99999-9999");
+$("#tel,#tel_edit").on("focus", function(){
+    $("#tel,#tel_edit").mask("(99) 99999-9999");
 });
 
-/**
- * Ao carregar a página
- */
+///////////////////////////////
+///////Ao Carregar Página//////
+//////////////////////////////
 $( window ).on( "load", function() {
     // Se checkbox "Sou Profissional" estiver marcado exibe e habilita os campos profissionais
-    if( $("#role").is(':checked') ){
-        $("#cpf").prop("disabled", false); // <- = habilita input
-        $("#tel").prop("disabled", false); // <- = habilita input
-        $("#formCpf").show("fast");
-        $("#formTel").show("linear");
+    if( $("#role,#role_edit").is(':checked') ){
+        $("#cpf,#cpf_edit").prop("disabled", false); // <- = habilita input
+        $("#tel,#tel_edit").prop("disabled", false); // <- = habilita input
+        $("#formCpf,#formCpf_edit").fadeIn("linear");
+        $("#formTel,#formTel_edit").fadeIn("slow");
     }else{
-        $("#cpf").prop("disabled", true); // <- = desabilita input
-        $("#tel").prop("disabled", true); // <- = desabilita input
-        $("#formCpf").hide("fast");
-        $("#formTel").hide("linear");
+        $("#cpf,#cpf_edit").prop("disabled", true); // <- = desabilita input
+        $("#tel,#tel_edit").prop("disabled", true); // <- = desabilita input
+        $("#formCpf,#formCpf_edit").hide();
+        $("#formTel,#formTel_edit").hide();
     }
 });

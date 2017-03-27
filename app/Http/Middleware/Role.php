@@ -15,12 +15,11 @@ class Role
      */
     public function handle($request, Closure $next, $role)
     {
-        if ( \Auth::user()->can($role . '-access') ){
+        if (\Auth::user()->can($role . '-access')) {
             return $next($request);
-        }else{
+        } else {
             // return response(view('errors.nao-autorizado'));
             return redirect()->route('home');
         }
-
     }
 }

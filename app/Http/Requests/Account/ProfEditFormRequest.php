@@ -40,7 +40,6 @@ class ProfEditFormRequest extends FormRequest
     public function messages()
     {
         return [
-
             'name.min'              => 'Mínimo de :min caracteres permitido.',
             'name.max'              => 'Máximo de :max caracteres permitido.',
             'email.email'           => 'Informe um endereço de e-mail válido.',

@@ -27,7 +27,7 @@ class ProfileController extends Controller
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
         // Verifica se o profissional está ativo
         $profStatus = $prof->status;
-        if($profStatus == 'active'){
+        if ($profStatus == 'active') {
             // Nome do profissional
             $name = $prof->user['name'];
             // Serviços cadastrados pelo profissional
@@ -36,7 +36,7 @@ class ProfileController extends Controller
             $especialidades = $prof->especialidades;       
             // Exibe o perfil profissional com os dados cadastrados
             return view('profile.my-profile', compact('name', 'servicos', 'especialidades'));
-        }else{
+        } else {
             // Redireciona para a página editar-perfil
             return redirect()->route('editar-perfil')->withErrors('Informe um endereço para o seu perfil!');
         }
@@ -48,33 +48,53 @@ class ProfileController extends Controller
     	$categorias = Categoria::get();
         // Busca prof logado
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+        // Nome do prof
+        $profName = $prof->user->name;
         // Busca categorias previamente cadastradas pelo prof (para exibir marcadas na view)
         $profCategorias = $prof->categorias;
-
-    	return view('profile.editar-categorias', compact('categorias', 'profCategorias'));
+    	return view('profile.editar-categorias', compact('categorias', 'profCategorias', 'profName'));
     }
 
+    // Primeiro Cadastro de Categorias
+    public function postCadastrarCategorias(Request $request)
+    {
+        // Pega os checkbox's marcados, exceto o token
+        $categorias = $request->except(['_token']);
+        // Verifica categorias >=1 e <=3
+        if (count($categorias) >= 1 && count($categorias) <= 2) {
+            // Busca id do prof = id do prof logado
+            $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+            // Atualiza as categorias escolhidas e salva no banco de dados
+            $insert = $profissional->categorias()->sync($categorias);
+            if ($insert) {
+                return redirect()->route('editar-servicos');
+            } else {
+                return redirect()->back()->withErrors('Erro ao atualizar dados.');
+            }
+        } else {
+            return redirect()->back()->withErrors('Selecione no mínimo 1 e no máximo 2 categorias!');
+        }
+    }
+
+    // Editar Categorias
     public function postEditarCategorias(Request $request)
     {
         // Pega os checkbox's marcados, exceto o token
         $categorias = $request->except(['_token']);
         // Verifica categorias >=1 e <=3
-        if( count($categorias) >= 1 && count($categorias) <= 2 ){
+        if (count($categorias) >= 1 && count($categorias) <= 2) {
             // Busca id do prof = id do prof logado
             $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
             // Atualiza as categorias escolhidas e salva no banco de dados
             $insert = $profissional->categorias()->sync($categorias);
-
-            if($insert){
-                return redirect()->route('editar-servicos');
-            }else{
+            if ($insert) {
+                return redirect()->route('editar-categorias');
+            } else {
                 return redirect()->back()->withErrors('Erro ao atualizar dados.');
             }
-        }else{
+        } else {
             return redirect()->back()->withErrors('Selecione no mínimo 1 e no máximo 2 categorias!');
         }
-        
-
     }
 
     public function editarServicos()
@@ -83,35 +103,55 @@ class ProfileController extends Controller
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
         // Verifica se o profissional cadastrou alguma categoria anteriormente
         $categorias = $prof->categorias;
-        if(count($categorias) >= 1){
+        if (count($categorias) >= 1) {
             // Busca servicos previamente cadastradas pelo prof, para exibir marcadas na view (se existir)
             $profServicos = $prof->servicos;
             // Exibe as categorias com seus respectivos serviços na view
             return view('profile.editar-servicos', compact('categorias', 'profServicos'));
-        }else{
+        } else {
             // Redireciona para editar-categorias
             return redirect()->route('editar-categorias')->withErrors('Selecione no mínimo 1 e no máximo 2 categorias!');
         }
-        
     }
 
+    // Primeiro Cadastro de Categorias
+    public function postCadastrarServicos(Request $request)
+    {
+        // Pega os checkbox's marcados, exceto o token
+        $servicos = $request->except(['_token']);
+        // Verifica servicos >=1 e <=5
+        if (count($servicos) >= 1 && count($servicos) <= 5) {
+            // Busca id do prof = id do prof logado
+            $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+            // Atualiza os servicos escolhidos e salva no banco
+            $insert = $profissional->servicos()->sync($servicos);
+            if ($insert) {
+                return redirect()->route('editar-especialidades');
+            } else {
+                return redirect()->back()->withErrors('Erro ao atualizar dados.');
+            }
+        } else {
+            return redirect()->back()->withErrors('Selecione no mínimo 1 e no máximo 5 serviços!');
+        }
+    }
+
+    // Editar Serviços
     public function postEditarServicos(Request $request)
     {
         // Pega os checkbox's marcados, exceto o token
         $servicos = $request->except(['_token']);
         // Verifica servicos >=1 e <=5
-        if( count($servicos) >= 1 && count($servicos) <= 5 ){
+        if (count($servicos) >= 1 && count($servicos) <= 5) {
             // Busca id do prof = id do prof logado
             $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
             // Atualiza os servicos escolhidos e salva no banco
             $insert = $profissional->servicos()->sync($servicos);
-
-            if($insert){
-                return redirect()->route('editar-especialidades');
-            }else{
+            if ($insert) {
+                return redirect()->route('editar-servicos');
+            } else {
                 return redirect()->back()->withErrors('Erro ao atualizar dados.');
             }
-        }else{
+        } else {
             return redirect()->back()->withErrors('Selecione no mínimo 1 e no máximo 5 serviços!');
         }
     }
@@ -122,36 +162,33 @@ class ProfileController extends Controller
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
         // Verifica se o profissional cadastrou serviços anteriormente
         $servicos = $prof->servicos;
-        if(count($servicos) >= 1){
+        if (count($servicos) >= 1) {
             // Busca especialidades previamente cadastradas pelo prof, para exibir marcadas na view (se existir)
             $profEspecialidades = $prof->especialidades;
             // Exibe os serviços com suas respectivas especialidades na view
             return view('profile.editar-especialidades', compact('servicos', 'profEspecialidades'));
-        }else{
+        } else {
             // Redireciona para editar-servicos
             return redirect()->route('editar-servicos')->withErrors('Selecione no mínimo 1 e no máximo 5 serviços!');
         }
-        
     }
 
     public function postEditarEspecialidades(Request $request)
     {
         // Pega os checkbox's marcados, exceto o token
         $especialidades = $request->except(['_token']);
-
         // Mínimo de 1 especialidade
-        if( count($especialidades) >= 1 ){
+        if (count($especialidades) >= 1) {
             // Busca id do prof = id do prof logado
             $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
             // Atualiza as especialidades escolhidos e salva no banco
             $insert = $profissional->especialidades()->sync($especialidades);
-
-            if($insert){
+            if ($insert) {
                 return redirect()->route('editar-perfil');
-            }else{
+            } else {
                 return redirect()->back()->withErrors('Erro ao atualizar dados.');
             }
-        }else{
+        } else {
             return redirect()->back()->withErrors('Selecione no mínimo 1 especialidade!');
         }
     }
@@ -162,7 +199,7 @@ class ProfileController extends Controller
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
         // Verifica se o profissional cadastrou alguma especialidade anteriormente
         $especialidades = $prof->especialidades;
-        if(count($especialidades) >= 1){
+        if (count($especialidades) >= 1) {
             // Busca url do perfil cadastrada anteriormente (se existir)
             $urlProf = $prof->url_perfil;
             // Busca cidade do profissional cadastrada anteriormente (se existir)
@@ -182,12 +219,11 @@ class ProfileController extends Controller
         // Busca id do prof = id do prof logado
         $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
         // Se houver configurado a url do perfil
-        if(isset($prof->url_perfil)){
+        if (isset($prof->url_perfil)) {
             return redirect()->route('my-profile');
         }else{
             return redirect()->back()->withErrors('Informe um endereço para o seu perfil!');
         }
-
     }
 
     public function postEditarUrl(UrlEditFormRequest $request)
@@ -201,10 +237,9 @@ class ProfileController extends Controller
             'url_perfil'    => $dataForm['url_perfil'],
             'status'        => 'active',
         ]);
-
-        if($insert){
+        if ($insert) {
             return redirect()->route('editar-perfil');
-        }else{
+        } else {
             return redirect()->back();
         }
     }
@@ -219,12 +254,10 @@ class ProfileController extends Controller
         $insert = $prof->update([
             'description'    => $dataForm['description'],
         ]);
-
-        if($insert){
+        if ($insert) {
             return redirect()->route('editar-perfil');
-        }else{
+        } else {
             return redirect()->back();
         }
     }
-
 }

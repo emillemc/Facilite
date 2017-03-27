@@ -9,8 +9,8 @@ $( window ).on( "load", function() {
     ///////// Outros Checkbox's //
     //////////////////////////////
 
-     //Cadastrar
-    if( $("#role").is(":checked") ){
+     // Cadastrar / Editar Conta
+    if( $("#role,#role_edit").is(":checked") ){
         $('#check_span_role').removeClass('glyphicon-unchecked');
         $('#check_span_role').addClass('glyphicon-check');
         $("#check_span_role").css({color: "#206BBF"});
@@ -119,7 +119,7 @@ $( window ).on( "load", function() {
     ///////// Outros Checkbox's //
     //////////////////////////////
     
-    // Login
+    // Login / Editar Conta
     $('#label_role, #check_span_role').mouseover(function() {
         $(this).css({cursor: "pointer"});
     });
@@ -174,7 +174,7 @@ $( window ).on( "load", function() {
             $("#cat_1").prop("checked", true);
         }
 
-        if( $("#role").is(":checked") ){
+        if( $("#role,#role_edit").is(":checked") ){
             $('#check_span_role').removeClass('glyphicon-unchecked');
             $('#check_span_role').addClass('glyphicon-check');
             $("#check_span_role").css({color: "#206BBF"});

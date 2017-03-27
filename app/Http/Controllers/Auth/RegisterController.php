@@ -28,19 +28,15 @@ class RegisterController extends Controller
     {   
         // Pega os dados vindo do formulário
         $dataForm = $request->all();
-
         // Se checkbox estiver marcado = prof, senão = user
         $dataForm['role'] = ( !isset($dataForm['role']) ) ? 'user' : 'prof';
-
         // Guarda valor do checkbox (permissão user ou prof)
         $role = $dataForm['role'];
-
         // Verifica e cria hash do password
         if (Hash::needsRehash($dataForm['password'])) {
             $dataForm['password'] = Hash::make($dataForm['password']);
         }
-
-        switch($role){
+        switch ($role) {
             case "prof":
                 // Insere na base de dados, na tabela users os dados de login
                 $insertUser = User::create($dataForm);
@@ -53,25 +49,24 @@ class RegisterController extends Controller
                 // Loga o usuário após cadastrar
                 $login = Auth::login($insertUser, true);
                 // Verifica se inseriu com sucesso
-                if($insertProf){
+                if ($insertProf) {
                     // Redireciona para a page Cadastrar/Editar Especialidades
                     return redirect()->route('editar-categorias');
-                }else{
+                } else {
                     // Caso haja erro na inserção, volta para a page cadastro informando os erros
                     return redirect()->back();
                 }
-            break;
-
+                break;
             default:
                 // Insere na base de dados, na tabela users
                 $insert = User::create($dataForm);
                 // Loga o usuário após cadastrar
                 $login = Auth::login($insert, true);
                 // Verifica se inseriu com sucesso
-                if($insert){
+                if ($insert) {
                     // Redireciona para a page home
                     return redirect()->route('home');
-                }else{
+                } else {
                     // Caso haja erro na inserção, volta para a page cadastro informando os erros
                     return redirect()->back();
                 }

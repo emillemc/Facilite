@@ -30,11 +30,11 @@
 
         {{-- Menu se for prof --}}
         @elseif( Auth::user()->role == 'prof' )
-          @include('layouts.includes.menu-prof');
+          @include('layouts.includes.navbar-menu-prof');
         
         {{-- Menu se for user --}}
         @else
-          @include('layouts.includes.menu-user');
+          @include('layouts.includes.navbar-menu-user');
         @endif
         
       </ul>

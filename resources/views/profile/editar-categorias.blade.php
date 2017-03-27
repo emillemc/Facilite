@@ -7,25 +7,127 @@
 @endsection
 
 @section('content')
-  
-  <h2>Selecione as categorias: </h2>
-  <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h4 class="text-danger">&raquo; {{ $error }}</h4> @endforeach @endif</span>
-  <hr style="margin-bottom: 50px;">
+  {{-- Primeiro cadastro (Se não existir categorias cadastradas anteriormente, esconde sidebar) --}}
+  @if($profCategorias->count() != 0)
+    {{-- SideBar --}}
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 
-  <div class="row">
-    <!-- FORM -->
-    <form action="{{route('post-editar-categorias')}}" method="POST">
+      {{-- Imagem e botão 'Mudar foto' --}}
+      <div class="text-center">
+        <img src="{{ asset('img/perfil.png') }}" alt="img_perfil" class="img-circle">
+        <div class="input-group center-block top-5">
+          <label for="input-img">
+            <a class="btn btn-primary btn-sm">Mudar foto</a>
+          </label>
+        </div>
+        <input id="input-img" type="file"  accept="image/*" style="display: none;">
+      </div>
+      {{-- Nome Prof --}}
+      <div class="text-center">
+        <h4><b>{{$profName or ''}}</b></h4>
+        <hr>
+      </div>
+      {{-- Menu SideBar --}}
+      <div class="hidden-xs">
+        <div class="hidden-xs">
+        <nav>
+          <ul class="nav nav-stacked">
+            <li class="active">
+                <a href="{{ route('my-profile') }}" class="text-muted">
+                  <span class="glyphicon glyphicon-user"></span> Meu Perfil
+                </a>
+              </li>
+            <li>
+                <a href="{{ route('editar-perfil') }}" class="text-muted">
+                  <span class="glyphicon glyphicon-picture"></span> Editar perfil
+                </a>
+              </li>
+              <li>
+                {{-- Link ativo page editar-categorias --}}
+                <a href="{{ route('editar-categorias') }}" class="active">
+                  <span class="glyphicon glyphicon-th-large"></span> Editar categorias
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('editar-servicos') }}" class="text-muted">
+                  <span class="glyphicon glyphicon-th-list"></span> Editar serviços
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('editar-especialidades') }}" class="text-muted">
+                  <span class="glyphicon glyphicon-th"></span> Editar especialidades
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('editar-conta') }}" class="text-muted">
+                  <span class="glyphicon glyphicon-cog"></span> Editar Conta
+                </a>
+              </li>
+          </ul>
+        </nav>
+      </div>
+      </div>
+      {{-- //Menu SideBar --}}
+
+    </div>
+    {{-- SideBar --}}
+  @else
+    {{-- Register Steps --}}
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+      <div>
+        <span style="font-size: 16px;" class="text-success">1) Dados Pessoais </span>
+        <span class="text-success glyphicon glyphicon-ok" style="font-size: 16px;"></span>
+        
+      </div>
+      <hr>
+      <div>
+        <span style="font-size: 25px;" class="text-primary">2) Categorias </span>
+        {{-- <span style="font-size: 25px;" class="glyphicon glyphicon-th-large text-primary pull-right"></span> --}}
+      </div>
+      <hr>
+      <div>
+        <span style="font-size: 16px;" class="text-muted">3) Serviços </span>
+        {{-- <span class="text-muted glyphicon glyphicon-th-list pull-right" style="font-size: 16px;"></span> --}}
+      </div>
+      <hr>
+      <div>
+        <span style="font-size: 16px;" class="text-muted">4) Especialidades </span>
+        {{-- <span class="text-muted glyphicon glyphicon-remove" style="font-size: 16px;"></span> --}}
+      </div>
+      <hr>
+      <div>
+        <span style="font-size: 16px;" class="text-muted">5) Perfil </span>
+        {{-- <span class="text-muted glyphicon glyphicon-picture" style="font-size: 16px;"></span> --}}
+      </div>
+      
+      <div class="progress" style="margin-top: 20%">
+        <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+          20%
+        </div>
+      </div>
+      <h3 class="text-center">2/5</h3>
+
+    </div>
+    {{-- Register Steps --}}
+  @endif
+
+  <div class="col-lg-offset-1 col-lg-8 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
+    <h2>Editar Categorias</h2>
+    <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h4 class="text-danger">&raquo; {{ $error }}</h4> @endforeach @endif</span>
+    <hr style="margin-bottom: 5%">
+  </div>
+
+    {{-- FORM - Se existir categoria cadastrada, post-editar. Se não, post-cadastrar --}}
+    <form action="@if($profCategorias->count() != 0){{route('post-editar-categorias')}}@else{{route('post-cadastrar-categorias')}}@endif" method="POST">
       
       {{ csrf_field() }}
-      
+      <div class="col-lg-offset-1 col-lg-7 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
       <!-- BLOCO CATEGORIAS -->
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
         @forelse($categorias as $categoria)
           {{-- CATEGORIA --}}
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="padding: 0px;">
             <div id="div_bg_{{$categoria->id}}">
-              <span id="check_span_{{$categoria->id}}" name="check_span_{{$categoria->id}}" class="glyphicon glyphicon-unchecked" style="font-size: 25px; color: #272727"></span>
+              <span id="check_span_{{$categoria->id}}" name="check_span_{{$categoria->id}}" class="glyphicon glyphicon-unchecked" style="font-size: 25px; color: #272727;"></span>
               <label id="label_cat_{{$categoria->id}}" class="text-center" for="cat_{{$categoria->id}}" style="font-weight: normal; font-size: 27px;">
                 <input type="checkbox" id="cat_{{$categoria->id}}" name="cat_{{$categoria->id}}" value="{{$categoria->id}}" 
 
@@ -45,26 +147,24 @@
         @empty
           <h1>Não foi possível carregar as categorias...</h1>
         @endforelse
-
+      {{-- //BLOCO CATEGORIAS --}}
       </div>
-      <!-- //BLOCO CATEGORIAS -->
 
-      <!-- BLOCO BOTÃO -->
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top-6">
-        <div class="col-md-5 col-sm-5 col-xs-4"></div>
-        <div class="col-md-2 col-sm-2 col-xs-4">
-          <div class="input-group">
-            <input type="submit" class="btn btn-md btn-primary" value="Salvar">
+        {{-- BLOCO BOTÃO --}}
+        <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 top-8">
+          <div class="form-group">
+            <div class="text-center">
+              @if($profCategorias->count() != 0)
+                <button type="submit" class="btn btn-md btn-success">Salvar</button>
+              @else
+                <button type="submit" class="btn btn-md btn-primary">Avançar <span class="glyphicon glyphicon-chevron-right"></span></button>
+              @endif
+            </div>
           </div>
         </div>
-        <div class="col-md-5 col-sm-5 col-xs-4"></div>
-      </div>
-      <!-- //BLOCO BOTÃO -->
-
+        {{-- //BLOCO BOTÃO --}}
+      
     </form>
-    <!-- //FORM -->
-  </div>
-  <!-- //ROW -->
 
 @endsection
 

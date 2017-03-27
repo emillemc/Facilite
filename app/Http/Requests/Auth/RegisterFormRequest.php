@@ -29,7 +29,6 @@ class RegisterFormRequest extends FormRequest
             'password'  => 'required|confirmed|min:6',
             'cpf'       => 'required_with:role,prof|min:14|unique:professionals,cpf',
             'tel'       => 'required_with:role,prof|min:15|unique:professionals,tel',
-
         ];
     }
 
@@ -52,7 +51,6 @@ class RegisterFormRequest extends FormRequest
             'tel.required_with'     => 'O campo telefone é obrigatório.',
             'tel.min'               => 'O campo telefone deve conter 11 dígitos.',
             'tel.unique'            => 'O telefone informado já está em uso.'
-            
         ];
     }
 }
