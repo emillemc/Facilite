@@ -20,7 +20,7 @@ class ProfileController extends Controller
     	$this->middleware('role:prof');
     }
 
-    // Perfil Profissional
+    // View Perfil Profissional
     public function index()
     {
         // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
@@ -42,6 +42,7 @@ class ProfileController extends Controller
         }
     }
 
+    // View Cadastrar/Editar Categorias
     public function editarCategorias()
     {   
         // Lista todas as categorias disponíveis
@@ -55,7 +56,7 @@ class ProfileController extends Controller
     	return view('profile.editar-categorias', compact('categorias', 'profCategorias', 'profName'));
     }
 
-    // Primeiro Cadastro de Categorias
+    // Cadastrar Categorias (Primeiro cadastro)
     public function postCadastrarCategorias(Request $request)
     {
         // Pega os checkbox's marcados, exceto o token
@@ -97,6 +98,7 @@ class ProfileController extends Controller
         }
     }
 
+    // View Cadastrar/Editar Serviços
     public function editarServicos()
     {
         // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
@@ -114,7 +116,7 @@ class ProfileController extends Controller
         }
     }
 
-    // Primeiro Cadastro de Categorias
+    // Cadastrar Serviços (Primeiro cadastro)
     public function postCadastrarServicos(Request $request)
     {
         // Pega os checkbox's marcados, exceto o token
@@ -156,6 +158,7 @@ class ProfileController extends Controller
         }
     }
 
+    // View Cadastrar/Editar Especialidades
     public function editarEspecialidades()
     {
         // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
@@ -173,7 +176,8 @@ class ProfileController extends Controller
         }
     }
 
-    public function postEditarEspecialidades(Request $request)
+    // Cadastrar Especialidades (Primeiro cadastro)
+    public function postCadastrarEspecialidades(Request $request)
     {
         // Pega os checkbox's marcados, exceto o token
         $especialidades = $request->except(['_token']);
@@ -193,6 +197,28 @@ class ProfileController extends Controller
         }
     }
 
+    // Editar Especialidades
+    public function postEditarEspecialidades(Request $request)
+    {
+        // Pega os checkbox's marcados, exceto o token
+        $especialidades = $request->except(['_token']);
+        // Mínimo de 1 especialidade
+        if (count($especialidades) >= 1) {
+            // Busca id do prof = id do prof logado
+            $profissional = Professional::where('user_id', Auth::user()->id)->get()->first();
+            // Atualiza as especialidades escolhidos e salva no banco
+            $insert = $profissional->especialidades()->sync($especialidades);
+            if ($insert) {
+                return redirect()->route('editar-especialidades');
+            } else {
+                return redirect()->back()->withErrors('Erro ao atualizar dados.');
+            }
+        } else {
+            return redirect()->back()->withErrors('Selecione no mínimo 1 especialidade!');
+        }
+    }
+
+    // View Editar Perfil
     public function editarPerfil()
     {
         // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado

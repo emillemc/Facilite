@@ -98,7 +98,7 @@ Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 		'as'	=> 'editar-categorias' // -< Rota nomeada
 	]);
 
-	// Post Cadastrar Categorias (Primeiro Cadastro)
+	// Post Cadastrar Categorias (Primeiro cadastro)
 	Route::post('/editar/categorias', [
 		'uses' 	=> 'ProfileController@postCadastrarCategorias',
 		'as'	=> 'post-cadastrar-categorias' // -< Rota nomeada
@@ -116,13 +116,13 @@ Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 		'as'	=> 'editar-servicos' // -< Rota nomeada
 	]);
 
-	// Post Cadastrar Serviços
+	// Post Cadastrar Serviços (Primeiro cadastro)
 	Route::post('/editar/servicos', [
 		'uses' 	=> 'ProfileController@postCadastrarServicos',
 		'as'	=> 'post-cadastrar-servicos' // -< Rota nomeada
 	]);
 
-	// Post Cadastrar/Editar Serviços
+	// Post Editar Serviços
 	Route::post('/edit/servicos', [
 		'uses' 	=> 'ProfileController@postEditarServicos',
 		'as'	=> 'post-editar-servicos' // -< Rota nomeada
@@ -134,8 +134,14 @@ Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 		'as'	=> 'editar-especialidades' // -< Rota nomeada
 	]);
 
-	// Post Cadastrar/Editar Especialidades
+	// Post Cadastrar Especialidades (Primeiro cadastro)
 	Route::post('/editar/especialidades', [
+		'uses' 	=> 'ProfileController@postCadastrarEspecialidades',
+		'as'	=> 'post-cadastrar-especialidades' // -< Rota nomeada
+	]);
+
+	// Post Editar Especialidades
+	Route::post('/edit/especialidades', [
 		'uses' 	=> 'ProfileController@postEditarEspecialidades',
 		'as'	=> 'post-editar-especialidades' // -< Rota nomeada
 	]);

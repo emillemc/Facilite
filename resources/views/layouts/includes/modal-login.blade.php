@@ -91,5 +91,5 @@
       </div>
     </div>
   </div>
-  <!-- //MODAL CONTRATAR -->
 </div>
+<!-- //MODAL CONTRATAR -->

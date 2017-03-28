@@ -40,24 +40,29 @@
       <!-- //MENU EDITAR-CONTA -->
 
     </div>
-
   </div>
-	
-	<div class="top-5 col-lg-6 col-md-6 col-sm-7 col-xs-12">
+
+  <div class="col-lg-offset-1 col-lg-8 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
+    <h2>Editar Conta</h2>
+    <hr style="margin-bottom: 4%">
+  </div>
 		
 		<!-- EDITAR-CONTA-->
-      <div class="form-horizontal">
-        @if(Auth::user()->role == 'prof')
-          {{-- Profissional logado, exibe form-prof --}}
-          @include('layouts.includes.form-editar-prof')
-        @else
-          {{-- Exibe form-user --}}
-          @include('layouts.includes.form-editar-user')
-        @endif
+      <div class="form-horizontal col-lg-offset-1 col-lg-7 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;"">
+
+        <div class="col-lg-7 col-md-7 col-xs-12">
+
+          @if(Auth::user()->role == 'prof')
+            {{-- Profissional logado, exibe form-prof --}}
+            @include('layouts.includes.form-editar-prof')
+          @else
+            @include('layouts.includes.form-editar-user')
+          @endif
+
+        </div>
+
       </div>
     <!-- //EDITAR-CONTA -->
-
-	</div>
 
 @endsection
 

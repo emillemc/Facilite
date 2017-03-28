@@ -75,40 +75,37 @@
     {{-- Register Steps --}}
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
       <div>
-        <span style="font-size: 16px;" class="text-success">1) Dados Pessoais </span>
-        <span class="text-success glyphicon glyphicon-ok" style="font-size: 16px;"></span>
-        
+        <span style="font-size: 18px;" class="text-success">1) Criar conta</span>
+        <span class="text-success glyphicon glyphicon-ok-sign pull-right" style="font-size: 22px;"></span>
       </div>
       <hr>
       <div>
-        <span style="font-size: 25px;" class="text-primary">2) Categorias </span>
-        {{-- <span style="font-size: 25px;" class="glyphicon glyphicon-th-large text-primary pull-right"></span> --}}
+        <span style="font-size: 20px;" class="text-primary"><b>2) Categorias</b></span>
+        <span class="text-primary glyphicon glyphicon-plus-sign pull-right" style="font-size: 22px;"></span>
       </div>
       <hr>
       <div>
-        <span style="font-size: 16px;" class="text-muted">3) Serviços </span>
-        {{-- <span class="text-muted glyphicon glyphicon-th-list pull-right" style="font-size: 16px;"></span> --}}
+        <span style="font-size: 18px;" class="text-muted">3) Serviços</span>
+        <span class="text-muted glyphicon glyphicon-question-sign pull-right" style="font-size: 22px;"></span>
       </div>
       <hr>
       <div>
-        <span style="font-size: 16px;" class="text-muted">4) Especialidades </span>
-        {{-- <span class="text-muted glyphicon glyphicon-remove" style="font-size: 16px;"></span> --}}
+        <span style="font-size: 18px;" class="text-muted">4) Especialidades</span>
+        <span class="text-muted glyphicon glyphicon-question-sign pull-right" style="font-size: 22px;"></span>
       </div>
       <hr>
       <div>
-        <span style="font-size: 16px;" class="text-muted">5) Perfil </span>
-        {{-- <span class="text-muted glyphicon glyphicon-picture" style="font-size: 16px;"></span> --}}
+        <span style="font-size: 18px;" class="text-muted">5) Perfil </span>
+        <span class="text-muted glyphicon glyphicon-question-sign pull-right" style="font-size: 22px;"></span>
       </div>
-      
-      <div class="progress" style="margin-top: 20%">
-        <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-          20%
+      <h4 class="text-left" style="margin-top: 15%;">Concluído:</h4>
+      <div class="progress" style="margin-top: 0%">
+        <div class="progress-bar progress-bar-success" style="width: 20%;">
+          <span>1 de 5</span>
         </div>
       </div>
-      <h3 class="text-center">2/5</h3>
-
     </div>
-    {{-- Register Steps --}}
+    {{-- //Register Steps --}}
   @endif
 
   <div class="col-lg-offset-1 col-lg-8 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
@@ -155,7 +152,7 @@
           <div class="form-group">
             <div class="text-center">
               @if($profCategorias->count() != 0)
-                <button type="submit" class="btn btn-md btn-success">Salvar</button>
+                <button type="submit" class="btn btn-md btn-success">Salvar <span class="glyphicon glyphicon-chevron-right"></button>
               @else
                 <button type="submit" class="btn btn-md btn-primary">Avançar <span class="glyphicon glyphicon-chevron-right"></span></button>
               @endif
