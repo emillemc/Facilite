@@ -22,7 +22,7 @@
     
     {{-- Nome User --}}
     <div class="text-center">
-      <h4><b>{{$userName or $profName}}</b></h4>
+      <h4><b>{{$user->name or $prof->user->name}}</b></h4>
       <hr>
     </div>
 		

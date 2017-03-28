@@ -20,26 +20,15 @@ class AccountController extends Controller
 
     /**
      * Editar Conta
-     * @return [view] [editar-conta]
+     * @return view | Exibe view 'editar-conta' com os dados dos usuários preenchidos
      */
     public function index()
     {   
-        // Busca user pelo id do user logado
         $user = User::where('id', Auth::user()->id)->get()->first();
-        $userName = $user->name;
-        $userEmail = $user->email;
-        // Busca prof (contém user, categorias, serviços e especialidades) pelo id do userProf logado
+
         $prof = Professional::where('user_id', $user->id)->get()->first();
-        // Se for encontrado profissional cadastrado anteriormente, exibe as informações
-        if ($prof) {
-            $profRole = $prof->user->role;
-            $profName = $prof->user->name;
-            $profEmail = $prof->user->email;
-            $profCpf = $prof->cpf;
-            $profTel = $prof->tel;
-        }
-        // Retorna a view com os campos preenchidos
-        return view('account.editar-conta', compact('user', 'userName', 'userEmail', 'profRole', 'profName', 'profEmail', 'profCpf', 'profTel'));
+
+        return view('account.editar-conta', compact('user', 'prof'));
     }
 
     public function postEditarContaUser(UserEditFormRequest $request)
@@ -155,5 +144,16 @@ class AccountController extends Controller
                 return redirect()->back();
             }
         }
+    }
+
+    /**
+     * Deleta conta do usuário permanentemente
+     * @return redirect() | Redireciona para 'home'
+     */
+    public function deletarConta()
+    {
+        $user = User::find(Auth::user()->id);
+        $user->delete();
+        return redirect()->route('home');
     }
 }

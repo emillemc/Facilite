@@ -23,19 +23,26 @@ class LoginController extends Controller
     	return view('auth.login');
     }
 
+    /**
+     * Verifica credenciais e efetua login
+     * @param  Request $request (Dados form login)
+     * @return Boolean | True: Login efetuado com sucesso. False: Login inválido.
+     */
     public function postLogin(Request $request)
     {
         $credentials = $request->only(['email', 'password']);
         if (Auth::attempt($credentials)) {
-            // Dados corretos: faz o login e redireciona para a ultima tentativa de acesso
             return redirect()->intended();
         } else {
-            // Dados incorretos: retorna para a page de login informando os erros
             return redirect()->route('login')->withErrors('Email ou senha incorretos!');
         }
         
     }
 
+    /**
+     * Efetua logout
+     * @return redirect() | Deslogia e redireciona o usuário para 'home'
+     */
     public function logout()
     {
         Auth::logout();

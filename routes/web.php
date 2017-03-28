@@ -183,5 +183,11 @@ Route::group(['namespace' => 'Account', 'prefix' => 'minha-conta'], function(){
 		'as'	=> 'post-editar-conta-prof' // -< Rota nomeada
 	]);
 
+	// Post Deletar Conta
+	Route::post('/deletar', [
+		'uses' 	=> 'AccountController@deletarConta',
+		'as'	=> 'deletar-conta' // -< Rota nomeada
+	]);
+
 });
 /***************************//****************************/

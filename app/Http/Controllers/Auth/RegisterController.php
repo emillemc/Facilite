@@ -16,7 +16,6 @@ class RegisterController extends Controller
     {
         // Se tiver sessão ativa redireciona para '/' e não mostra a page de cadastro
     	$this->middleware('guest');
-
     }
 
     public function index()
@@ -24,50 +23,55 @@ class RegisterController extends Controller
     	return view('auth.cadastrar');
     }
 
+    /**
+     * Cadastrar Usuários (User e Prof) e valida dados com o RegisterFormRequest
+     * @param  RegisterFormRequest $request -> Dados do form "cadastrar"
+     * @return Boolean -> True: Cadastrado com sucesso, redirect(). False: Erro ao cadastrar, back().
+     */
     public function postCadastrar(RegisterFormRequest $request)
     {   
-        // Pega os dados vindo do formulário
         $dataForm = $request->all();
-        // Se checkbox estiver marcado = prof, senão = user
+
         $dataForm['role'] = ( !isset($dataForm['role']) ) ? 'user' : 'prof';
-        // Guarda valor do checkbox (permissão user ou prof)
+
+        // Guarda valor do checkbox (user ou prof)
         $role = $dataForm['role'];
+
         // Verifica e cria hash do password
         if (Hash::needsRehash($dataForm['password'])) {
             $dataForm['password'] = Hash::make($dataForm['password']);
         }
+
         switch ($role) {
+
             case "prof":
-                // Insere na base de dados, na tabela users os dados de login
+                // Cadastra dados, tabela User
                 $insertUser = User::create($dataForm);
-                // Insere na base de dados, na tabela prof os campos profissionais
+                // Cadastra dados, tabela Professional
                 $insertProf = Professional::create([
                     'user_id'   => $insertUser->id,
                     'cpf'       => $dataForm['cpf'],
                     'tel'       => $dataForm['tel'],
                 ]);
-                // Loga o usuário após cadastrar
+                // Loga o usuário após cadastrar (Persiste sessão)
                 $login = Auth::login($insertUser, true);
-                // Verifica se inseriu com sucesso
+                // Verifica se inseriu
                 if ($insertProf) {
-                    // Redireciona para a page Cadastrar/Editar Especialidades
                     return redirect()->route('editar-categorias');
                 } else {
-                    // Caso haja erro na inserção, volta para a page cadastro informando os erros
                     return redirect()->back();
                 }
                 break;
+
             default:
-                // Insere na base de dados, na tabela users
+                // Cadastra dados, tabela User
                 $insert = User::create($dataForm);
-                // Loga o usuário após cadastrar
+                // Loga o usuário após cadastrar (Persiste sessão)
                 $login = Auth::login($insert, true);
-                // Verifica se inseriu com sucesso
+                // Verifica se inseriu
                 if ($insert) {
-                    // Redireciona para a page home
                     return redirect()->route('home');
                 } else {
-                    // Caso haja erro na inserção, volta para a page cadastro informando os erros
                     return redirect()->back();
                 }
         }
