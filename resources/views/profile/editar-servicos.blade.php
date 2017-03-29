@@ -25,44 +25,44 @@
       </div>
       {{-- Nome Prof --}}
       <div class="text-center">
-        <h4><b>{{$profName or ''}}</b></h4>
-        <hr>
+        <h4><b>{{$profName or ""}}</b></h4>
+        <hr class="hidden-xs">
       </div>
       {{-- Menu SideBar --}}
       <div class="hidden-xs">
         <nav>
           <ul class="nav nav-stacked">
             <li class="active">
-                <a href="{{ route('my-profile') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-user"></span> Meu Perfil
-                </a>
-              </li>
+              <a href="{{ route('my-profile') }}" class="text-muted">
+                <span class="glyphicon glyphicon-user"></span> Meu Perfil
+              </a>
+            </li>
             <li>
-                <a href="{{ route('editar-perfil') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-picture"></span> Editar perfil
-                </a>
-              </li>
-              <li>
-                {{-- Link ativo page editar-categorias --}}
-                <a href="{{ route('editar-categorias') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-th-large"></span> Editar categorias
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('editar-servicos') }}" class="active">
-                  <span class="glyphicon glyphicon-th-list"></span> Editar serviços
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('editar-especialidades') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-th"></span> Editar especialidades
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('editar-conta') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-cog"></span> Editar Conta
-                </a>
-              </li>
+              {{-- Link ativo page editar-categorias --}}
+              <a href="{{ route('editar-categorias') }}" class="text-muted">
+                <span class="glyphicon glyphicon-th-large"></span> Editar categorias
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('editar-servicos') }}" class="active">
+                <span class="glyphicon glyphicon-th-list"></span> Editar serviços
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('editar-especialidades') }}" class="text-muted">
+                <span class="glyphicon glyphicon-th"></span> Editar especialidades
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('editar-perfil') }}" class="text-muted">
+                <span class="glyphicon glyphicon-picture"></span> Editar perfil
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('editar-conta') }}" class="text-muted">
+                <span class="glyphicon glyphicon-cog"></span> Editar Conta
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -107,11 +107,17 @@
     {{-- //Register Steps --}}
   @endif
   
-  <div class="col-lg-offset-1 col-lg-8 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
-    <h2>Editar Serviços</h2>
+  {{-- Título Page --}}
+  <div class="col-lg-offset-3 col-md-offset-4 col-sm-offset-5 col-xs-offset-0">
+    @if($profServicos->count() != 0)
+      <h2>Editar Serviços</h2>
+    @else
+      <h2>Cadastrar Serviços</h2>
+    @endif
     <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h4 class="text-danger">&raquo; {{ $error }}</h4> @endforeach @endif</span>
     <hr style="margin-bottom: 4%">
   </div>
+  {{-- //Título Page --}}
     
   {{-- FORM --}}
   <form class="form-horizontal" action="@if($profServicos->count() != 0){{route('post-editar-servicos')}}@else{{route('post-cadastrar-servicos')}}@endif" method="POST">

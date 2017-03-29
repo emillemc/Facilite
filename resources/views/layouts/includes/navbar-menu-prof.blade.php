@@ -15,12 +15,6 @@
     </li>
     <li class="divider"></li>
     <li>
-      <a href="{{ route('editar-perfil') }}">
-        <span class="glyphicon glyphicon-picture"></span> Editar perfil
-      </a>
-    </li>
-    <li class="divider"></li>
-    <li>
       <a href="{{ route('editar-categorias') }}">
         <span class="glyphicon glyphicon-th-large"></span> Editar categorias
       </a>
@@ -35,6 +29,12 @@
     <li>
       <a href="{{ route('editar-especialidades') }}">
         <span class="glyphicon glyphicon-th"></span> Editar especialidades
+      </a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="{{ route('editar-perfil') }}">
+        <span class="glyphicon glyphicon-picture"></span> Editar perfil
       </a>
     </li>
     <li class="divider"></li>

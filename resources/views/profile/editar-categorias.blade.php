@@ -10,7 +10,7 @@
   {{-- Primeiro cadastro (Se não existir categorias cadastradas anteriormente, esconde sidebar) --}}
   @if($profCategorias->count() != 0)
     {{-- SideBar --}}
-    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 
       {{-- Imagem e botão 'Mudar foto' --}}
       <div class="text-center">
@@ -24,8 +24,8 @@
       </div>
       {{-- Nome Prof --}}
       <div class="text-center">
-        <h4><b>{{$profName or ''}}</b></h4>
-        <hr>
+        <h4><b>{{$profName or ""}}</b></h4>
+        <hr class="hidden-xs">
       </div>
       {{-- Menu SideBar --}}
       <div class="hidden-xs">
@@ -33,42 +33,41 @@
         <nav>
           <ul class="nav nav-stacked">
             <li class="active">
-                <a href="{{ route('my-profile') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-user"></span> Meu Perfil
-                </a>
-              </li>
+              <a href="{{ route('my-profile') }}" class="text-muted">
+                <span class="glyphicon glyphicon-user"></span> Meu Perfil
+              </a>
+            </li>
             <li>
-                <a href="{{ route('editar-perfil') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-picture"></span> Editar perfil
-                </a>
-              </li>
-              <li>
-                {{-- Link ativo page editar-categorias --}}
-                <a href="{{ route('editar-categorias') }}" class="active">
-                  <span class="glyphicon glyphicon-th-large"></span> Editar categorias
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('editar-servicos') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-th-list"></span> Editar serviços
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('editar-especialidades') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-th"></span> Editar especialidades
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('editar-conta') }}" class="text-muted">
-                  <span class="glyphicon glyphicon-cog"></span> Editar Conta
-                </a>
-              </li>
+              {{-- Link ativo page editar-categorias --}}
+              <a href="{{ route('editar-categorias') }}" class="active">
+                <span class="glyphicon glyphicon-th-large"></span> Editar categorias
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('editar-servicos') }}" class="text-muted">
+                <span class="glyphicon glyphicon-th-list"></span> Editar serviços
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('editar-especialidades') }}" class="text-muted">
+                <span class="glyphicon glyphicon-th"></span> Editar especialidades
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('editar-perfil') }}" class="text-muted">
+                <span class="glyphicon glyphicon-picture"></span> Editar perfil
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('editar-conta') }}" class="text-muted">
+                <span class="glyphicon glyphicon-cog"></span> Editar Conta
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
       </div>
       {{-- //Menu SideBar --}}
-
     </div>
     {{-- SideBar --}}
   @else
@@ -98,7 +97,7 @@
         <span style="font-size: 18px;" class="text-muted">5) Perfil </span>
         <span class="text-muted glyphicon glyphicon-question-sign pull-right" style="font-size: 22px;"></span>
       </div>
-      <h4 class="text-left" style="margin-top: 15%;">Concluído:</h4>
+      <h4 class="text-left" style="margin-top: 15%;">Cadastro:</h4>
       <div class="progress" style="margin-top: 0%">
         <div class="progress-bar progress-bar-success" style="width: 20%;">
           <span>1 de 5</span>
@@ -107,12 +106,18 @@
     </div>
     {{-- //Register Steps --}}
   @endif
-
-  <div class="col-lg-offset-1 col-lg-8 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
-    <h2>Editar Categorias</h2>
+  
+  {{-- Título Page --}}
+  <div class="col-lg-offset-3 col-md-offset-4 col-sm-offset-5 col-xs-offset-0">
+    @if($profCategorias->count() != 0)
+      <h2>Editar Categorias</h2>
+    @else
+      <h2>Cadastrar Categorias</h2>
+    @endif
     <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h4 class="text-danger">&raquo; {{ $error }}</h4> @endforeach @endif</span>
-    <hr style="margin-bottom: 5%">
+    <hr style="margin-bottom: 4%">
   </div>
+  {{-- //Título Page --}}
 
     {{-- FORM - Se existir categoria cadastrada, post-editar. Se não, post-cadastrar --}}
     <form action="@if($profCategorias->count() != 0){{route('post-editar-categorias')}}@else{{route('post-cadastrar-categorias')}}@endif" method="POST">

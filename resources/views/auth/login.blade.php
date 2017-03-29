@@ -49,11 +49,6 @@
 
         <div class="form-group">
           <div class="col-md-offset-3 col-md-8">
-            {{-- <div class="pull-left">
-              <label for="remember">
-                <input name="remember" type="checkbox"/> Me lembre
-              </label>
-            </div> --}}
             <div class="pull-right">
               <label>
                 <a class="btn btn-link" href="#">
@@ -77,7 +72,7 @@
     <div class="top-12 visible-xs"></div>
     <div class="col-lg-6 col-md-6 text-center">
       <h2>Ainda não é cadastrado?</h2>
-      <p>Clique no botão abaixo e faça o seu cadastro agora mesmo!</p>
+      <p>Cadastre-se agora mesmo!</p>
       <p><a class="btn btn-primary btn-lg" href="{{route('cadastrar')}}" role="button">Cadastrar agora &raquo;</a></p>
     </div>
     <!-- //CADASTRAR -->

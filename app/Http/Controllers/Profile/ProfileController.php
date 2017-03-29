@@ -89,7 +89,7 @@ class ProfileController extends Controller
             // Atualiza as categorias escolhidas e salva no banco de dados
             $insert = $profissional->categorias()->sync($categorias);
             if ($insert) {
-                return redirect()->route('editar-categorias');
+                return redirect()->route('editar-servicos');
             } else {
                 return redirect()->back()->withErrors('Erro ao atualizar dados.');
             }
@@ -149,7 +149,7 @@ class ProfileController extends Controller
             // Atualiza os servicos escolhidos e salva no banco
             $insert = $profissional->servicos()->sync($servicos);
             if ($insert) {
-                return redirect()->route('editar-servicos');
+                return redirect()->route('editar-especialidades');
             } else {
                 return redirect()->back()->withErrors('Erro ao atualizar dados.');
             }

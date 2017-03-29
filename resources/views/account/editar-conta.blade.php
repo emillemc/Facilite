@@ -23,13 +23,13 @@
     {{-- Nome User --}}
     <div class="text-center">
       <h4><b>{{$user->name or $prof->user->name}}</b></h4>
-      <hr>
+      <hr class="hidden-xs">
     </div>
 		
 		{{-- Menu --}}
     <div class="hidden-xs">
 
-      <!-- MENU EDITAR-CONTA-->
+       {{-- MENU EDITAR-CONTA --}}
         @if(Auth::user()->role == 'prof')
           {{-- Profissional logado, exibe menu-prof --}}
           @include('layouts.includes.menu-prof')
@@ -37,32 +37,29 @@
           {{-- Exibe menu-user --}}
           @include('layouts.includes.menu-user')
         @endif
-      <!-- //MENU EDITAR-CONTA -->
+      {{-- //MENU EDITAR-CONTA --}}
 
     </div>
   </div>
 
-  <div class="col-lg-offset-1 col-lg-8 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
+  {{-- Título Page --}}
+  <div class="col-md-offset-3 col-lg-offset-3 col-sm-offset-4 col-xs-offset-0">
     <h2>Editar Conta</h2>
     <hr style="margin-bottom: 4%">
   </div>
+  {{-- //Título Page --}}
 		
-		<!-- EDITAR-CONTA-->
-      <div class="form-horizontal col-lg-offset-1 col-lg-7 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;"">
+	{{-- EDITAR-CONTA --}}
+  <div class="col-lg-offset-1 col-lg-4 col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-6 col-xs-12">
 
-        <div class="col-lg-7 col-md-7 col-xs-12">
+    @if(Auth::user()->role == 'prof')
+      @include('layouts.includes.form-editar-prof')
+    @else
+      @include('layouts.includes.form-editar-user')
+    @endif
 
-          @if(Auth::user()->role == 'prof')
-            {{-- Profissional logado, exibe form-prof --}}
-            @include('layouts.includes.form-editar-prof')
-          @else
-            @include('layouts.includes.form-editar-user')
-          @endif
-
-        </div>
-
-      </div>
-    <!-- //EDITAR-CONTA -->
+  </div>
+  {{-- //EDITAR-CONTA --}}
 
 @endsection
 
