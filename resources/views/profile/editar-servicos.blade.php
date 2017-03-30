@@ -9,7 +9,7 @@
 @section('content')
   
   {{-- Primeiro cadastro (Se não existir categorias cadastradas anteriormente, esconde sidebar) --}}
-  @if($profServicos->count() != 0)
+  @if(count($profile->servicos) != 0)
     {{-- SideBar --}}
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 
@@ -25,7 +25,7 @@
       </div>
       {{-- Nome Prof --}}
       <div class="text-center">
-        <h4><b>{{$profName or ""}}</b></h4>
+        <h4><b>{{$profile->user->name or ""}}</b></h4>
         <hr class="hidden-xs">
       </div>
       {{-- Menu SideBar --}}
@@ -109,7 +109,7 @@
   
   {{-- Título Page --}}
   <div class="col-lg-offset-3 col-md-offset-4 col-sm-offset-5 col-xs-offset-0">
-    @if($profServicos->count() != 0)
+    @if(count($profile->servicos) != 0)
       <h2>Editar Serviços</h2>
     @else
       <h2>Cadastrar Serviços</h2>
@@ -120,10 +120,10 @@
   {{-- //Título Page --}}
     
   {{-- FORM --}}
-  <form class="form-horizontal" action="@if($profServicos->count() != 0){{route('post-editar-servicos')}}@else{{route('post-cadastrar-servicos')}}@endif" method="POST">
+  <form class="form-horizontal" action="@if(count($profile->servicos) != 0){{route('post-editar-servicos')}}@else{{route('post-cadastrar-servicos')}}@endif" method="POST">
     {{ csrf_field() }}
     
-    @forelse($categorias as $categoria)
+    @forelse($profile->categorias as $categoria)
       {{-- BLOCO PRINCIPAL --}}
       <div class="col-lg-offset-1 col-lg-7 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
         <h3>{{$categoria->name}}</h3>
@@ -136,8 +136,8 @@
                 <label class="checkbox-inline" for="check_{{$servico->id}}">
                   <input type="checkbox" id="check_{{$servico->id}}" name="check_{{$servico->id}}" value="{{$servico->id}}"
 
-                    @forelse($profServicos as $profServico) 
-                      @if( isset($profServicos) && $profServico->id == $servico->id ) 
+                    @forelse($profile->servicos as $profServico) 
+                      @if( isset($profile->servicos) && $profServico->id == $servico->id ) 
                         checked 
                       @endif
                     @empty 
@@ -162,7 +162,7 @@
     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 top-8">
       <div class="form-group">
         <div class="text-center">
-          @if($profServicos->count() != 0)
+          @if(count($profile->servicos) != 0)
             <button type="submit" class="btn btn-md btn-success">Salvar <span class="glyphicon glyphicon-chevron-right"></button>
           @else
             <button type="submit" class="btn btn-md btn-primary">Avançar <span class="glyphicon glyphicon-chevron-right"></span></button>

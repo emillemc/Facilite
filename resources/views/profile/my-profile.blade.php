@@ -126,11 +126,11 @@
                     {{-- Display Desktop --}}
                     <div class="visible-lg visible-md">
                       <div class="col-lg-6 col-md-6">
-                        <h2><b>{{$name}}</b></h2>
+                        <h2><b>{{$profile->user->name}}</b></h2>
                         <hr>
                         <!-- ícones Serviços -->
                         <div class="">
-                          @forelse($servicos as $servico)
+                          @forelse($profile->servicos as $servico)
                             <span>•{{$servico->name}}&nbsp;</span>
                           @empty
                           @endforelse
@@ -142,12 +142,12 @@
                     {{-- Display Mobile (Centralizado) --}}
                     <div class="visible-sm visible-xs text-center">
                       <div class="col-sm-7 col-xs-7">
-                        <h2><b>{{$name}}</b></h2>
+                        <h2><b>{{$profile->user->name}}</b></h2>
                         <hr>
                       </div>
                       <!-- Ícones Serviços -->
                       <div class="">
-                        @forelse($servicos as $servico)
+                        @forelse($profile->servicos as $servico)
                           <span>•{{$servico->name}}&nbsp;</span>
                         @empty
                         @endforelse
@@ -191,10 +191,10 @@
                   <hr>
                   <div class="">
                     {{-- Lista os serviços cadastradas pelo profissional --}}
-                    @forelse($servicos as $servico)
+                    @forelse($profile->servicos as $servico)
                       <h4>{{$servico->name}}:</h4>
                       {{-- Lista as especialidades cadastradas pelo profissional --}}
-                      @forelse($especialidades->where('servico_id', $servico->id) as $especialidade)
+                      @forelse($profile->especialidades->where('servico_id', $servico->id) as $especialidade)
                         <span>•{{$especialidade->name}}&nbsp;</span>
                       @empty
                       @endforelse

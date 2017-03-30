@@ -17,7 +17,7 @@
     <li class="active">{{$servico->name}}</li>
   </ol>
 
-	<h4>Profissionais encontrados em "{{$servico->name}}" :</h4>
+	<h4>{{count($profissionais)}} Profissionais encontrados em "{{$servico->name}}" :</h4>
   <hr>
   <!-- ROW -->
   <div class="row">
@@ -110,7 +110,7 @@
               @empty
                 <span>Não foi possível carregar os serviços...</span>
               @endforelse --}}
-              <i><p>Descrição...</p></i>
+              <i><p>Descrição: {{$profissional->url_perfil}}</p></i>
               <hr>
               <i><p>Infos...</p></i>
             </div>
@@ -120,7 +120,6 @@
               <div class="panel-footer text-center">
                 <a href="#login" data-toggle="modal" data-target="#modalLogin">Ver Perfil</a>
               </div>
-
               @include('layouts.includes.modal-login')
 
             {{-- Se não mostra perfil do profissional --}}
@@ -133,7 +132,7 @@
           </div>
         </div>
         @empty
-          <h1>Não foi possível carregar o conteúdo...</h1>
+          <h2>Nenhum profissional encontrado...</h2>
         @endforelse
 
     </div>

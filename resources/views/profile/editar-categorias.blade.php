@@ -8,7 +8,7 @@
 
 @section('content')
   {{-- Primeiro cadastro (Se não existir categorias cadastradas anteriormente, esconde sidebar) --}}
-  @if($profCategorias->count() != 0)
+  @if(count($profile->categorias) != 0)
     {{-- SideBar --}}
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 
@@ -24,7 +24,7 @@
       </div>
       {{-- Nome Prof --}}
       <div class="text-center">
-        <h4><b>{{$profName or ""}}</b></h4>
+        <h4><b>{{$profile->user->name or ""}}</b></h4>
         <hr class="hidden-xs">
       </div>
       {{-- Menu SideBar --}}
@@ -109,7 +109,7 @@
   
   {{-- Título Page --}}
   <div class="col-lg-offset-3 col-md-offset-4 col-sm-offset-5 col-xs-offset-0">
-    @if($profCategorias->count() != 0)
+    @if(count($profile->categorias) != 0)
       <h2>Editar Categorias</h2>
     @else
       <h2>Cadastrar Categorias</h2>
@@ -120,7 +120,7 @@
   {{-- //Título Page --}}
 
     {{-- FORM - Se existir categoria cadastrada, post-editar. Se não, post-cadastrar --}}
-    <form action="@if($profCategorias->count() != 0){{route('post-editar-categorias')}}@else{{route('post-cadastrar-categorias')}}@endif" method="POST">
+    <form action="@if(count($profile->categorias) != 0){{route('post-editar-categorias')}}@else{{route('post-cadastrar-categorias')}}@endif" method="POST">
       
       {{ csrf_field() }}
       <div class="col-lg-offset-1 col-lg-7 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
@@ -133,8 +133,8 @@
               <label id="label_cat_{{$categoria->id}}" class="text-center" for="cat_{{$categoria->id}}" style="font-weight: normal; font-size: 27px;">
                 <input type="checkbox" id="cat_{{$categoria->id}}" name="cat_{{$categoria->id}}" value="{{$categoria->id}}" 
 
-                  @forelse($profCategorias as $profCategoria)
-                    @if( isset($profCategorias) && $profCategoria->id == $categoria->id )
+                  @forelse($profile->categorias as $profCategoria)
+                    @if( isset($profile->categorias) && $profCategoria->id == $categoria->id )
                       checked
                     @endif
                   @empty
@@ -156,7 +156,7 @@
         <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 top-8">
           <div class="form-group">
             <div class="text-center">
-              @if($profCategorias->count() != 0)
+              @if(count($profile->categorias) != 0)
                 <button type="submit" class="btn btn-md btn-success">Salvar <span class="glyphicon glyphicon-chevron-right"></button>
               @else
                 <button type="submit" class="btn btn-md btn-primary">Avançar <span class="glyphicon glyphicon-chevron-right"></span></button>

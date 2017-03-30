@@ -24,19 +24,17 @@ class RegisterController extends Controller
     }
 
     /**
-     * Cadastrar Usuários (User e Prof) e valida dados com o RegisterFormRequest
-     * @param  RegisterFormRequest $request -> Dados do form "cadastrar"
-     * @return Boolean -> True: Cadastrado com sucesso, redirect(). False: Erro ao cadastrar, back().
+     * Cadastra usuários (User e Prof) e valida dados com o RegisterFormRequest
+     * @param  RegisterFormRequest $request | Dados do form "cadastrar"
+     * @return Boolean | True: Cadastrado com sucesso, redirect(). False: Erro ao cadastrar, back().
      */
     public function postCadastrar(RegisterFormRequest $request)
     {   
         $dataForm = $request->all();
-
+        // Checkbox marcado = prof, desmarcado = user
         $dataForm['role'] = ( !isset($dataForm['role']) ) ? 'user' : 'prof';
-
         // Guarda valor do checkbox (user ou prof)
         $role = $dataForm['role'];
-
         // Verifica e cria hash do password
         if (Hash::needsRehash($dataForm['password'])) {
             $dataForm['password'] = Hash::make($dataForm['password']);
@@ -53,10 +51,10 @@ class RegisterController extends Controller
                     'cpf'       => $dataForm['cpf'],
                     'tel'       => $dataForm['tel'],
                 ]);
-                // Loga o usuário após cadastrar (Persiste sessão)
-                $login = Auth::login($insertUser, true);
                 // Verifica se inseriu
                 if ($insertProf) {
+                    // Loga o usuário após cadastrar (Persiste sessão
+                    $login = Auth::login($insertUser, true);
                     return redirect()->route('editar-categorias');
                 } else {
                     return redirect()->back();
@@ -75,8 +73,6 @@ class RegisterController extends Controller
                     return redirect()->back();
                 }
         }
-
     }
-
-
+    
 }

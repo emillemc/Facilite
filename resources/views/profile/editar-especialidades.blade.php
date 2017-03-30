@@ -9,7 +9,7 @@
 @section('content')
   
   {{-- Primeiro cadastro (Se não existir categorias cadastradas anteriormente, esconde sidebar) --}}
-  @if($profEspecialidades->count() != 0)
+  @if(count($profile->especialidades) != 0)
     {{-- SideBar --}}
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 
@@ -25,7 +25,7 @@
       </div>
       {{-- Nome Prof --}}
       <div class="text-center">
-        <h4><b>{{$profName or ""}}</b></h4>
+        <h4><b>{{$profile->user->name or ""}}</b></h4>
         <hr class="hidden-xs">
       </div>
       {{-- Menu SideBar --}}
@@ -108,7 +108,7 @@
 
   {{-- Título Page --}}
   <div class="col-lg-offset-3 col-md-offset-4 col-sm-offset-5 col-xs-offset-0">
-    @if($profEspecialidades->count() != 0)
+    @if(count($profile->especialidades) != 0)
       <h2>Editar Especialidades</h2>
     @else
       <h2>Cadastrar Especialidades</h2>
@@ -119,12 +119,12 @@
   {{-- //Título Page --}}
 
   {{-- FORM --}}
-  <form class="form-horizontal" action="@if($profEspecialidades->count() != 0){{route('post-editar-especialidades')}}@else{{route('post-cadastrar-especialidades')}}@endif" method="POST">
+  <form class="form-horizontal" action="@if(count($profile->especialidades) != 0){{route('post-editar-especialidades')}}@else{{route('post-cadastrar-especialidades')}}@endif" method="POST">
     {{ csrf_field() }}
 
     {{-- BLOCO PRINCIPAL --}}
     <div class="col-lg-offset-1 col-lg-7 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-7 col-xs-12" style="padding: 0px;">
-      @forelse($servicos as $servico)
+      @forelse($profile->servicos as $servico)
         {{-- PAINEL ESPECIALIDADES --}}
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
           <h3>{{$servico->name}}</h3>
@@ -135,8 +135,8 @@
                   <label for="check_{{$especialidade->id}}">
                     <input type="checkbox" id="check_{{$especialidade->id}}" name="check_{{$especialidade->id}}" value="{{$especialidade->id}}"
 
-                      @forelse($profEspecialidades as $profEspecialidade)
-                        @if( isset($profEspecialidades) && $profEspecialidade->id == $especialidade->id )
+                      @forelse($profile->especialidades as $profEspecialidade)
+                        @if( isset($profile->especialidades) && $profEspecialidade->id == $especialidade->id )
                           checked
                         @endif
                       @empty
@@ -162,7 +162,7 @@
     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 top-8">
       <div class="form-group">
         <div class="text-center">
-          @if($profEspecialidades->count() != 0)
+          @if(count($profile->especialidades) != 0)
             <button type="submit" class="btn btn-md btn-success">Salvar</button>
           @else
             <button type="submit" class="btn btn-md btn-primary">Avançar <span class="glyphicon glyphicon-chevron-right"></span></button>

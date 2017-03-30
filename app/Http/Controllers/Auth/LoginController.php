@@ -24,24 +24,31 @@ class LoginController extends Controller
     }
 
     /**
-     * Verifica credenciais e efetua login
-     * @param  Request $request (Dados form login)
+     * Verifica credenciais e Efetua Login. Caso seja prof, verifica se existe
+     * perfil ativo, se não redireciona para 'editar-perfil'.
+     * @param  Request $request | Dados form login
      * @return Boolean | True: Login efetuado com sucesso. False: Login inválido.
      */
     public function postLogin(Request $request)
     {
-        $credentials = $request->only(['email', 'password']);
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended();
+        $login = $request->only(['email', 'password']);
+        if (Auth::attempt($login)) {
+            $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
+            if ($prof->status == 'inactive') {
+                //////////FAZER FILTRO DO PERFIL PROFISSIONAL PARA AGILIZAR/// 
+                /////////////REDIRECIONAMENTO DE PÁGINA APÓS LOGIN///////////
+                return redirect()->route('editar-perfil');
+            } else {
+                return redirect()->intended();
+            }
         } else {
             return redirect()->route('login')->withErrors('Email ou senha incorretos!');
         }
-        
     }
 
     /**
      * Efetua logout
-     * @return redirect() | Deslogia e redireciona o usuário para 'home'
+     * @return redirect() | Desloga e redireciona o usuário para 'home'
      */
     public function logout()
     {

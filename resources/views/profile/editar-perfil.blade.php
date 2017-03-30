@@ -7,8 +7,8 @@
 @endsection
 
 @section('content')
-  {{-- Primeiro cadastro (Se não existir categorias cadastradas anteriormente, esconde sidebar) --}}
-  @if($urlProf)
+  {{-- Se houver perfil ativo, exibe sidebar --}}
+  @if($profile->status == 'active')
     {{-- SideBar --}}
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
       {{-- Imagem e botão 'Mudar foto' --}}
@@ -23,7 +23,7 @@
       </div>
       {{-- Nome Prof --}}
       <div class="text-center">
-        <h4><b>{{$profName or "UserName"}}</b></h4>
+        <h4><b>{{$profile->user->name}}</b></h4>
         <hr class="hidden-xs">
       </div>
       {{-- Menu SideBar --}}
@@ -107,7 +107,7 @@
   
   {{-- Título Page --}}
   <div class="col-lg-offset-3 col-md-offset-4 col-sm-offset-5 col-xs-offset-0">
-    @if($urlProf)
+    @if($profile->status == 'active')
       <h2>Editar Perfil</h2>
     @else
       <h2>Cadastrar Perfil</h2>
@@ -124,7 +124,7 @@
       <label for="url_perfil">Endereço do perfil:</label>
       <div class="form-inline{{ $errors->has('url_perfil') ? ' has-error' : '' }}">
           <label for="url_perfil" style="font-size: 21px; color: #6CA7BF"><i>facilite.com/profiles/</i></label>
-          <input id="url_perfil" class="form-control" type="text" name="url_perfil" maxlength="25" value="@if(isset($urlProf)){{$urlProf}}@endif"/>
+          <input id="url_perfil" class="form-control" type="text" name="url_perfil" maxlength="25" value="@if(isset($profile->url_perfil)){{$profile->url_perfil}}@endif"/>
 
           @if ($errors->has('url_perfil'))
             <span class="help-block">
@@ -159,7 +159,7 @@
       <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <label for="">Descrição:</label for="">
-          <textarea id="description" name="description" class="form-control" maxlength="140" rows="3">@if(isset($descriptionProf)){{$descriptionProf}}@endif</textarea>
+          <textarea id="description" name="description" class="form-control" maxlength="140" rows="3">@if(isset($profile->description)){{$profile->description}}@endif</textarea>
           @if ($errors->has('description'))
             <span class="help-block">
               <strong>{{ $errors->first('description') }}</strong>

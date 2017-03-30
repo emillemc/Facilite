@@ -20,14 +20,12 @@ class AccountController extends Controller
 
     /**
      * Editar Conta
-     * @return view | Exibe view 'editar-conta' com os dados dos usuários preenchidos
+     * @return view | Exibe view 'editar-conta' com os dados dos usuários (ou profissionais) preenchidos.
      */
     public function index()
     {   
-        $user = User::where('id', Auth::user()->id)->get()->first();
-
+        $user = User::find(Auth::user()->id);
         $prof = Professional::where('user_id', $user->id)->get()->first();
-
         return view('account.editar-conta', compact('user', 'prof'));
     }
 

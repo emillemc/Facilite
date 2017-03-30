@@ -5,7 +5,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="modalSolicitarServicoLabel">
-            <h3 class="margin-0"><b>Solicitar serviços de "{{$name}}" :</b></h3>
+            <h3 class="margin-0"><b>Solicitar serviços de "{{$profile->user->name}}" :</b></h3>
         </h4>
       </div>
       <div class="modal-body">
@@ -18,7 +18,7 @@
               <label><i>Escolha os serviços desejados:</i></label>
             </div>
             
-            @forelse($servicos as $servico)
+            @forelse($profile->servicos as $servico)
               <!-- BLOCO SERVIÇOS -->
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 text-center">
                 <div class="form-group">
