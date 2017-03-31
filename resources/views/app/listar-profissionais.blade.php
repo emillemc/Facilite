@@ -17,9 +17,9 @@
     <li class="active">{{$servico->name}}</li>
   </ol>
 
-	<h4>{{count($profissionais)}} Profissionais encontrados em "{{$servico->name}}" :</h4>
+	<h4>{{count($profissionais)}} Profissionais encontrados em "{{$servico->name}}" @if(isset($filtroEspecialidade))<i>({{$filtroEspecialidade->name}})</i>@endif :</h4>
   <hr>
-  <!-- ROW -->
+  {{-- ROW --}}
   <div class="row">
     
     <!-- ~***********************************************************************
@@ -27,26 +27,35 @@
     ***************************************************************************** -->
     <div class="col-lg-2 col-md-3 col-sm-3">
 
-      <!-- ESPECIALIDADES -->
+      {{-- ESPECIALIDADES --}}
       <h4>Especialidades:</h4>
       <div class="panel panel-default">
         <div class="panel-body">
-          @forelse($especialidades as $especialidade)
-            <div class="checkbox">
-              <label for="check_{{$especialidade->id}}">
-                <input type="checkbox" id="check_{{$especialidade->id}}" value="{{$especialidade->id}}">{{$especialidade->name}}
-            </label>
-            </div>
-          @empty
-            <div>
-              <p>Não foi possível carregar o conteúdo...</p>
-            </div>
-          @endforelse
+          <div class="checkbox">
+            <nav>
+              <ul class="nav nav-stacked">
+                @forelse($especialidades as $especialidade)
+                  <li>
+                    <a  class="@if( isset($filtroEspecialidade) && $filtroEspecialidade->id == $especialidade->id ) active @else text-muted @endif" href="{{url("/categorias/$categoria->url/$servico->url/$especialidade->url")}}">{{$especialidade->name}}</a>
+                  </li>
+                    {{-- <a class="text-muted" href="{{url("/categorias/$categoria->url/$servico->url/$especialidade->url")}}">{{$especialidade->name}}</a> --}}
+                    {{-- <label for="check_{{$especialidade->id}}">
+                      <input type="checkbox" id="check_{{$especialidade->id}}" value="{{$especialidade->id}}">{{$especialidade->name}}
+                  </label> --}}
+                @empty
+                  <div><p>Não foi possível carregar o conteúdo...</p></div>
+                @endforelse
+                  <li>
+                  <a class="text-muted" href="{{url("/categorias/$categoria->url/$servico->url/")}}">Todas</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
-      <!-- //ESPECIALIDADES -->
+      {{-- //ESPECIALIDADES --}}
       
-      <!-- FILTROS -->
+      {{-- FILTROS --}}
       <h4>Filtros:</h4>
       <div class="panel panel-default">
         <div class="panel-body">
@@ -64,18 +73,20 @@
             </div>
         </div>
       </div>
-      <!-- //FILTROS -->
+      {{-- //FILTROS --}}
 
-      <!-- PESQUISAR POR NOME -->
-      <label for="searchNome"><h4>Nome:</h4></label>
-      <div class="text-center">
-        <input type="text" id="searchNome" class="form-control">
-        <button type="submit" class="btn btn-primary btn-sm top-5">Buscar</button>
-      </div>
-      <!-- //PESQUISAR POR NOME -->
+      {{-- PESQUISAR POR NOME --}}
+      <form action="#!" method="GET">
+        <label for="searchNome"><h4>Nome:</h4></label>
+        <div class="text-center">
+          <input type="text" id="searchNome" name="name" class="form-control">
+          <button type="submit" class="btn btn-primary btn-sm top-5">Buscar</button>
+        </div>
+      </form>
+      {{-- //PESQUISAR POR NOME --}}
 
     </div>
-    <!-- //BLOCO PRINCIPAL 1 ESQUERDA (FILTROS) -->
+    {{-- //BLOCO PRINCIPAL 1 ESQUERDA (FILTROS) --}}
     
     <!-- *************************************************************************
     *************** BLOCO PRINCIPAL 2 CONTEÚDO (LISTA DE PROFISSIONAIS) **********
@@ -84,16 +95,16 @@
       @forelse($profissionais as $profissional)
         <div class="col-lg-4 col-md-6 col-sm-6">
           <h4 style="color: white;"> - </h4> <!-- GAMBIARRA -->
-          <div class="panel panel-default">
-            <div class="panel-heading clearfix"> <!-- CLEARFIX PARA ENCAIXAR AS COLUNAS NO PAINEL HEAD -->
+          <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
+            <div class="panel-body clearfix"> <!-- CLEARFIX PARA ENCAIXAR AS COLUNAS NO PAINEL HEAD -->
               <div class=" col-md-4  text-center">  <!-- BLOCO FOTO PROFISSIONAL -->
                 <img src="{{ asset('img/perfil2.png') }}" alt="img_perfil2" class="img-circle">
               </div>
-              <!-- BLOCO NOME E ESTRELAS PROFISSIONAL -->
+              {{-- BLOCO NOME E ESTRELAS PROFISSIONAL --}}
               <div class="col-md-8 ">
                 <h4 class="panel-title text-center"><b>{{$profissional->user->name}}</b></h4>
                 <hr>
-                <!-- ESTRELAS -->
+                {{-- ESTRELAS --}}
                 <div class="text-center">
                   <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="font-size: 25px;"></span>
                   <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="font-size: 25px;"></span>
@@ -101,7 +112,7 @@
                   <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="font-size: 25px;"></span>
                   <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="font-size: 25px;"></span>
                 </div>
-                <!-- //ESTRELAS -->
+                {{-- //ESTRELAS --}}
               </div>
             </div>
             <div class="panel-body">
@@ -110,7 +121,9 @@
               @empty
                 <span>Não foi possível carregar os serviços...</span>
               @endforelse --}}
-              <i><p>Descrição: {{$profissional->url_perfil}}</p></i>
+              <div class="text-justify">
+                <i><p>{{substr($profissional->description, 0, 262)}}</p></i>
+              </div>
               <hr>
               <i><p>Infos...</p></i>
             </div>
@@ -136,9 +149,9 @@
         @endforelse
 
     </div>
-    <!-- //BLOCO PRINCIPAL 2 CONTEÚDO (LISTA DE PROFISSIONAIS) -->
+    {{-- //BLOCO PRINCIPAL 2 CONTEÚDO (LISTA DE PROFISSIONAIS) --}}
   </div>
-  <!-- //ROW-->
+   {{-- //ROW --}}
 
 @endsection
 

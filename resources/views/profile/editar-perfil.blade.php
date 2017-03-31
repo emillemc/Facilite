@@ -159,12 +159,14 @@
       <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <label for="">Descrição:</label for="">
-          <textarea id="description" name="description" class="form-control" maxlength="140" rows="3">@if(isset($profile->description)){{$profile->description}}@endif</textarea>
+          <textarea id="description" name="description" class="form-control" maxlength="1000" rows="10">@if(isset($profile->description)){{$profile->description}}@endif</textarea>
+
           @if ($errors->has('description'))
             <span class="help-block">
               <strong>{{ $errors->first('description') }}</strong>
             </span>
           @endif
+
         </div>
       </div>
       <button disabled id="bt-salvar-descricao" type="submit" class="btn btn-success btn-sm pull-right disabled" style="display:none;">Editar</button>

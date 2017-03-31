@@ -14,11 +14,11 @@ class Professional extends Authenticatable
 	use Notifiable;
 	
     protected $fillable = [
-        'user_id', 'tel', 'cpf', 'city', 'url_perfil', 'status'
+        'user_id', 'tel', 'cpf', 'city', 'url_perfil', 'status', 'description'
     ];
 
     protected $hidden = [
-        'password',
+        'password'
     ];
 
     // Um Profissional é um usuário

@@ -25,7 +25,7 @@ class ProfileEditFormRequest extends FormRequest
     {
         return [
             // 'url_perfil'        => 'required|alpha|between:4,25|unique:professionals,url_perfil',
-            'description'       => 'max:140',
+            'description'       => 'max:1000',
         ];
     }
 
@@ -36,7 +36,7 @@ class ProfileEditFormRequest extends FormRequest
             // 'url_perfil.alpha'          => 'O endereço do perfil deve conter apenas letras.',
             // 'url_perfil.between'        => 'O endereço do perfil deve conter no min 4 e no max 25 caracteres.',
             // 'url_perfil.unique'         => 'Esta url já está em uso.',
-            'description.max'           => 'Máximo de 140 caracteres permitido.',
+            'description.max'           => 'Máximo de 1000 caracteres permitido.',
         ];
     }
 }

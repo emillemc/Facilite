@@ -241,20 +241,6 @@ class ProfileController extends Controller
     /////////////////////////////
     ///////SUJEITO A ALTERAÇÃO //
     /////////////////////////////
-    public function postEditarPerfil(Request $request)
-    {
-        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-        // Se houver configurado a url do perfil
-        if (isset($prof->url_perfil)) {
-            return redirect()->route('my-profile');
-        }else{
-            return redirect()->back()->withErrors('Informe um endereço para o seu perfil!');
-        }
-    }
-
-    /////////////////////////////
-    ///////SUJEITO A ALTERAÇÃO //
-    /////////////////////////////
     public function postEditarUrl(UrlEditFormRequest $request)
     {
         // Pega os dados do formulário editar-url
@@ -276,20 +262,33 @@ class ProfileController extends Controller
     /////////////////////////////
     ///////SUJEITO A ALTERAÇÃO //
     /////////////////////////////
-    public function postEditarDescricao(Request $request)
+    public function postEditarDescricao(ProfileEditFormRequest $request)
     {
-        // Pega os dados do formulário editar-descrição
         $dataForm = $request->except(['_token']);
-        // Busca id do prof = id do prof logado
-        $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-        // Cadastra/Atualiza a descrição do perfil profissional
-        $insert = $prof->update([
-            'description'    => $dataForm['description'],
-        ]);
+        $profile = Professional::where('user_id', Auth::user()->id)->get()->first();
+        $insert = $profile->update($dataForm);
+
         if ($insert) {
             return redirect()->route('editar-perfil');
         } else {
             return redirect()->back();
+        }
+    }
+
+    /**
+     * Verifica se o perfil já foi configurado (ativo) e redireciona
+     * para o perfil profissional (my-profile).
+     * @param  Request $request | 
+     * @return redirect() | Se perfil ativo, redireciona para 'my-profile'.
+     * Caso contrário, back() informando os erros.
+     */
+    public function postEditarPerfil(Request $request)
+    {
+        $profile = Professional::where('user_id', Auth::user()->id)->get()->first();
+        if ($profile->status == 'active') {
+            return redirect()->route('my-profile');
+        }else{
+            return redirect()->back()->withErrors('Informe um endereço para o seu perfil!');
         }
     }
 }

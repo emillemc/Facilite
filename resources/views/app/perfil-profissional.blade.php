@@ -193,10 +193,10 @@
         </div>
       </div>
       
-      <!-- ROW -->
+      {{-- ROW --}}
       <div class="row">
         <div class="col-lg-8 col-md-8">
-          <!-- ESPECIALIDADES -->
+          {{-- ESPECIALIDADES --}}
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3><b>Especialidades:</b></h3>
@@ -215,9 +215,43 @@
                 @endforelse
               </div>
               <hr>
+              {{-- <div class="panel-heading">
+                <h3><b>Bio:</b></h3>
+                <hr>
+                <div class="">
+                  <p>{{$profile->description}}</p>
+                </div>
+              </div>
+              <hr> --}}
             </div>
-          </div>     
-          <!-- //ESPECIALIDADES -->
+          </div>
+
+          {{-- BIOGRAFIA --}}
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3><b>Bio:</b></h3>
+              <hr>
+              <div class="">
+                <p>{{$profile->description or "Este profissional ainda não escreveu uma bio..."}}</p>
+              </div>
+              <hr>
+            </div>
+          </div>
+          {{-- //BIOGRAFIA --}}
+
+          {{-- IMAGENS --}}
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3><b>Galeria de Imagens:</b></h3>
+              <hr>
+              <div class="">
+                <p>Imagens aqui...</p>
+              </div>
+              <hr>
+            </div>
+          </div>
+          {{-- //IMAGENS --}}
+
         </div>
 
         <div class="col-lg-4 col-md-4">

@@ -33,8 +33,8 @@ class LoginController extends Controller
     {
         $login = $request->only(['email', 'password']);
         if (Auth::attempt($login)) {
-            $prof = Professional::where('user_id', Auth::user()->id)->get()->first();
-            if ($prof->status == 'inactive') {
+            $profile = Professional::where('user_id', Auth::user()->id)->get()->first();
+            if (isset($profile->status) && $profile->status == 'inactive') {
                 //////////FAZER FILTRO DO PERFIL PROFISSIONAL PARA AGILIZAR/// 
                 /////////////REDIRECIONAMENTO DE PÁGINA APÓS LOGIN///////////
                 return redirect()->route('editar-perfil');

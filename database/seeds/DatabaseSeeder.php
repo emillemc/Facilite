@@ -120,198 +120,234 @@ class DatabaseSeeder extends Seeder
         //***** Especialidades (serviço Manicure)
         DB::table('especialidades')->insert([
             'servico_id'    => 1,
-            'name'          => 'Pedicure'
+            'name'          => 'Pedicure',
+            'url'           => 'pedicure'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 1,
-            'name'          => 'Podóloga'
+            'name'          => 'Podóloga',
+            'url'           => 'podologa'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 1,
-            'name'          => 'Unhas Personalizadas'
+            'name'          => 'Unhas Personalizadas',
+            'url'           => 'unhas-personalizadas'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 1,
-            'name'          => 'Outros'
+            'name'          => 'Outros',
+            'url'           => 'manicure-outros'
         ]);
         // *************************//
 
         //***** Especialidades (serviço Cabeleleiro)
         DB::table('especialidades')->insert([
             'servico_id'    => 2,
-            'name'          => 'Cortes Masculinos'
+            'name'          => 'Cortes Masculinos',
+            'url'           => 'cortes-masculinos'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 2,
-            'name'          => 'Cortes Femininos'
+            'name'          => 'Cortes Femininos',
+            'url'           => 'cortes-femininos'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 2,
-            'name'          => 'Alisamento'
+            'name'          => 'Alisamento',
+            'url'           => 'alisamento'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 2,
-            'name'          => 'Tintura'
+            'name'          => 'Tintura',
+            'url'           => 'tintura'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 2,
-            'name'          => 'Escova'
+            'name'          => 'Escova',
+            'url'           => 'escova'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 2,
-            'name'          => 'Outros'
+            'name'          => 'Outros',
+            'url'           => 'cabeleireiro-outros'
         ]);
         // *************************//
 
         //***** Especialidades (serviço Depilação)
         DB::table('especialidades')->insert([
             'servico_id'    => 3,
-            'name'          => 'Cera Quente'
+            'name'          => 'Cera Quente',
+            'url'           => 'cera-quente'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 3,
-            'name'          => 'Cera Fria'
+            'name'          => 'Cera Fria',
+            'url'           => 'cera-fria'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 3,
-            'name'          => 'Roll On'
+            'name'          => 'Roll On',
+            'url'           => 'roll-on'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 3,
-            'name'          => 'À Linha'
+            'name'          => 'À Linha',
+            'url'           => 'a-linha'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 3,
-            'name'          => 'Outros'
+            'name'          => 'Outros',
+            'url'           => 'depilacao-outros'
         ]);
         // *************************//
 
         //***** Especialidades (serviço Pedreiro)
         DB::table('especialidades')->insert([
             'servico_id'    => 4,
-            'name'          => 'Telhadista'
+            'name'          => 'Telhadista',
+            'url'           => 'telhadista'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 4,
-            'name'          => 'Porcelanato'
+            'name'          => 'Porcelanato',
+            'url'           => 'porcelanato'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 4,
-            'name'          => 'Piso e Alvenaria'
+            'name'          => 'Piso e Alvenaria',
+            'url'           => 'piso-alvenaria'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 4,
-            'name'          => 'Outros'
+            'name'          => 'Outros',
+            'url'           => 'pedreiro-outros'
         ]);
         // *************************//
 
         //** Especialidades (serviço Eletricista)
         DB::table('especialidades')->insert([
             'servico_id'    => 5,
-            'name'          => 'Cabeamento'
+            'name'          => 'Cabeamento',
+            'url'           => 'cabeamento'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 5,
-            'name'          => 'Fiações Elétricas'
+            'name'          => 'Fiações Elétricas',
+            'url'           => 'fiacoes-eletricas'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 5,
-            'name'          => 'Quadros Elétricos'
+            'name'          => 'Quadros Elétricos',
+            'url'           => 'quadros-eletricos'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 5,
-            'name'          => 'Outros'
+            'name'          => 'Outros',
+            'url'           => 'eletricista-outros'
         ]);
         // *************************//
 
         //** Especialidades (serviço Carpinteiro)
         DB::table('especialidades')->insert([
             'servico_id'    => 6,
-            'name'          => 'Assoalhos'
+            'name'          => 'Assoalhos',
+            'url'           => 'assoalhos'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 6,
-            'name'          => 'Forros'
+            'name'          => 'Forros',
+            'url'           => 'forros'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 6,
-            'name'          => 'Portas'
+            'name'          => 'Portas',
+            'url'           => 'portas'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 6,
-            'name'          => 'Outros'
+            'name'          => 'Outros',
+            'url'           => 'carpinteiro-outros'
         ]);
         // *************************//
 
         //** Especialidades (serviço Motorista)
         DB::table('especialidades')->insert([
             'servico_id'    => 7,
-            'name'          => 'Carro próprio'
+            'name'          => 'Carro próprio',
+            'url'           => 'carro-proprio'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 7,
-            'name'          => 'Atendimento 24h'
+            'name'          => 'Atendimento 24h',
+            'url'           => 'motorista-atend-24'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 7,
-            'name'          => 'Outros'
+            'name'          => 'Outros',
+            'url'           => 'morotista-outros'
         ]);
         // *************************//
 
         //** Especialidades (serviço Motoboy)
         DB::table('especialidades')->insert([
             'servico_id'    => 8,
-            'name'          => 'Atendimento 24h'
+            'name'          => 'Atendimento 24h',
+            'url'           => 'motoboy-atend-24'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 8,
-            'name'          => 'Outros'
+            'name'          => 'Outros',
+            'url'           => 'motoboy-outros'
         ]);
         // *************************//
 
         //** Especialidades (serviço Lavagem Automotiva)
         DB::table('especialidades')->insert([
             'servico_id'    => 9,
-            'name'          => 'Lavagem a seco'
+            'name'          => 'Lavagem a seco',
+            'url'           => 'lavagem-seco'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 9,
-            'name'          => 'Higienização'
+            'name'          => 'Higienização',
+            'url'           => 'higienizacao'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 9,
-            'name'          => 'Cristalização'
+            'name'          => 'Cristalização',
+            'url'           => 'cristalizacao'
         ]);
 
         DB::table('especialidades')->insert([
             'servico_id'    => 9,
-            'name'          => 'Outros'
+            'name'          => 'Outros',
+            'url'           => 'lavagem-auto-outros'
         ]);
         // *************************//
     }

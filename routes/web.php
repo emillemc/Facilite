@@ -25,6 +25,17 @@ Route::group(['namespace' => 'App'], function(){
 		'uses' 	=> 'AppController@listarProfissionais'
 	]);
 
+	// Listar Profissionais filtrando especialidades
+	Route::get('/categorias/{urlCat?}/{urlServ?}/{urlEspec?}', [
+		'uses' 	=> 'AppController@filtrarEspecialidades'
+	]);
+	
+	// Route::get('/buscar-profissionais{name?}', [
+	// 	'uses' 	=> 'AppController@buscarNome',
+	// 	'as'	=> 'buscar-nome' // <- Rota nomeada
+	// ]);
+
+
 	// Listar Perfil Profissional passando a url do perfil
 	Route::get('/profiles/{urlPerfil?}', [
 		'uses' 	=> 'AppController@listarPerfis'

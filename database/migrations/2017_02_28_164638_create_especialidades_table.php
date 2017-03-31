@@ -17,6 +17,7 @@ class CreateEspecialidadesTable extends Migration
             $table->increments('id');
             $table->integer('servico_id')->unsigned();
             $table->string('name', 150);
+            $table->string('url', 60)->unique();
             $table->timestamps();
 
             // Chave estrangeira que representa o Serviço

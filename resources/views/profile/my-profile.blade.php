@@ -14,10 +14,10 @@
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         ~~~~~~~~~~~~~~~~ BLOCO PRINCIPAL 1 - ESQUERDA (AVALIAÇÃO PROFISSIONAL) ~~~~~~~~~~~~~~~~~~~ 
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 hidden-xs">
 
           <!-- NOTAS DE AVALIAÇÃO (FEEDBACK) -->
-          <div class="panel panel-default">
+          <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
             <div class="panel-body">
               
                 <h3><b>Avaliação:</b></h3>
@@ -84,9 +84,9 @@
           
 
           <!-- COMENTÁRIOS -->
-          <div class="panel panel-default">
+          <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
             <div class="panel-body">
-              <h3 class="margin-0"><b>Comentários:</b></h3>
+              <h3><b>Comentários:</b></h3>
               <hr>
               <div class="text-center">
                 {{-- <p>Aqui comentários de clientes...</p> --}}
@@ -111,10 +111,10 @@
 
           <div class="row">
             <div class="col-lg-12 col-md-12">
-              <div class="panel panel-default">
+              <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
 
                 <!-- CLEARFIX PARA ENCAIXAR AS COLUNAS NO PAINEL HEAD -->
-                <div class="panel-heading clearfix">
+                <div class="panel-body clearfix">
 
                   {{-- ******************* FOTO PROFISSIONAL ******************** --}}
                   <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5 text-center">
@@ -181,12 +181,12 @@
             </div>
           </div>
           
-          <!-- ROW -->
+          {{-- ROW --}}
           <div class="row">
             <div class="col-lg-8 col-md-8">
-              <!-- ESPECIALIDADES -->
-              <div class="panel panel-default">
-                <div class="panel-heading">
+              {{-- ESPECIALIDADES --}}
+              <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
+                <div class="panel-body">
                   <h3><b>Especialidades:</b></h3>
                   <hr>
                   <div class="">
@@ -205,12 +205,38 @@
                   <hr>
                 </div>
               </div>     
-              <!-- //ESPECIALIDADES -->
+              {{-- //ESPECIALIDADES --}}
+
+              {{-- BIOGRAFIA --}}
+              <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
+                <div class="panel-body">
+                  <h3><b>Bio:</b></h3>
+                  <hr>
+                  <div class="">
+                    <p>{{$profile->description or "Este profissional ainda não escreveu uma bio..."}}</p>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+              {{-- //BIOGRAFIA --}}
+
+              {{-- IMAGENS --}}
+              <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
+                <div class="panel-body">
+                  <h3><b>Galeria de Imagens:</b></h3>
+                  <hr>
+                  <div class="">
+                    <p>Imagens aqui...</p>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+              {{-- //IMAGENS --}}
             </div>
 
             <div class="col-lg-4 col-md-4">
               <!-- LOCAIS -->
-              <div class="panel panel-default">
+              <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
                 <div class="panel-body">
                   <h3><b> Locais:</b></h3>
                   <hr>
@@ -225,7 +251,7 @@
               </div>     
               <!-- //LOCAIS-->
 
-              <div class="panel panel-default">
+              <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
                 <div class="panel-body">
                   <h3 class="margin-0"><b>Calendário:</b></h3>
                   <hr>

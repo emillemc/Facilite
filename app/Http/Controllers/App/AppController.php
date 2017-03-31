@@ -97,6 +97,51 @@ class AppController extends Controller
         return view('app.listar-profissionais', compact('categoria', 'servico', 'especialidades', 'profissionais'));
     }
 
+    public function filtrarEspecialidades($urlCat, $urlServ, $urlEspec)
+    {
+        $categoria = Categoria::where('url', $urlCat)->get()->first();
+        // Se for encontrada a categoria...
+        if ($categoria) {
+            // Busca os serviços de acordo com a categoria buscada e a $urlServ informada
+            $servico = Servico::where('categoria_id', $categoria->id)->where('url', $urlServ)->get()->first();
+            // Se for encontrado o serviço...
+            if ($servico) {
+                // Busca as especialidades a partir do serviço encontrado (Listar nos Filtros de Especialidades)
+                $especialidades = Especialidade::where('servico_id', $servico->id)->get();
+                // Busca especialidade filtrada
+                $filtroEspecialidade = Especialidade::where('url', $urlEspec)->get()->first();
+                // Se for encontrado a especialidade filtrada...
+                if ($filtroEspecialidade) {
+                    // Lista profissionais a partir da categoria, serviço e especialidade buscadas
+                    $profissionais = Professional::
+                      join('especialidade_professional', 'professionals.id', '=', 'especialidade_professional.professional_id')
+                    ->join('especialidades', 'especialidades.id', '=', 'especialidade_professional.especialidade_id')
+                    ->join('servico_professional', 'professionals.id', '=', 'servico_professional.professional_id')
+                    ->join('servicos', 'servicos.id', '=', 'servico_professional.servico_id')
+                    ->join('categoria_professional', 'professionals.id', '=', 'categoria_professional.professional_id')
+                    ->join('categorias', 'categorias.id', '=', 'categoria_professional.categoria_id')
+                    ->where('categorias.id', $categoria->id)->where('servicos.id', $servico->id)->where('especialidades.id', $filtroEspecialidade->id)->where('professionals.status', 'active')->get();
+                } else {
+                    // Caso não encontre a especialidade filtrada
+                return redirect()->route('home');
+                }
+                
+            } else {
+                // Caso não encontre o serviço
+                return redirect()->route('home');
+            }
+        } else {
+            // Caso não encontre a categoria
+            return redirect()->route('home');
+        }
+        return view('app.listar-profissionais', compact('categoria', 'servico', 'especialidades', 'filtroEspecialidade', 'profissionais'));
+    }
+    
+    public function buscarNome()
+    {
+        return "Buscar pelo nome";
+    }
+
     /**
      * Busca e exibe o perfil profissional ativo a partir
      * do endereço do perfil.
