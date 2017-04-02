@@ -7,76 +7,61 @@
 @endsection
 
 @section('content')
-    <div class="row">
-    <!-- LOGIN -->
-    <div class="col-lg-6 col-md-6 border-right">
-      <h2 class="text-center">Entrar</h2>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-12">
+      <div class="panel panel-default shadow-1">
+        <div class="panel-body">
+          <h3 class="text-center cyan-third font-roboto">ENTRAR</h3>
 
-      <form class="form-horizontal" role="form" method="POST" action="{{ route('postLogin') }}">
-        {{ csrf_field() }}
+          <form role="form" method="POST" action="{{ route('postLogin') }}" style="padding: 20px;">
+            {{ csrf_field() }}
 
-        {{-- <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}"> --}}
-        <div class="form-group">
-          <label for="email" class="col-md-2 control-label">Email:</label>
-          <div class="col-md-9">
-            <input id="email" type="email" class="form-control" name="email" placeholder="exemplo@exemplo.com" value="{{ old('email') }}" autofocus/>
-
-            {{-- @if ($errors->has('email'))
-              <span class="help-block">
-                  <strong>{{ $errors->first('email') }}</strong>
-              </span>
-            @endif --}}
-
-          </div>
-        </div>
-
-        {{-- <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}"> --}}
-        <div class="form-group">
-          <label for="password" class="col-md-2 control-label">Senha:</label>
-          <div class="col-md-9">
-            <input id="password" type="password" class="form-control" name="password" placeholder="*****************"/>
-            
-            {{-- @if ($errors->has('password'))
-              <span class="help-block">
-                  <strong>{{ $errors->first('password') }}</strong>
-              </span>
-            @endif --}}
-            <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <h5 class="text-danger">{{ $error }}</h5> @endforeach @endif</span>
-
-          </div>
-        </div>
-        
-
-        <div class="form-group">
-          <div class="col-md-offset-3 col-md-8">
-            <div class="pull-right">
-              <label>
-                <a class="btn btn-link" href="#">
-                  Esqueceu sua senha?
-                </a>
-              </label>
+            {{-- <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}"> --}}
+            <div class="form-group">
+              <label for="email" class="control-label cor-default">Email:</label>
+              <input id="email" type="email" class="form-control" name="email" placeholder="exemplo@exemplo.com" value="{{ old('email') }}" autofocus />
+              {{-- @if ($errors->has('email'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+              @endif --}}
             </div>
-          </div>
+
+            {{-- <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}"> --}}
+            <div class="form-group">
+              <label for="password" class="control-label cor-default">Senha:</label>
+              <input id="password" type="password" class="form-control" name="password" placeholder="*****************" />
+              {{-- @if ($errors->has('password'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+              @endif --}}
+              <span>@if ( count($errors) > 0 ) @foreach ($errors->all() as $error) <b class="text-danger">{{ $error }}</b> @endforeach @endif</span>
+            </div>
+
+            <div class="form-group text-right">
+              <a href="#">
+                <i>Esqueci minha senha</i>
+              </a>
+            </div>
+
+            <div class="form-group">
+              <div class="text-center">
+                <button type="submit" class="btn-green-large">ENTRAR</button>
+              </div>
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+              <h4>Ainda não é cadastrado?</h4>
+              <span><a style="padding-top: 13px;" class="btn btn-cyan-large" href="{{route('cadastrar')}}">CADASTRAR AGORA</a><span>
+            </div>
+
+          </form>
+
         </div>
-
-        <div class="form-group">
-          <div class="text-center">
-            <button type="submit" class="btn btn-success btn-lg">Entrar</button>
-          </div>
-        </div>
-
-      </form>
+      </div>
     </div>
-
-    <!-- CADASTRAR -->
-    <div class="top-12 visible-xs"></div>
-    <div class="col-lg-6 col-md-6 text-center">
-      <h2>Ainda não é cadastrado?</h2>
-      <p>Cadastre-se agora mesmo!</p>
-      <p><a class="btn btn-primary btn-lg" href="{{route('cadastrar')}}" role="button">Cadastrar agora &raquo;</a></p>
-    </div>
-    <!-- //CADASTRAR -->
-
   </div>
 @endsection
 
