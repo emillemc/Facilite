@@ -17,22 +17,8 @@ footer {
     /* height: 20px; */
 }
 
-
-/***************** FORMULÁRIOS ******************/
-
-input#email,input#password,input#password_confirmation,input#name,input#cpf,input#tel{
-  border-radius: 0px;
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
-  border-bottom: 1px solid #999999;
-  padding: 0px;
-}
-
-input#email:focus,input#password:focus,input#password_confirmation:focus,input#name:focus,input#cpf:focus,input#tel:focus{
-  box-shadow: none;
-  border: none;
-  border-bottom: 2px solid #024D62;
+.border-test{
+  border: 1px solid black;
 }
 
 /****************** NAVBAR ********************/
@@ -58,6 +44,12 @@ input#email:focus,input#password:focus,input#password_confirmation:focus,input#n
     display: block;
     margin-top: 0;
  }
+
+/* Menu Hamburguer */
+#menu-hamburguer{
+  border-radius: 0px; 
+  border: none;
+}
 
 /* NavBar Menu */
 #navbar-menu li{
@@ -114,6 +106,27 @@ input#email:focus,input#password:focus,input#password_confirmation:focus,input#n
   font-family: 'Montserrat', sans-serif;
 }
 /***************** /FONTS *******************/
+
+/***************** FORMULÁRIOS ******************/
+
+/* Inputs Styles */
+input#email,input#password,input#password_confirmation,input#name,input#cpf,input#tel{
+  border-radius: 0px;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  border-bottom: 1px solid #999999;
+  padding: 0px;
+}
+
+/* Inputs Focus */
+input#email:focus,input#password:focus,input#password_confirmation:focus,input#name:focus,input#cpf:focus,input#tel:focus{
+  box-shadow: none;
+  border: none;
+  border-bottom: 2px solid #024D62;
+}
+
+/***************** /FORMULÁRIOS *****************/
 
 /******************* BOTÕES *******************/
 
@@ -378,35 +391,62 @@ input#email:focus,input#password:focus,input#password_confirmation:focus,input#n
 /***************** /BACKGROUND'S ***************/
 
 /********* ESPAÇAMENTOS **********/
-.top-25{
-  margin-top: 25%;
+/* Margin */
+.margin-top-12{
+  margin-top: 12%;
 }
 
-.top-18{
-  margin-top: 18%;
-}
-
-.top-12{
+.margin-top-10{
   margin-top: 10%;
 }
 
-.top-8{
+.margin-top-8{
     margin-top:  8%;
 }
 
-.top-6{
+.margin-top-6{
     margin-top:  6%;
 }
 
-.top-5{
-  margin-top: 5%;
-}
-
-.top-4{
+.margin-top-4{
     margin-top: 4%;
 }
 
-.border-test{
-  border: 1px solid black;
+.margin-top-2{
+    margin-top: 2%;
+}
+
+.margin-top-1{
+    margin-top: 1%;
+}
+
+/* Padding */
+
+.padding-top-12{
+  padding-top: 12%;
+}
+
+.padding-top-10{
+  padding-top: 10%;
+}
+
+.padding-top-8{
+    padding-top: 8%;
+}
+
+.padding-top-6{
+    padding-top: 6%;
+}
+
+.padding-top-4{
+    padding-top: 4%;
+}
+
+.padding-top-2{
+    padding-top: 2%;
+}
+
+.padding-top-1{
+    padding-top: 1%;
 }
 /********* /ESPAÇAMENTOS **********/

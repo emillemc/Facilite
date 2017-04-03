@@ -24,8 +24,8 @@ class RegisterFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => 'required|min:4|max:40',
-            'email'     => 'required|email|max:55|unique:users,email',
+            'name'      => 'required|min:4|max:50',
+            'email'     => 'required|email|max:255|unique:users,email',
             'password'  => 'required|confirmed|min:6',
             'cpf'       => 'required_with:role,prof|min:14|unique:professionals,cpf',
             'tel'       => 'required_with:role,prof|min:15|unique:professionals,tel',
@@ -43,7 +43,7 @@ class RegisterFormRequest extends FormRequest
             'email.max'             => 'Seu e-mail parece grande demais...',
             'email.unique'          => 'O e-mail informado já está em uso.',
             'password.required'     => 'Informe uma senha.',
-            'password.confirmed'    => 'A confirmãção de senha não confere.',
+            'password.confirmed'    => 'A confirmação de senha não confere.',
             'password.min'          => 'A senha deve ter no mínimo :min caracteres.',
             'cpf.required_with'     => 'O campo cpf é obrigatório.',
             'cpf.min'               => 'O campo cpf deve conter 11 dígitos.',

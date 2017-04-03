@@ -1,7 +1,6 @@
 /* Necessita do plugin 'jquery.mask.min.js'*/
 
-/* MOSTRAR/OCULTAR CAMPOS PROFISSIONAIS */
-//Ao selecionar checkbox mostra e ativa os campos profissionais 
+/* MOSTRAR/OCULTAR CAMPOS PROFISSIONAIS ao marcar/desmarcar checkbox 'role' */
 $("#role,#role_edit").on("click", function() {
      if( $("#role,#role_edit").is(':checked') ){
         $("#cpf,#cpf_edit").prop("disabled", false); // <- = habilita input
@@ -11,8 +10,8 @@ $("#role,#role_edit").on("click", function() {
     }else{
         $("#cpf,#cpf_edit").prop("disabled", true); // <- = desabilita input
         $("#tel,#tel_edit").prop("disabled", true); // <- = desabilita input
-        $("#formCpf,#formCpf_edit").hide();
-        $("#formTel,#formTel_edit").hide();
+        $("#formCpf,#formCpf_edit").fadeOut("fast");
+        $("#formTel,#formTel_edit").fadeOut("fast");
     }
 });
 

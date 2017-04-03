@@ -13,13 +13,13 @@ $( window ).on( "load", function() {
     if( $("#role,#role_edit").is(":checked") ){
         $('#check_span_role').removeClass('glyphicon-unchecked');
         $('#check_span_role').addClass('glyphicon-check');
-        $("#check_span_role").css({color: "#206BBF"});
-        $("#label_role").css({color: "#206BBF"});
+        $("#check_span_role").css({color: "#024D62"});
+        // $("#label_role").css({color: "#024D62"});
     }else{
         $('#check_span_role').removeClass('glyphicon-check');
         $('#check_span_role').addClass('glyphicon-unchecked');
         $("#check_span_role").css({color: "#272727"});
-        $("#label_role").css({color: "#272727"});
+        // $("#label_role").css({color: "#272727"});
     }
 
     //////////////////////////////
@@ -30,8 +30,8 @@ $( window ).on( "load", function() {
     if( $("#cat_1").is(":checked") ){
         $('#check_span_1').removeClass('glyphicon-unchecked');
         $('#check_span_1').addClass('glyphicon-check');
-        $("#check_span_1").css({color: "#206BBF"});
-        $("#label_cat_1").css({color: "#206BBF"});
+        $("#check_span_1").css({color: "#024D62"});
+        $("#label_cat_1").css({color: "#024D62"});
     }else{
         $('#check_span_1').removeClass('glyphicon-check');
         $('#check_span_1').addClass('glyphicon-unchecked');
@@ -43,8 +43,8 @@ $( window ).on( "load", function() {
     if( $("#cat_2").is(":checked") ){
         $('#check_span_2').removeClass('glyphicon-unchecked');
         $('#check_span_2').addClass('glyphicon-check');
-        $("#check_span_2").css({color: "#206BBF"});
-        $("#label_cat_2").css({color: "#206BBF"});
+        $("#check_span_2").css({color: "#024D62"});
+        $("#label_cat_2").css({color: "#024D62"});
     }else{
         $('#check_span_2').removeClass('glyphicon-check');
         $('#check_span_2').addClass('glyphicon-unchecked');
@@ -56,8 +56,8 @@ $( window ).on( "load", function() {
     if( $("#cat_3").is(":checked") ){
         $('#check_span_3').removeClass('glyphicon-unchecked');
         $('#check_span_3').addClass('glyphicon-check');
-        $("#check_span_3").css({color: "#206BBF"});
-        $("#label_cat_3").css({color: "#206BBF"});
+        $("#check_span_3").css({color: "#024D62"});
+        $("#label_cat_3").css({color: "#024D62"});
     }else{
         $('#check_span_3').removeClass('glyphicon-check');
         $('#check_span_3').addClass('glyphicon-unchecked');
@@ -69,8 +69,8 @@ $( window ).on( "load", function() {
     if( $("#cat_4").is(":checked") ){
         $('#check_span_4').removeClass('glyphicon-unchecked');
         $('#check_span_4').addClass('glyphicon-check');
-        $("#check_span_4").css({color: "#206BBF"});
-        $("#label_cat_4").css({color: "#206BBF"});
+        $("#check_span_4").css({color: "#024D62"});
+        $("#label_cat_4").css({color: "#024D62"});
     }else{
         $('#check_span_4').removeClass('glyphicon-check');
         $('#check_span_4').addClass('glyphicon-unchecked');
@@ -82,8 +82,8 @@ $( window ).on( "load", function() {
     if( $("#cat_5").is(":checked") ){
         $('#check_span_5').removeClass('glyphicon-unchecked');
         $('#check_span_5').addClass('glyphicon-check');
-        $("#check_span_5").css({color: "#206BBF"});
-        $("#label_cat_5").css({color: "#206BBF"});
+        $("#check_span_5").css({color: "#024D62"});
+        $("#label_cat_5").css({color: "#024D62"});
     }else{
         $('#check_span_5').removeClass('glyphicon-check');
         $('#check_span_5').addClass('glyphicon-unchecked');
@@ -95,8 +95,8 @@ $( window ).on( "load", function() {
     if( $("#cat_6").is(":checked") ){
         $('#check_span_6').removeClass('glyphicon-unchecked');
         $('#check_span_6').addClass('glyphicon-check');
-        $("#check_span_6").css({color: "#206BBF"});
-        $("#label_cat_6").css({color: "#206BBF"});
+        $("#check_span_6").css({color: "#024D62"});
+        $("#label_cat_6").css({color: "#024D62"});
     }else{
         $('#check_span_6').removeClass('glyphicon-check');
         $('#check_span_6').addClass('glyphicon-unchecked');
@@ -166,7 +166,7 @@ $( window ).on( "load", function() {
     ///////// Outros Checkbox's //
     //////////////////////////////
     
-    //Editar Conta && Login
+    // Cadastrar / Editar Conta
     $("#check_span_role, #label_role").on("click", function() {
         if( $("#cat_1").is(":checked") ){
             $("#cat_1").prop("checked", false);
@@ -177,13 +177,13 @@ $( window ).on( "load", function() {
         if( $("#role,#role_edit").is(":checked") ){
             $('#check_span_role').removeClass('glyphicon-unchecked');
             $('#check_span_role').addClass('glyphicon-check');
-            $("#check_span_role").css({color: "#206BBF"});
-            $("#label_role").css({color: "#206BBF"});
+            $("#check_span_role").css({color: "#024D62"});
+            // $("#label_role").css({color: "#024D62"});
         }else{
             $('#check_span_role').removeClass('glyphicon-check');
             $('#check_span_role').addClass('glyphicon-unchecked');
             $("#check_span_role").css({color: "#272727"});
-            $("#label_role").css({color: "#272727"});
+            // $("#label_role").css({color: "#272727"});
         }  
     });
 
@@ -203,8 +203,8 @@ $( window ).on( "load", function() {
         if( $("#cat_1").is(":checked") ){
             $('#check_span_1').removeClass('glyphicon-unchecked');
             $('#check_span_1').addClass('glyphicon-check');
-            $("#check_span_1").css({color: "#206BBF"});
-            $("#label_cat_1").css({color: "#206BBF"});
+            $("#check_span_1").css({color: "#024D62"});
+            $("#label_cat_1").css({color: "#024D62"});
         }else{
             $('#check_span_1').removeClass('glyphicon-check');
             $('#check_span_1').addClass('glyphicon-unchecked');
@@ -224,8 +224,8 @@ $( window ).on( "load", function() {
         if( $("#cat_2").is(":checked") ){
             $('#check_span_2').removeClass('glyphicon-unchecked');
             $('#check_span_2').addClass('glyphicon-check');
-            $("#check_span_2").css({color: "#206BBF"});
-            $("#label_cat_2").css({color: "#206BBF"});
+            $("#check_span_2").css({color: "#024D62"});
+            $("#label_cat_2").css({color: "#024D62"});
         }else{
             $('#check_span_2').removeClass('glyphicon-check');
             $('#check_span_2').addClass('glyphicon-unchecked');
@@ -245,8 +245,8 @@ $( window ).on( "load", function() {
         if( $("#cat_3").is(":checked") ){
             $('#check_span_3').removeClass('glyphicon-unchecked');
             $('#check_span_3').addClass('glyphicon-check');
-            $("#check_span_3").css({color: "#206BBF"});
-            $("#label_cat_3").css({color: "#206BBF"});
+            $("#check_span_3").css({color: "#024D62"});
+            $("#label_cat_3").css({color: "#024D62"});
         }else{
             $('#check_span_3').removeClass('glyphicon-check');
             $('#check_span_3').addClass('glyphicon-unchecked');
@@ -266,8 +266,8 @@ $( window ).on( "load", function() {
         if( $("#cat_4").is(":checked") ){
             $('#check_span_4').removeClass('glyphicon-unchecked');
             $('#check_span_4').addClass('glyphicon-check');
-            $("#check_span_4").css({color: "#206BBF"});
-            $("#label_cat_4").css({color: "#206BBF"});
+            $("#check_span_4").css({color: "#024D62"});
+            $("#label_cat_4").css({color: "#024D62"});
         }else{
             $('#check_span_4').removeClass('glyphicon-check');
             $('#check_span_4').addClass('glyphicon-unchecked');
@@ -287,8 +287,8 @@ $( window ).on( "load", function() {
         if( $("#cat_5").is(":checked") ){
             $('#check_span_5').removeClass('glyphicon-unchecked');
             $('#check_span_5').addClass('glyphicon-check');
-            $("#check_span_5").css({color: "#206BBF"});
-            $("#label_cat_5").css({color: "#206BBF"});
+            $("#check_span_5").css({color: "#024D62"});
+            $("#label_cat_5").css({color: "#024D62"});
         }else{
             $('#check_span_5').removeClass('glyphicon-check');
             $('#check_span_5').addClass('glyphicon-unchecked');
@@ -308,8 +308,8 @@ $( window ).on( "load", function() {
         if( $("#cat_6").is(":checked") ){
             $('#check_span_6').removeClass('glyphicon-unchecked');
             $('#check_span_6').addClass('glyphicon-check');
-            $("#check_span_6").css({color: "#206BBF"});
-            $("#label_cat_6").css({color: "#206BBF"});
+            $("#check_span_6").css({color: "#024D62"});
+            $("#label_cat_6").css({color: "#024D62"});
         }else{
             $('#check_span_6').removeClass('glyphicon-check');
             $('#check_span_6').addClass('glyphicon-unchecked');
