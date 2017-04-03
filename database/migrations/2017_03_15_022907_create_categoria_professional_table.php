@@ -13,7 +13,7 @@ class CreateCategoriaProfessionalTable extends Migration
      */
     public function up()
     {
-      // Tabela Associativa de Categorias e Profissionais
+        // Tabela Associativa de Categorias e Profissionais
         Schema::create('categoria_professional', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('categoria_id')->unsigned();

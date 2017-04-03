@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-fluid')
 
 @section('title') Login - Facilite Serviços @endsection
 

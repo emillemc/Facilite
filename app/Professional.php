@@ -27,6 +27,12 @@ class Professional extends Authenticatable
         return $this->belongsTo(User::class);
     }
 
+    // Um Profissional (Receptor) recebe várias solicitações de usuários (Many-To-Many)
+    // public function solicitacoes()
+    // {   
+    //     return $this->belongsToMany(User::class, 'solicitar_servico', 'solicitante_id', 'receptor_id');
+    // }
+
     // Um Profissional tem muitas Categorias (Many-To-Many)
     public function categorias()
     {

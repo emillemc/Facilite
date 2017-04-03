@@ -169,6 +169,12 @@ Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 		'as'	=> 'post-editar-descricao' // -< Rota nomeada
 	]);
 
+	// // Post Solicitar Serviço
+	// Route::post('/solicitar-servico', [
+	// 	'uses' 	=> 'MessagesController@index',
+	// 	'as'	=> 'mensagens' // -< Rota nomeada
+	// ]);
+
 });
 /***************************//****************************/
 
@@ -198,6 +204,12 @@ Route::group(['namespace' => 'Account', 'prefix' => 'minha-conta'], function(){
 	Route::post('/deletar', [
 		'uses' 	=> 'AccountController@deletarConta',
 		'as'	=> 'deletar-conta' // -< Rota nomeada
+	]);
+
+	// Mensagens
+	Route::get('/mensagens', [
+		'uses' 	=> 'MessagesController@index',
+		'as'	=> 'mensagens' // -< Rota nomeada
 	]);
 
 });

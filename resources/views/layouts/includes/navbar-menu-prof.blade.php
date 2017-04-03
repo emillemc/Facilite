@@ -1,5 +1,5 @@
 {{-- Links Mensagens Privadas --}}
-<li><a href="#!" title="Mensagens"><span class="glyphicon glyphicon-inbox"></span></a></li>
+<li><a href="{{route('mensagens')}}" title="Mensagens"><span class="glyphicon glyphicon-inbox"></span></a></li>
 
 {{-- Menu Dropdown --}}
 <li class="dropdown">
