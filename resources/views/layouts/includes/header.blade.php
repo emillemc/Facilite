@@ -43,10 +43,10 @@
         {{-- Service Injection das Categorias do NavBar --}}
         @forelse( $categorias->injectCategorias() as $categoria )
 
-        <li class="dropdown">
-          <a href="{{ url("/categorias/$categoria->url") }}" class="dropdown" aria-haspopup="true" aria-expanded="false">{{ $categoria->name }}</a>
+        <li id="dropdown-categorias" class="dropdown">
+          <a href="{{ url("/categorias/$categoria->url") }}">{{ $categoria->name }}</a>
           <div class="hidden-xs">
-            <ul class="dropdown-menu text-capitalize">
+            <ul id="dropdown-servicos" class="dropdown-menu text-capitalize">
               @forelse( $categoria->servicos as $servico)
                 <li>
                   <a href="{{ url("/categorias/$categoria->url/$servico->url ") }}">{{ $servico->name }} </a>

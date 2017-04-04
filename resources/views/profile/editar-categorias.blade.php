@@ -157,7 +157,7 @@
           <div class="form-group">
             <div class="text-center">
               @if(count($profile->categorias) != 0)
-                <button type="submit" class="btn btn-md btn-success">Salvar <span class="glyphicon glyphicon-chevron-right"></button>
+                <button type="submit" class="btn btn-green-medium">Salvar <span class="glyphicon glyphicon-chevron-right"></button>
               @else
                 <button type="submit" class="btn btn-md btn-primary">Avançar <span class="glyphicon glyphicon-chevron-right"></span></button>
               @endif

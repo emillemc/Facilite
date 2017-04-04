@@ -12,8 +12,9 @@
       <div class="panel panel-default shadow-1">
         <div class="panel-body">
           <h3 class="text-center cyan-third font-roboto">ENTRAR</h3>
+          <hr>
 
-          <form role="form" method="POST" action="{{ route('postLogin') }}" style="padding: 20px;">
+          <form role="form" method="POST" action="{{ route('postLogin') }}" style="padding: 0px 20px 20px 20px;">
             {{ csrf_field() }}
 
             <div class="form-group">

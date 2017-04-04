@@ -12,8 +12,9 @@
       <div class="panel panel-default shadow-1">
         <div class="panel-body">
           <h3 class="text-center cyan-third font-roboto">CADASTRAR</h3>
+          <hr>
 
-          <form id="form_cadastro" role="form" method="POST" action="{{ route('post-cadastrar') }}" style="padding: 20px;">
+          <form id="form_cadastro" role="form" method="POST" action="{{ route('post-cadastrar') }}" style="padding: 0px 20px 20px 20px;">
             {{ csrf_field() }}
 
             <div class="form-group">

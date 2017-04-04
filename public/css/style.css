@@ -40,7 +40,7 @@ footer {
 }
 
 /* Dropdown hover - menu navbar */
-.dropdown:hover .dropdown-menu{
+.dropdown[id="dropdown-categorias"]:hover .dropdown-menu[id="dropdown-servicos"]{
     display: block;
     margin-top: 0;
  }
@@ -69,7 +69,6 @@ footer {
 #navbar-entrar:hover{
   color: #FFFFFF;
   background-color: #024D62;
-  /* border: 1px solid #024D62; */
 }
 
 /* Navbar Menu - Cadastrar */
@@ -78,8 +77,6 @@ footer {
   background-color: #488E00;
   border: 1px solid #488E00;
   padding: 10px;
-  /* padding: 10px 20px 10px 20px; */
-  /* border-radius: 0px; */
 }
 
 /* Navbar Categorias */
@@ -89,7 +86,47 @@ footer {
 
 #navbar-categorias a:hover{
   color: #488E00;
+  font-size: 16px;
+  font-weight: bold;
   background: none;
+}
+
+#message-link{
+  color: #077E9F;
+}
+
+#message-link:hover{
+  color: #024D62;
+  font-weight: bold;
+}
+
+#message-icon{
+  color: #8B8B8B;
+}
+
+#menu-user{
+  color: #077E9F;
+}
+
+#menu-user:hover{
+  color: #024D62;
+  font-weight: bold;
+}
+
+#menu-user:focus{
+  font-weight: bold;
+  color: #024D62;
+  background-color: transparent;
+}
+
+#dropdown-menu-user a{
+  color: #8B8B8B;
+}
+
+#dropdown-menu-user a:hover{
+  color: #024D62;
+  font-weight: bold;
+  background-color: transparent;
 }
 /***************** /NAVBAR ********************/
 
@@ -384,13 +421,8 @@ input#email:focus,input#password:focus,input#password_confirmation:focus,input#n
   color: #5C5B5B;
 }
 /******************** /CORES *****************  */
-/****************** BACKGROUND'S ***************/
-.bg-white{
 
-}
-/***************** /BACKGROUND'S ***************/
-
-/********* ESPAÇAMENTOS **********/
+/********* ESPAÇAMENTOS/TAMANHOS **********/
 /* Margin */
 .margin-top-12{
   margin-top: 12%;
@@ -448,5 +480,19 @@ input#email:focus,input#password:focus,input#password_confirmation:focus,input#n
 
 .padding-top-1{
     padding-top: 1%;
+}
+
+/* Font-Sizes */
+
+.font-16{
+  font-size: 16px;
+}
+
+.font-20{
+  font-size: 20px;
+}
+
+.font-25{
+  font-size: 25px;
 }
 /********* /ESPAÇAMENTOS **********/
