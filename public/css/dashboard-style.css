@@ -1,22 +1,3 @@
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    font-family: 'Open Sans', sans-serif; 
-    margin: 0 0 100px;
-    /* bottom = footer height */
-    background-color: #F9F9F9;
-}
-
-footer {
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    /* height: 20px; */
-}
-
 .border-test{
   border: 1px solid black;
 }
@@ -40,10 +21,10 @@ footer {
 }
 
 /* Dropdown hover - menu navbar */
-.dropdown[id="dropdown-categorias"]:hover .dropdown-menu[id="dropdown-servicos"]{
-    display: block;
-    margin-top: 0;
- }
+.dropdown-categorias:hover .dropdown-servicos{
+  display: block;
+  margin-top: 0;
+}
 
 /* Menu Hamburguer */
 #menu-hamburguer{
@@ -91,15 +72,15 @@ footer {
   background: none;
 }
 
-#message-link{
-  color: #077E9F;
-}
-
 #message-icon{
   color: #8B8B8B;
 }
 
-#menu-user{
+#message-link:hover{
+  color: #8B8B8B;
+}
+
+#menu-user:hover{
   color: #077E9F;
 }
 
@@ -120,24 +101,102 @@ footer {
 }
 /***************** /NAVBAR ********************/
 
-/***************** FONTS ********************/
-.font-roboto{
-  font-family: 'Roboto', sans-serif;
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 95px;
+  font-family: 'Open Sans', sans-serif; 
+  background-color: #F9F9F9;
 }
 
-.font-open-sans{
-  font-family: 'Open Sans', sans-serif;
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 50px 20px 20px 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #FFFFFF;
+    border-right: 1px solid #eee;
+  }
 }
 
-.font-montserrat{
-  font-family: 'Montserrat', sans-serif;
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
 }
-/***************** /FONTS *******************/
+.nav-sidebar > li > a {
+  color: #024D62;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #024D62;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
 
 /***************** FORMULÁRIOS ******************/
 
 /* Inputs Styles */
-input#email,input#password,input#password_confirmation,input#name,input#cpf,input#tel{
+input#email,input#email_edit,input#password,input#password_confirmation,input#name,input#name_edit,
+input#cpf,input#cpf_edit,input#tel,input#tel_edit{
   border-radius: 0px;
   border: none;
   box-shadow: none;
@@ -147,13 +206,85 @@ input#email,input#password,input#password_confirmation,input#name,input#cpf,inpu
 }
 
 /* Inputs Focus */
-input#email:focus,input#password:focus,input#password_confirmation:focus,input#name:focus,input#cpf:focus,input#tel:focus{
+input#email:focus,input#email_edit:focus,input#password:focus,input#password_confirmation:focus,
+input#name:focus,input#name_edit:focus,input#cpf:focus,input#cpf_edit:focus,
+input#tel:focus,input#tel_edit:focus{
   box-shadow: none;
   border: none;
   border-bottom: 2px solid #024D62;
 }
 
 /***************** /FORMULÁRIOS *****************/
+
+/******************** CORES ******************  */
+/* Green */
+.green-primary{
+  color: #76E603;
+}
+
+.green-secondary{
+  color: #5BB400;
+}
+
+.green-third{
+  color:  #488E00;
+}
+
+.green-4{
+  color: #A6ED5E;
+}
+
+.green-5{
+  color: #8FE835;
+}
+
+/* Blue */
+.blue-primary{
+  color: #3B16B0;
+}
+
+.blue-secondary{
+  color: #2C0F8A;
+}
+
+.blue-third{
+  color: #21096C;
+}
+
+.blue-4{
+  color: #755CC5;
+}
+
+.blue-5{
+  color: #573AB6;
+}
+
+/* Cyan */
+.cyan-primary{
+  color: #077E9F;
+}
+
+.cyan-secondary{
+  color: #04627C;
+}
+
+.cyan-third{
+  color: #024D62;
+}
+
+.cyan-4{
+  color: #4DA1B9;
+}
+
+.cyan-5{
+  color: #2B8BA6;
+}
+
+/* Cor Default */
+.cor-default{
+  color: #5C5B5B;
+}
+/******************** /CORES *****************  */
 
 /******************* BOTÕES *******************/
 
@@ -333,156 +464,3 @@ input#email:focus,input#password:focus,input#password_confirmation:focus,input#n
 }
 
 /****************** /BOTÕES *******************/
-
-/**************** BOX SHADOW'S ****************/
-.shadow-1{
-  border-radius: 0; 
-  box-shadow: 2px 3px 10px #838383;
-}
-/**************** /BOX SHADOW'S ***************/
-
-
-/******************** CORES ******************  */
-/* Green */
-.green-primary{
-  color: #76E603;
-}
-
-.green-secondary{
-  color: #5BB400;
-}
-
-.green-third{
-  color:  #488E00;
-}
-
-.green-4{
-  color: #A6ED5E;
-}
-
-.green-5{
-  color: #8FE835;
-}
-
-/* Blue */
-.blue-primary{
-  color: #3B16B0;
-}
-
-.blue-secondary{
-  color: #2C0F8A;
-}
-
-.blue-third{
-  color: #21096C;
-}
-
-.blue-4{
-  color: #755CC5;
-}
-
-.blue-5{
-  color: #573AB6;
-}
-
-/* Cyan */
-.cyan-primary{
-  color: #077E9F;
-}
-
-.cyan-secondary{
-  color: #04627C;
-}
-
-.cyan-third{
-  color: #024D62;
-}
-
-.cyan-4{
-  color: #4DA1B9;
-}
-
-.cyan-5{
-  color: #2B8BA6;
-}
-
-/* Cor Default */
-.cor-default{
-  color: #5C5B5B;
-}
-/******************** /CORES *****************  */
-
-/********* ESPAÇAMENTOS/TAMANHOS **********/
-/* Margin */
-.margin-top-12{
-  margin-top: 12%;
-}
-
-.margin-top-10{
-  margin-top: 10%;
-}
-
-.margin-top-8{
-    margin-top:  8%;
-}
-
-.margin-top-6{
-    margin-top:  6%;
-}
-
-.margin-top-4{
-    margin-top: 4%;
-}
-
-.margin-top-2{
-    margin-top: 2%;
-}
-
-.margin-top-1{
-    margin-top: 1%;
-}
-
-/* Padding */
-
-.padding-top-12{
-  padding-top: 12%;
-}
-
-.padding-top-10{
-  padding-top: 10%;
-}
-
-.padding-top-8{
-    padding-top: 8%;
-}
-
-.padding-top-6{
-    padding-top: 6%;
-}
-
-.padding-top-4{
-    padding-top: 4%;
-}
-
-.padding-top-2{
-    padding-top: 2%;
-}
-
-.padding-top-1{
-    padding-top: 1%;
-}
-
-/* Font-Sizes */
-
-.font-16{
-  font-size: 16px;
-}
-
-.font-20{
-  font-size: 20px;
-}
-
-.font-25{
-  font-size: 25px;
-}
-/********* /ESPAÇAMENTOS **********/

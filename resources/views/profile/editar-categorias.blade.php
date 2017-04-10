@@ -14,60 +14,36 @@
 
       {{-- Imagem e botão 'Mudar foto' --}}
       <div class="text-center">
-        <img src="{{ asset('img/perfil.png') }}" alt="img_perfil" class="img-circle">
         <div class="input-group center-block top-5">
-          <label for="input-img">
-            <a class="btn btn-primary btn-sm">Mudar foto</a>
+          <label id="img-perfil" for="input-img">
+            <img style="cursor: pointer;" src="{{ asset('img/perfil.png') }}" alt="img_perfil" class="img-circle">
+            <br>
+            <a id="btn-img-perfil" style="display: none;" class="btn btn-primary btn-sm">Mudar foto</a>
           </label>
         </div>
         <input id="input-img" type="file"  accept="image/*" style="display: none;">
       </div>
+      
       {{-- Nome Prof --}}
       <div class="text-center">
         <h4><b>{{$profile->user->name or ""}}</b></h4>
         <hr class="hidden-xs">
       </div>
+      
       {{-- Menu SideBar --}}
       <div class="hidden-xs">
-        <div class="hidden-xs">
-        <nav>
-          <ul class="nav nav-stacked">
-            <li class="active">
-              <a href="{{ route('my-profile') }}" class="text-muted">
-                <span class="glyphicon glyphicon-user"></span> Meu Perfil
-              </a>
-            </li>
-            <li>
-              {{-- Link ativo page editar-categorias --}}
-              <a href="{{ route('editar-categorias') }}" class="active">
-                <span class="glyphicon glyphicon-th-large"></span> Editar categorias
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('editar-servicos') }}" class="text-muted">
-                <span class="glyphicon glyphicon-th-list"></span> Editar serviços
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('editar-especialidades') }}" class="text-muted">
-                <span class="glyphicon glyphicon-th"></span> Editar especialidades
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('editar-perfil') }}" class="text-muted">
-                <span class="glyphicon glyphicon-picture"></span> Editar perfil
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('editar-conta') }}" class="text-muted">
-                <span class="glyphicon glyphicon-cog"></span> Editar Conta
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+        {{-- MENU EDITAR-CONTA --}}
+        @if(Auth::user()->role == 'prof')
+          {{-- Profissional logado, exibe menu-prof --}}
+          @include('layouts.includes.menu-prof')
+        @else
+          {{-- Exibe menu-user --}}
+          @include('layouts.includes.menu-user')
+        @endif
+        {{-- //MENU EDITAR-CONTA --}}
       </div>
       {{-- //Menu SideBar --}}
+
     </div>
     {{-- SideBar --}}
   @else
@@ -178,4 +154,16 @@
   <script src="{{ asset('js/check-uncheck.js') }}"></script>
   <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
   <script src="{{ asset('js/jquery.min.js') }}"></script>
+
+  <script>
+    
+    $('#img-perfil').hover(
+      function() {
+        $('#btn-img-perfil').show();
+      }, function() {
+        $('#btn-img-perfil').hide();
+      }
+    );
+
+  </script>
 @endpush

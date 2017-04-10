@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h5 class="modal-title"><b>Alterar senha</b></h5>
+        <h4 class="modal-title"><b>Alterar senha</b></h4>
       </div>
       <div class="modal-body">
         <form action="#!" method="POST">
@@ -38,9 +38,9 @@
           </div>
 
           <div class="{{ $errors->has('password') ? ' has-error' : '' }}" style="margin-top: 5%;">
-            <label for="password">Confirmar Senha:</label>
+            <label for="password_confirmation">Confirmar Senha:</label>
             <div>
-              <input type="password" name="password_confirm" id="password_confirm" class="form-control"/>
+              <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"/>
 
               @if ($errors->has('password'))
                 <span class="help-block">
