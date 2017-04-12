@@ -3,17 +3,16 @@
   {{-- {{ method_field('DELETE')}} --}}
   <div class="modal" id="modalExcluirConta">
     <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <div style="border-radius: 0px !important;" class="modal-content">
+        {{-- <div class="modal-header">
           <h5 class="modal-title"><b>Excluir Conta</b></h5>
-        </div>
+        </div> --}}
         <div class="modal-body">
+          <button style="font-size: 30px;" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4>Sua conta será excluída permanentemente!<br><small>Deseja continuar?</small></h4>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-danger">Excluir</button>
+          <button type="submit" class="btn-red-large">Excluir conta</button>
         </div>
       </div>
     </div>

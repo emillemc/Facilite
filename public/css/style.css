@@ -34,10 +34,14 @@ footer {
   font-size: 20px;
   font-weight: 700;
   color: #077E9F;
-  /* background-color: #077E9F; */
-  /* border: 1px solid #077E9F; */
-  /* border-radius: 60px 0px 60px 0px; */
 }
+
+/* #logo:hover{
+  color: #FFFFFF;
+  background-color: #077E9F;
+  border: 1px solid #077E9F;
+  border-radius: 60px 0px 60px 0px;
+} */
 
 /* Dropdown hover - menu navbar */
 .dropdown[id="dropdown-categorias"]:hover .dropdown-menu[id="dropdown-servicos"]{
@@ -91,31 +95,32 @@ footer {
   background: none;
 }
 
-#message-link{
-  color: #077E9F;
+#message-icon{
+  color: #ADADAD;
 }
 
-#message-icon{
-  color: #8B8B8B;
+#message-link{
+  color: #606060;
 }
 
 #menu-user{
-  color: #077E9F;
-}
-
-#menu-user:focus{
-  font-weight: bold;
-  color: #024D62;
-  background-color: transparent;
+  color: #606060;
+  background-color: transparent !important;
 }
 
 #dropdown-menu-user a{
-  color: #8B8B8B;
+  color: #606060;
+}
+
+#dropdown-menu-user a:hover span{
+  color: #024D62;
+  font-weight: bold;
+  background-color: transparent;
 }
 
 #dropdown-menu-user a:hover{
   color: #024D62;
-  font-weight: bold;
+  /* font-weight: bold; */
   background-color: transparent;
 }
 /***************** /NAVBAR ********************/

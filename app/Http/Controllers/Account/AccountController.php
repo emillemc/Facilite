@@ -26,7 +26,7 @@ class AccountController extends Controller
     {   
         $user = User::find(Auth::user()->id);
         $prof = Professional::where('user_id', $user->id)->get()->first();
-        return view('account.editar-conta', compact('user', 'prof'));
+        return view('account.minha-conta', compact('user', 'prof'));
     }
 
     public function postEditarContaUser(UserEditFormRequest $request)
@@ -142,6 +142,11 @@ class AccountController extends Controller
                 return redirect()->back();
             }
         }
+    }
+
+    public function alterarSenha()
+    {
+        return "test";
     }
 
     /**

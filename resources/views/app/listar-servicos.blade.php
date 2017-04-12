@@ -3,7 +3,7 @@
 @section('title') {{ $categoria->name or "Facilite Serviços - Categorias"}}  @endsection
 
 @section('navbar')
-    @include('layouts.includes.header')
+    @include('layouts.includes.header-fixed')
 @endsection
 
 @section('content')
@@ -36,5 +36,5 @@
 @endsection
 
 @section('footer')
-	@include('layouts.includes.footer')
+	{{-- @include('layouts.includes.footer') --}}
 @endsection

@@ -1,9 +1,9 @@
 @extends('layouts.master-fluid')
 
-@section('title') Editar Categorias - Facilite Serviços @endsection
+@section('title') {{$profile->user->name or "Perfil Profissional"}} - Facilite Serviços @endsection
 
 @section('navbar')
-    @include('layouts.includes.header')
+    @include('layouts.includes.header-fixed')
 @endsection
 
 @section('content')
@@ -298,7 +298,7 @@
 @endsection
 
 @section('footer')
-    @include('layouts.includes.footer')
+    {{-- @include('layouts.includes.footer') --}}
 @endsection
 
 @push('scripts')

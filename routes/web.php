@@ -200,6 +200,12 @@ Route::group(['namespace' => 'Account', 'prefix' => 'minha-conta'], function(){
 		'as'	=> 'post-editar-conta-prof' // -< Rota nomeada
 	]);
 
+	// Post Alterar Senha
+	Route::post('alterar-senha', [
+		'uses' 	=> 'AccountController@alterarSenha',
+		'as'	=> 'alterar-senha' // -< Rota nomeada
+	]);
+
 	// Post Deletar Conta
 	Route::post('/deletar', [
 		'uses' 	=> 'AccountController@deletarConta',

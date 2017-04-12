@@ -15,10 +15,14 @@
   font-size: 20px;
   font-weight: 700;
   color: #077E9F;
-  /* background-color: #077E9F; */
-  /* border: 1px solid #077E9F; */
-  /* border-radius: 60px 0px 60px 0px; */
 }
+
+/* #logo:hover{
+  color: #FFFFFF;
+  background-color: #077E9F;
+  border: 1px solid #077E9F;
+  border-radius: 60px 0px 60px 0px;
+} */
 
 /* Dropdown hover - menu navbar */
 .dropdown-categorias:hover .dropdown-servicos{
@@ -61,11 +65,11 @@
 }
 
 /* Navbar Categorias */
-#navbar-categorias{
+#navbar-categorias, #navbar-categorias-md{
   padding-left: 2%;
 }
 
-#navbar-categorias a:hover{
+#navbar-categorias a:hover, #navbar-categorias-md a:hover{
   color: #488E00;
   font-size: 16px;
   font-weight: bold;
@@ -73,30 +77,31 @@
 }
 
 #message-icon{
-  color: #8B8B8B;
+  color: #ADADAD;
 }
 
-#message-link:hover{
-  color: #8B8B8B;
+#message-link{
+  color: #606060;
 }
 
-#menu-user:hover{
-  color: #077E9F;
-}
-
-#menu-user:focus{
-  font-weight: bold;
-  color: #024D62;
-  background-color: transparent;
+#menu-user{
+  color: #606060;
+  background-color: transparent !important;
 }
 
 #dropdown-menu-user a{
-  color: #8B8B8B;
+  color: #606060;
+}
+
+#dropdown-menu-user a:hover span{
+  color: #024D62;
+  font-weight: bold;
+  background-color: transparent;
 }
 
 #dropdown-menu-user a:hover{
   color: #024D62;
-  font-weight: bold;
+  /* font-weight: bold; */
   background-color: transparent;
 }
 /***************** /NAVBAR ********************/
@@ -107,7 +112,7 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 95px;
+  padding-top: 85px;
   font-family: 'Open Sans', sans-serif; 
   background-color: #F9F9F9;
 }
@@ -128,7 +133,7 @@ body {
     left: 0;
     z-index: 1000;
     display: block;
-    padding: 50px 20px 20px 20px;
+    padding: 58px 20px 20px 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #FFFFFF;
@@ -181,9 +186,6 @@ body {
   margin-bottom: 30px;
   text-align: center;
 }
-.placeholders h4 {
-  margin-bottom: 0;
-}
 .placeholder {
   margin-bottom: 20px;
 }
@@ -195,7 +197,7 @@ body {
 /***************** FORMULÁRIOS ******************/
 
 /* Inputs Styles */
-input#email,input#email_edit,input#password,input#password_confirmation,input#name,input#name_edit,
+input#email,input#email_edit,input#password,input#password_confirmation,input#current_password,input#name,input#name_edit,
 input#cpf,input#cpf_edit,input#tel,input#tel_edit{
   border-radius: 0px;
   border: none;
@@ -207,7 +209,7 @@ input#cpf,input#cpf_edit,input#tel,input#tel_edit{
 
 /* Inputs Focus */
 input#email:focus,input#email_edit:focus,input#password:focus,input#password_confirmation:focus,
-input#name:focus,input#name_edit:focus,input#cpf:focus,input#cpf_edit:focus,
+input#current_password:focus,input#name:focus,input#name_edit:focus,input#cpf:focus,input#cpf_edit:focus,
 input#tel:focus,input#tel_edit:focus{
   box-shadow: none;
   border: none;
@@ -463,4 +465,33 @@ input#tel:focus,input#tel_edit:focus{
   text-decoration: none;
 }
 
+/**
+ * Botão Cyan Large
+ */
+.btn-red-large {
+  color: #FFFFFF;
+  /* font-size: 14px; */
+  background: #C70000;
+  height: 45px;
+  width: 100%;
+  text-decoration: none;
+  border: 1px solid #C70000;
+  border-radius: 0px;
+}
+.btn-red-large:hover {
+  color: #ffffff;
+  background: #B90000;
+  text-decoration: none;
+}
+.btn-red-large:focus {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 /****************** /BOTÕES *******************/
+
+/* Style Image Logos Categorias/Serviços */
+
+.shadow-style{
+  box-shadow: 2px 3px 4px #5BB400;
+}

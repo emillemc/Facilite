@@ -4,7 +4,7 @@
 @section('title') {{ $servico->name or "Serviços - Facilite Serviços" }} - Facilite Serviços  @endsection
 
 @section('navbar')
-    @include('layouts.includes.header')
+    @include('layouts.includes.header-fixed')
 @endsection
 
 @section('content')
@@ -122,10 +122,11 @@
                 <span>Não foi possível carregar os serviços...</span>
               @endforelse --}}
               <div class="text-justify">
-                <i><p>{{substr($profissional->description, 0, 262)}}</p></i>
+                {{-- <i><p>{{substr($profissional->description, 0, 262)}}</p></i> --}}
+                <p>-</p>
               </div>
               <hr>
-              <i><p>Infos...</p></i>
+              <p>-</p>
             </div>
 
             {{-- Se for visitante abre modal-login --}}
@@ -156,5 +157,5 @@
 @endsection
 
 @section('footer')
-	@include('layouts.includes.footer')
+	{{-- @include('layouts.includes.footer') --}}
 @endsection

@@ -1,5 +1,5 @@
 {{-- Links Mensagens Privadas --}}
-<li><a id="message-link" style="font-size: 16px;" href="{{route('mensagens')}}" title="Mensagens"><span id="message-icon" class="glyphicon glyphicon-inbox font-16"></span>&nbsp;Mensagens</a></li>
+<li><a id="message-link" style="font-size: 16px;" href="{{route('mensagens')}}" title="Mensagens"><span id="message-icon" class="glyphicon glyphicon-inbox"></span>&nbsp;Mensagens</a></li>
 
 {{-- Menu Dropdown --}}
 <li class="dropdown">
@@ -10,43 +10,43 @@
 
   <ul id="dropdown-menu-user" class="dropdown-menu" role="menu">
     <li>
-      <a href="{{ route('my-profile') }}">
+      <a style="padding: 5px 10px 10px 20px;" href="{{ route('my-profile') }}">
         <span class="glyphicon glyphicon-user"></span> Meu perfil
       </a>
     </li>
-    <li class="divider"></li>
+    <li style="padding: 0px; margin: 0px;" class="divider"></li>
     <li>
-      <a href="{{ route('editar-categorias') }}">
+      <a style="padding: 10px 10px 10px 20px;" href="{{ route('editar-categorias') }}">
         <span class="glyphicon glyphicon-th-large"></span> Editar categorias
       </a>
     </li> 
-    <li class="divider"></li>
+    <li style="padding: 0px; margin: 0px;" class="divider"></li>
     <li>
-      <a href="{{ route('editar-servicos') }}">
+      <a style="padding: 10px 10px 10px 20px;" href="{{ route('editar-servicos') }}">
         <span class="glyphicon glyphicon-th-list"></span> Editar serviços
       </a>
     </li> 
-    <li class="divider"></li>
+    <li style="padding: 0px; margin: 0px;" class="divider"></li>
     <li>
-      <a href="{{ route('editar-especialidades') }}">
+      <a style="padding: 10px 10px 10px 20px;" href="{{ route('editar-especialidades') }}">
         <span class="glyphicon glyphicon-th"></span> Editar especialidades
       </a>
     </li>
-    <li class="divider"></li>
+    <li style="padding: 0px; margin: 0px;" class="divider"></li>
     <li>
-      <a href="{{ route('editar-perfil') }}">
+      <a style="padding: 10px 10px 10px 20px;" href="{{ route('editar-perfil') }}">
         <span class="glyphicon glyphicon-picture"></span> Editar perfil
       </a>
     </li>
-    <li class="divider"></li>
+    <li style="padding: 0px; margin: 0px;" class="divider"></li>
     <li>
-      <a href="{{ route('editar-conta') }}">
-        <span class="glyphicon glyphicon-cog"></span> Editar conta
+      <a style="padding: 10px 10px 10px 20px;" href="{{ route('editar-conta') }}">
+        <span class="glyphicon glyphicon-cog"></span> Minha conta
       </a>
     </li>
-    <li class="divider"></li>
+    <li style="padding: 0px; margin: 0px;" class="divider"></li>
     <li>
-      <a href="{{ route('logout') }}"
+      <a style="padding: 10px 10px 10px 20px;" href="{{ route('logout') }}"
         onclick="event.preventDefault();
                  document.getElementById('logout-form').submit();">
         <span class="glyphicon glyphicon-log-out"></span> Logout

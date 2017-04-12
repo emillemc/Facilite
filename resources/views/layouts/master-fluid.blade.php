@@ -11,7 +11,8 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     {{-- CSS --}}
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/dashboard-style.css') }}" rel="stylesheet">
 
     {{-- Fonts --}}
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">

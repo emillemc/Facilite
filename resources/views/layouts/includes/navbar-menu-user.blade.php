@@ -3,20 +3,20 @@
 
 {{-- Menu Dropdown --}}
 <li class="dropdown">
-  <a style="padding: 5px 1px 0px 1px;" id="menu-user" href="#" class="dropdown-toggle font-16" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a style="padding: 5px 1px 0px 1px; font-size: 16px;" id="menu-user" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <img src="{{asset('img/perfil3.png')}}" alt="user-image">
     {{ Auth::user()->name }} <span class="caret"></span>
   </a>
 
   <ul id="dropdown-menu-user" class="dropdown-menu" role="menu">
     <li>
-      <a href="{{ route('editar-conta') }}">
-        <span class="glyphicon glyphicon-cog"></span> Editar conta
+      <a style="padding: 10px 10px 10px 20px;" href="{{ route('editar-conta') }}">
+        <span class="glyphicon glyphicon-cog"></span> Minha conta
       </a>
     </li>
-    <li class="divider"></li>
+    <li style="padding: 0px; margin: 0px;" class="divider"></li>
     <li>
-      <a href="{{ route('logout') }}"
+      <a style="padding: 10px 10px 10px 20px;" href="{{ route('logout') }}"
         onclick="event.preventDefault();
                  document.getElementById('logout-form').submit();">
         <span class="glyphicon glyphicon-log-out"></span> Logout

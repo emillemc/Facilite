@@ -3,7 +3,7 @@
 @section('title') Mensagens - Facilite Serviços @endsection
 
 @section('navbar')
-    @include('layouts.includes.header')
+    @include('layouts.includes.header-fixed')
 @endsection
 
 @section('content')
@@ -21,15 +21,5 @@
 @endsection
 
 @section('footer')
-    @include('layouts.includes.footer')
+    {{-- @include('layouts.includes.footer') --}}
 @endsection
-
-@push('scripts')
-	{{-- check-uncheck.js --}}
-	{{-- <script src="{{ asset('js/check-uncheck.js') }}"></script> --}}
-  {{-- JQuery/JQuery Mask Plugins --}}
-  {{-- <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script> --}}
-  {{-- <script src="{{ asset('js/jquery.mask.min.js') }}"></script> --}}
-   {{-- Eventos do Formulário --}}
-  {{-- <script src="{{ asset('js/check-prof-mask-inputs.js') }}"></script> --}}
-@endpush
