@@ -51,4 +51,8 @@ class Professional extends Authenticatable
         return $this->belongsToMany(Especialidade::class, 'especialidade_professional');
     }
 
+    public function messages(){
+        return $this->hasMany('App\Models\ServicoSolicitado');
+    }
+
 }

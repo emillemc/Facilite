@@ -10,7 +10,7 @@ use App\User;
 use App\Professional;
 use App\Http\Requests\Account\UserEditFormRequest;
 use App\Http\Requests\Account\ProfEditFormRequest;
-
+use Validator;
 class AccountController extends Controller
 {
     public function __construct()
@@ -144,9 +144,24 @@ class AccountController extends Controller
         }
     }
 
-    public function alterarSenha()
+    public function alterarSenha(Request $request)
     {
-        return "test";
+        // Validando os dados informados
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required',
+            'password' => 'required|confirmed|min:6',
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+        if(Hash::check($request->current_password, Auth::user()->password)){
+            Auth::user()->update(['password',$request->password]);
+            return redirect()->back();
+            // Retornar para a tela anterior com mensagens de sucesso (Senha Alterada)
+        }else{
+            return redirect()->back();
+            // Retornar para a tela anterior com mensagem de falha (Senha atual informada não confere com senha cadastrada no banco de dados)
+        }
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Professional;
 use App\Models\Categoria;
 use App\Http\Requests\Profile\ProfileEditFormRequest;
 use App\Http\Requests\Profile\UrlEditFormRequest;
+use Image;
 
 class ProfileController extends Controller
 {
@@ -19,6 +20,21 @@ class ProfileController extends Controller
         // Só acessa profissionais
     	$this->middleware('role:prof');
     }
+
+     public function update_avatar(Request $request){
+        // Handle the user upload of avatar
+        //dd($request);
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(100, 100)->save( public_path('/uploads/avatars/' . $filename ) );
+            $user = Auth::user()->isProfessional;
+            $user->avatar = $filename;
+            $user->save();
+        }
+        return redirect()->route('editar-perfil');
+    }
+
 
     /**
      * Exibe o perfil do profissional 'my-profile'.

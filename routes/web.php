@@ -41,6 +41,9 @@ Route::group(['namespace' => 'App'], function(){
 		'uses' 	=> 'AppController@listarPerfis'
 	]);
 
+	// Rotas Solicitar Serviço
+	Route::resource('solicitar-servico','SolicitarServicoController', ['except'=> ['index','create']]);
+
 
 });
 
@@ -90,6 +93,8 @@ Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function(){
 		'uses' 	=> 'ProfileController@index',
 		'as'	=> 'my-profile' // -< Rota nomeada
 	]);
+
+	Route::post('/editar/avatar', 'ProfileController@update_avatar');
 
 	// Editar Perfil
 	Route::get('/editar', [

@@ -10,8 +10,10 @@
       </div>
       <div class="modal-body">
         <!-- FORM SOLICITAR SERVIÇO -->
-        <form action="#" >
+         <form action="{{ route('solicitar-servico.store') }}" method="POST" >
+          {{ csrf_field() }}
           
+          <input type="hidden" name="professional_id" value="{{ $profile->id }}">
           <!-- ESCOLHER SERVIÇOS -->
           <div class="row">
             <div class="col-lg-12 col-md-12">
@@ -24,7 +26,7 @@
                 <div class="form-group">
                   <div class="checkbox">
                     <label for="check_{{$servico->id}}">
-                      <input type="checkbox" id="check_{{$servico->id}}" value="{{$servico->id}}">{{$servico->name}}
+                      <input type="checkbox" name="servico_id" id="check_{{$servico->id}}" value="{{$servico->id}}">{{$servico->name}}
                     </label>
                   </div>
                 </div>
@@ -39,12 +41,29 @@
 
           <hr>
 
+          <div class="row">
+            <div class="col-md-12 col-md-12">
+              <div class="form-group">
+                <label for="data">Data:</label>
+                <input type="text" name="data" class="form-control" id="data" >
+              </div>
+              <div class="form-group">
+                <label for="hora">Hora:</label>
+                <input type="text" name="horario" class="form-control" id="hora" >
+              </div>
+              <div class="form-group">
+                <label for="Telefone">Telefone:</label>
+                <input type="text" name="numero" class="form-control" id="Telefone" placeholder="(00) 00000-0000">
+              </div>
+          </div>
+          </div>
+
           <!-- COMENTÁRIOS -->
           <div class="row">
             <div class="col-md-12 col-md-12">
               <div class="form-group">
-                <label for="comentarios" class="control-label"><i>Comentários:</i></label>
-                <textarea class="form-control" name="comentarios" id="comentarios" rows="10"></textarea>
+                <label for="mensagem" class="control-label"><i>Mensagem:</i></label>
+                <textarea class="form-control" name="mensagem" id="mensagem" rows="10"></textarea>
               </div>
             </div>
           </div>
@@ -68,3 +87,19 @@
   </div>
 </div>
 <!-- //MODAL CONTRATAR -->
+
+
+@push('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
+@endpush
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+<script>
+  $('#data').datepicker({
+    language: "pt-BR",
+    forceParse: false,
+    autoclose: true
+});
+</script>
+@endpush

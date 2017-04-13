@@ -33,5 +33,9 @@ class User extends Authenticatable
     // {   
     //     return $this->belongsToMany(Professional::class, 'solicitar_servico', 'receptor_id', 'solicitante_id');
     // }
+
+     public function isProfessional(){
+        return $this->hasOne("App\Professional");
+    }
     
 }

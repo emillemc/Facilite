@@ -118,7 +118,9 @@
 
                   {{-- ******************* FOTO PROFISSIONAL ******************** --}}
                   <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5 text-center">
-                    <img src="{{ asset('img/perfil.png') }}" alt="img_perfil2" class="img-circle">
+                    @if(Auth::user()->isProfessional != null)
+                     <img src="/uploads/avatars/{{ Auth::user()->isProfessional->avatar }}" class="img-circle">
+                    @endif
                   </div>
 
                   {{-- ************ NOME/SERVIÇOS PROFISSIONAL ************** --}}

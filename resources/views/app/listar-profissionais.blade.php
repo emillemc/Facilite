@@ -76,10 +76,10 @@
       {{-- //FILTROS --}}
 
       {{-- PESQUISAR POR NOME --}}
-      <form action="#!" method="GET">
+      <form action="" method="GET">
         <label for="searchNome"><h4>Nome:</h4></label>
         <div class="text-center">
-          <input type="text" id="searchNome" name="name" class="form-control">
+          <input type="text" id="searchNome" name="s" class="form-control">
           <button type="submit" class="btn btn-primary btn-sm top-5">Buscar</button>
         </div>
       </form>
@@ -98,7 +98,7 @@
           <div class="panel panel-default" style="border-radius: 0; box-shadow: 1px 2px 4px #4F4F4F">
             <div class="panel-body clearfix"> <!-- CLEARFIX PARA ENCAIXAR AS COLUNAS NO PAINEL HEAD -->
               <div class=" col-md-4  text-center">  <!-- BLOCO FOTO PROFISSIONAL -->
-                <img src="{{ asset('img/perfil2.png') }}" alt="img_perfil2" class="img-circle">
+                <img src="/uploads/avatars/{{ $profissional->avatar }}" alt="" class="img-circle">
               </div>
               {{-- BLOCO NOME E ESTRELAS PROFISSIONAL --}}
               <div class="col-md-8 ">

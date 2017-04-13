@@ -16,6 +16,7 @@ class CreateProfessionalsTable extends Migration
         Schema::create('professionals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->string('avatar')->default('default.jpg');
             $table->string('tel', 20);
             $table->string('cpf', 20);
             $table->string('city', 100)->nullable();

@@ -4,7 +4,9 @@
 {{-- Menu Dropdown --}}
 <li class="dropdown">
   <a style="padding: 5px 1px 0px 1px; font-size: 16px;" id="menu-user" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <img src="{{asset('img/perfil3.png')}}" alt="user-image">
+    @if(Auth::user()->isProfessional != null)
+       <img src="/uploads/avatars/{{ Auth::user()->isProfessional->avatar }}" class="img-circle" style="width:40px; height:40px;">
+    @endif
     {{ Auth::user()->name }} <span class="caret"></span>
   </a>
 

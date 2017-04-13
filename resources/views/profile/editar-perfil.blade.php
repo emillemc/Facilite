@@ -17,7 +17,13 @@
       <div class="text-center">
         <div class="input-group center-block top-5">
           <label for="input-img">
-            <img style="cursor: pointer;" src="{{ asset('img/perfil.png') }}" alt="img_perfil" class="img-circle">
+            @if(Auth::user()->isProfessional != null)
+              <img src="/uploads/avatars/{{ Auth::user()->isProfessional->avatar }}" class="img-circle">
+            @endif
+            <form enctype="multipart/form-data" id="form-change-avatar" action="/profile/editar/avatar" method="POST">
+            <!-- <input type="file" name="avatar"> -->
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input id="input-img" type="file" name="avatar"  accept="image/*" style="display: none;" onchange="document.getElementById('form-change-avatar').submit();">
             <br>
             {{-- <a id="btn-img-perfil" style="display: none;" class="btn btn-primary btn-sm">Mudar foto</a> --}}
           </label>

@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
+	@stack('styles')
 </head>
 <body>
 
@@ -33,6 +33,7 @@
 	{{-- JS Bootstrap Archives --}}
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
 
 	@stack('scripts')
 </body>

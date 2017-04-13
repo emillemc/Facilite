@@ -117,7 +117,7 @@
 
               {{-- ******************* FOTO PROFISSIONAL ******************** --}}
               <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5 text-center">
-                <img src="{{ asset('img/perfil.png') }}" alt="img_perfil2" class="img-circle">
+                    <img src="/uploads/avatars/{{ $profile->avatar }}" alt="" class="img-circle">
               </div>
 
               {{-- ************ NOME/SERVIÇOS PROFISSIONAL ************** --}}
